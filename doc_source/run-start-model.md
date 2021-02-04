@@ -1,0 +1,131 @@
+--------
+
+Amazon Lookout for Vision is in preview release and is subject to change\.
+
+--------
+
+# Starting your Amazon Lookout for Vision model<a name="run-start-model"></a>
+
+
+
+Before you can use an Amazon Lookout for Vision model to detect anomalies, you must first start the model\. You start a model by calling the [StartModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModel) API and passing the following:
++ **ProjectName** – The name of the project that contains the model that you want to start\.
++ **ModelVersion** – The version of the model that you want to start\.
++ **MinInferenceUnits** – The minimum number of inference units\. One unit corresponds to 5 transactions per second \(TPS\)\.
+
+The Amazon Lookout for Vision console provides example code that you can use to start and stop a model\. 
+
+**Note**  
+You are charged for the amount of the time that your model is running\. To stop a running model, see [Stopping your Amazon Lookout for Vision model](run-stop-model.md)\. 
+
+**Topics**
++ [Starting your model \(console\)](#start-model-console)
++ [Starting your Amazon Lookout for Vision model \(SDK\)](#start-model-sdk)
+
+## Starting your model \(console\)<a name="start-model-console"></a>
+
+The Amazon Lookout for Vision console provides a AWS CLI command that you can use to start a model\. After the model starts, you can start detecting anomalies in images\. For more information, see [Detecting anomalies in an image](inference-detect-anomalies.md)\.
+
+**To start a model \(console\)**
+
+1. If you haven't already done so, do the following:
+
+   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` and permissions\. For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+
+1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
+
+1. Choose **Get started**\. 
+
+1. In the left navigation pane, choose **Projects**\.
+
+1. On the **Projects** resources page, choose the project that contains the trained model that you want to start\.
+
+1. In the **Models** section, choose the model that you want to start\. 
+
+1. On the model's details page, choose the **Use model** tab\. 
+
+1. Under **Code snippets** choose **AWS CLI commands**\. 
+
+1. Copy the AWS CLI command that calls `start-model`\.
+
+1. At the command prompt, enter the `start-model` command that you copied in the previous step\. 
+
+1. In the console, choose **Models** in the left navigation page\.
+
+1. Check the **Status** column for the current status of the model, When the status is **Hosted**, you can use the model to detect anomalies in images\. 
+
+## Starting your Amazon Lookout for Vision model \(SDK\)<a name="start-model-sdk"></a>
+
+You start a model by calling the [StartModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModel) operation\.
+
+A model might take a while to start\. You can check the current status by calling [DescribeModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModel)\. For more information, see [Viewing your models](view-models.md)\.
+
+**To start your model \(SDK\)**
+
+1. If you haven't already done so, do the following:
+
+   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` and permissions\. For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+
+1. Use the following example code to start a model\.
+
+------
+#### [ CLI ]
+
+   Change the following values:
+   + `project-name` to the name of the project that contains the model that you want to start\.
+   + `model-version` to the version of the model that you want to start\.
+   + `--min-inference-units` to the number of anomaly detection units that you want to use\.
+
+   ```
+   aws lookoutvision start-model --project-name "project name"\
+     --model-version model version\
+     --min-inference-units number of units
+   ```
+
+------
+#### [ Python ]
+
+   Change the following values:
+   + `project` to the name of the project that contains the model that you want to start\.
+   + `model_version` to the version of the model that you want to start\. Note that the console prepends the model version with the text `Model`\. You only need to specify the version number\. For example `12`\. 
+   + `version_name` to the name of the model that you want to start\.
+   + `min_inference_units` to the number of inference units that you want to use\.
+
+   ```
+   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   
+   import boto3
+   
+   def start_model(project_name, model_version, min_inference_units):
+   
+       client=boto3.client('lookoutvision')
+   
+       try:
+           # Start the model
+           print('Starting model version ' + model_version  + ' for project ' + project_name )
+           response=client.start_model(ProjectName=project_name,
+               ModelVersion=model_version,
+               MinInferenceUnits=min_inference_units)
+           print('Status: ' + response['Status'])
+   
+   
+       except Exception as e:
+           print(e)
+           
+       print('Done...')
+       
+   def main():
+       project='my-project'
+       model_version='1'
+       min_inference_units=1 
+       start_model(project, model_version, min_inference_units)
+   
+   if __name__ == "__main__":
+       main()
+   ```
+
+------
