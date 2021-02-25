@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Step 2: Create an IAM administrator user and group<a name="su-account-user"></a>
 
 When you create an AWS account, you get a single sign\-in identity that has access to all of the AWS services and resources in the account\. This identity is called the AWS account *root user*\. If you use the AWS root user account to sign in to the AWS Management Console , you have complete access to all of the AWS resources in your account\. 

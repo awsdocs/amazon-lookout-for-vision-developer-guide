@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Verifying your model with a trial detection task<a name="trial-detection"></a>
 
 If you want to verify or improve the quality of your model, you can run a trial detection task\. A trial detection task detects anomalies in new images that you supply\. You can verify the detection results and add the verified images to your dataset\. If you have separate training and test datasets, the verified images are added to the training dataset\.
@@ -42,7 +36,7 @@ Perform the following steps to run a trial detection task\.
 1. Import the images according to the source of the images as follows:
    + If you are importing your source images from an Amazon S3 bucket, enter the **S3 URI**\.
 **Tip**  
-If you're using the Getting Started example images, use the *extra\_images* folder\. The Amazon S3 URI is `s3://your bucket/circuit_board/extra_images`\.
+If you're using the Getting Started example images, use the *extra\_images* folder\. The Amazon S3 URI is `s3://your bucket/circuitboard/extra_images`\.
    + If you are uploading images from your computer, add the images after you choose **Detect anomalies**\. 
 
 1. \(Optional\) If you want to use your own AWS KMS encryption key, do the following:

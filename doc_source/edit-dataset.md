@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Editing your dataset<a name="edit-dataset"></a>
 
 After you create a dataset, you should make sure the images are correctly labeled\. You can also enhance the quality of your model by adding more images\. If you have created a test dataset, adding more images can increase the accuracy of your model's performance metrics\.

@@ -1,18 +1,15 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Getting started with the AWS SDK<a name="getting-started-sdk"></a>
 
 The Getting Started instructions show you how to use the AWS SDK to create, train, evaluate, and use a model that detects anomalies in an image\. We recommend reading [Getting Started with the Amazon Lookout for Vision console](getting-started.md) first\. This section includes AWS CLI commands\. You can get more information and Python examples by choosing the **More information** link at the end of each section\.
+
+Also, the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository includes a Python Notebook that you can use to create a model with the circuitboard example images\. 
 
 To prepare, train, evaluate, improve, and use a model, do the following:
 
 **Topics**
 + [Set up Amazon Lookout for Vision](#gs-setup-sdk)
 + [Create a project](#gs-project)
++ [Upload your images](#gs-upload-images-sdk)
 + [Create a manifest file](#gs-create-manifest-sdk)
 + [Create a dataset](#gs-dataset-sdk)
 + [Train your model](#gs-general-train-model-sdk)
@@ -54,18 +51,37 @@ The JSON response examples use a project named `my-sdk-project`\.
 
 **More information**: [Create your project](model-create-project.md#create-project-sdk)\.
 
+## Upload your images<a name="gs-upload-images-sdk"></a>
+
+You store the images used to train a model in an Amazon S3 bucket\. For Getting Started, use the circuitboard images in the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository\. If you haven't already, do [Step 5: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+
 ## Create a manifest file<a name="gs-create-manifest-sdk"></a>
 
 To create a dataset with the AWS SDK, you need an Amazon SageMaker Ground Truth format manifest file\. A manifest file provides information about the images used for training\. For example, the S3 bucket location of images and labels that classify images as normal or anomalous\. Each image in the manifest file is represented by a JSON Line, as shown in the following example:
 
 ```
-{"source-ref":"s3://lookoutvision-console-us-east-1-nnnnnnnnnn/gt-job/manifest/IMG_1133.png","anomaly-label":1,"anomaly-label-metadata":{"confidence":0.95,"job-name":"labeling-job/testclconsolebucket","class-name":"normal","human-annotated":"yes","creation-date":"2020-04-15T20:17:23.433061","type":"groundtruth/image-classification"}}
+{
+    "source-ref": "s3://lookoutvision-console-us-east-1-nnnnnnnnnn/gt-job/manifest/IMG_1133.png",
+    "anomaly-label": 1,
+    "anomaly-label-metadata": {
+        "confidence": 0.95,
+        "job-name": "labeling-job/testclconsolebucket",
+        "class-name": "normal",
+        "human-annotated": "yes",
+        "creation-date": "2020-04-15T20:17:23.433061",
+        "type": "groundtruth/image-classification"
+    }
+}
 ```
 
-You can use an existing manifest file, such as the output from an SageMaker Ground Truth job, or you can create your own manifest file\. After you create a manifest file, you upload it to an Amazon S3 bucket where it is used to create a dataset\. 
+You can use an existing manifest file, such as the output from an SageMaker Ground Truth job, or you can create your own manifest file\. 
 
 **Tip**  
-For these Getting Started instructions, you can save time by reusing the manifest files for the datasets you created in [Getting Started with the Amazon Lookout for Vision console](getting-started.md)\. The training and test manifest file locations are `s3://bucket/datasets/project name/train or test/manifests/output/output.manifest`\. Copy the manifests to a new folder in your Amazon S3 bucket and continue with the Getting Started instructions\.
+If you are creating your dataset using the circuitboard example images, you have two options:  
+Create the manifest file using code\. The [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) Python Notebook shows how to create the manifest file for the circuitboard example images\. 
+If you've already followed [Getting Started with the Amazon Lookout for Vision console](getting-started.md) and created a dataset with the circuitboard example images, reuse the manifest files created for you by Amazon Lookout for Vision\. The training and test manifest file locations are `s3://bucket/datasets/project name/train or test/manifests/output/output.manifest`\. 
+
+Upload your completed manifest files to a folder within the bucket that contains your images\. 
 
 **More information**: [Create a manifest file](manifest-files.md)\.
 

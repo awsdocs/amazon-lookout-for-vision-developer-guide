@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Monitoring Lookout for Vision with Amazon CloudWatch<a name="security-monitoring-cloudwatch"></a>
 
 You can use CloudWatch to monitor image processing and anomaly detecting metrics in Lookout for Vision\.

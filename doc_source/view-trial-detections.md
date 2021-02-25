@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Viewing your trial detection tasks<a name="view-trial-detections"></a>
 
 You can view your trial detections by using the console\. You can't use the AWS SDK to view trial detection tasks\.

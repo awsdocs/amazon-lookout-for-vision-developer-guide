@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating your project<a name="model-create-project"></a>
 
 An Amazon Lookout for Vision project is a grouping of the resources needed to create and manage a Lookout for Vision model\. A project manages the following:
@@ -61,31 +55,42 @@ To view the projects that you have created in a project, call `ListProjects`\. F
 ------
 #### [ Python ]
 
-   Change the `project_name` to the name that you want to use for the project\.
+   In the function `main`, change the `project_name` to the name that you want to use for the project\.
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
    import boto3
    
+   from botocore.exceptions import ClientError
+   
    def create_project(project_name):
+       """
+       Creates a new Amazon Lookout for Vision project.
+       param: project_name: The name for the new project.
+       """
    
-       client=boto3.client('lookoutvision')
+       try:
+   
+           client = boto3.client("lookoutvision")
+   
+           # Create a project
+           print("Creating project:" + project_name)
+           response = client.create_project(ProjectName=project_name)
+           print("project ARN: " + response["ProjectMetadata"]["ProjectArn"])
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
    
    
-       try: 
-           #Create a project
-           print('Creating project:' + project_name)
-           response=client.create_project(ProjectName=project_name)
-           print('project ARN: ' + response['ProjectMetadata']['ProjectArn'])
-           print('Done...')
-       
-       except Exception as e:
-           print(e)
-       
    def main():
-       project_name='my-project'
+   
+       project_name = "my-project"  # Change to the desired name.
        create_project(project_name)
+   
    
    if __name__ == "__main__":
        main()

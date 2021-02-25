@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Improving your model<a name="improve"></a>
 
 During training Lookout for Vision tests your model with the test dataset and uses the results to create performance metrics\. You can use performance metrics to evaluate the performance of your model\. If necessary, you can take steps to improve your datasets and then retrain your model\.

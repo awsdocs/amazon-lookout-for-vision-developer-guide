@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Compliance validation for Amazon Lookout for Vision<a name="lookoutvision-compliance"></a>
 
 Third\-party auditors assess the security and compliance of Amazon Lookout for Vision as part of multiple AWS compliance programs\. Amazon Lookout for Vision is compliant with [General Data Protection Regulation \(GDPR\)](https://aws.amazon.com/compliance/gdpr-center/)\.

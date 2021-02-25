@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating a dataset with a manifest file \(console\)<a name="create-dataset-use-manifest"></a>
 
 The following procedure shows you how to create a training or test dataset by importing an SageMaker format manifest file that is stored in an Amazon S3 bucket\. 

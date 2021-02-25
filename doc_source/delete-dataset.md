@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Deleting a dataset<a name="delete-dataset"></a>
 
 You can delete a dataset from a project by using the console or the `DeleteDataset` operation\. The images referenced by a dataset aren't deleted\. If you delete the test dataset from a project that has a training and a test dataset, the project reverts to a single dataset project—the remaining dataset is split during training to create a training and test dataset\. If you delete the training dataset, you can't train a model in the project until you create a new training dataset\.
@@ -59,34 +53,45 @@ Use the `DeleteDataset` operation to delete a dataset\.
 ------
 #### [ Python ]
 
-   Change the following values:
+   In the function `main`, change the following values:
    + `project_name` to the name of the project that contains the model that you want to delete\.
    + `dataset_type` to either `train` or `test`, depending on which dataset you want to delete\.
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
+   
    
    import boto3
    
-   def delete_dataset(project_name,dataset_type):
+   from botocore.exceptions import ClientError
    
-       client=boto3.client('lookoutvision')
    
-       try: 
-           #Delete the dataset
-           print('Deleting dataset:' + dataset_type)
-           client.delete_dataset(ProjectName=project_name,
-             DatasetType=dataset_type)
+   def delete_dataset(project_name, dataset_type):
+       """
+       Deletes an Amazon Lookout for Vision dataset
+       param: project_name: The name of the project that contains the dataset that you want to delete.
+       param: dataset_type: the type (train or test) of the dataset that you want to delete.
+       """
+       try:
+           client = boto3.client("lookoutvision")
    
-           print('Done...')
-       
-       except Exception as e:
-           print(e)
-       
+           # Delete the dataset
+           print("Deleting dataset:" + dataset_type)
+           client.delete_dataset(ProjectName=project_name, DatasetType=dataset_type)
+   
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
+   
+   
    def main():
-       project_name='my-project-python'
-       dataset_type='train'
+       project_name = "my-project"  # the desired project.
+       dataset_type = "train"  # or 'test' to delete the test dataset.
        delete_dataset(project_name, dataset_type)
+   
    
    if __name__ == "__main__":
        main()

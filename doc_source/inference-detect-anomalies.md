@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Detecting anomalies in an image<a name="inference-detect-anomalies"></a>
 
 To detect anomalies in an image with a trained Amazon Lookout for Vision model, you call the [DetectAnomalies](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DetectAnomalies) operation\. The result from `DetectAnomalies` includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction\. 
@@ -75,44 +69,61 @@ If you're using the Getting Started images, use an image from the `extra_images`
 ------
 #### [ Python ]
 
-   The following example code detects anomalies in an image that you supply\. Replace the following values: 
+   The following example code detects anomalies in an image that you supply\. In the function `main`, change the following values: 
    + `project_name` with the name of the project that contains the model version that you want to use\. 
    + `model_version` with the version of the model that you want to use\. 
    + `photo` with the name and file path of a JPG format image file that you want to use\.
    + \(Optional\) If you want to pass a PNG format file, change the `detect_anomalies` input parameter `ContentType='image/jpeg'` to `ContentType='image/png'`\. 
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
    import boto3
    
-   def detect_anomalies(project_name,model_version,photo):
-        
+   from botocore.exceptions import ClientError
    
-       client=boto3.client('lookoutvision')
+   def detect_anomalies(project_name, model_version, photo):
+       """
+       Detects anomalies in an image (jpg/png) by using your Amazon Lookout for Vision model.
+       param: project_name: - the name of the project that contains the model that you want to use.
+       param: model_version: - the version of the model that you want to use.
+       param: photo: - the path and name of the image in which you want to detect anomalies.
+       """
    
-       #Call DetectAnomalies 
+       try:
    
-       with open(photo, 'rb') as image:
-           response = client.detect_anomalies(ProjectName=project_name, 
-           ContentType='image/jpeg',
-           Body=image.read(),
-           ModelVersion=model_version)
-       print ('Anomalous?: ' + str(response['DetectAnomalyResult']['IsAnomalous']))
-       print ('Confidence: ' + str(response['DetectAnomalyResult']['Confidence']))
+           client = boto3.client("lookoutvision")
+   
+           # Call detect_anomalies
+   
+           with open(photo, "rb") as image:
+               response = client.detect_anomalies(
+                   ProjectName=project_name,
+                   ContentType="image/jpeg",  # or image/png for png format input image.
+                   Body=image.read(),
+                   ModelVersion=model_version,
+               )
+           print("Anomalous?: " + str(response["DetectAnomalyResult"]["IsAnomalous"]))
+           print("Confidence: " + str(response["DetectAnomalyResult"]["Confidence"]))
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
    
    
    def main():
    
-       project_name='my-project'
-       photo='image.jpg'
-       model_version='1'
-     
-       anomalous=detect_anomalies(project_name,model_version,photo)
-       
+       project_name = "my-project"  # Change to your project name.
+       photo = "image.jpg"  # Chang to the path and name of the image (jpeg/png) that you want to use.
+       model_version = "1"  # Change to the version of your model.
+   
+       detect_anomalies(project_name, model_version, photo)
+   
    
    if __name__ == "__main__":
-       main().
+       main()
+   .
    ```
 
 ------

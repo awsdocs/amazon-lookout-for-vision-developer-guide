@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Viewing performance metrics<a name="performance-metrics"></a>
 
 You can get performance metrics from the console and by calling the `DescribeModel` operation\. After training is complete, the console displays the performance metrics\. The following procedure shows how to get the performance metrics from a project's model list view\.

@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Tagging models<a name="tagging-model"></a>
 
 You can identify, organize, search for, and filter your Amazon Lookout for Vision models by using tags\. Each tag is a label consisting of a user\-defined key and value\. For example, to help determine billing for your models, you could tag your models with a `Cost center` key and add the appropriate cost center number as a value\. For more information, see [Tagging AWS resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)\.
@@ -53,9 +47,9 @@ This procedure explains how to add tags to, or remove tags from, an existing mod
 
    1. For **Value**, enter a value\.
 
-1. To add more tags, choose **Add new tag** and repeat the previous step\.
+1. To add more tags, repeat steps 9 and 10\.
 
-1. \(Optional\) To remove a tag, choose **Remove** next to the tag that you want to remove\.
+1. \(Optional\) To remove a tag, choose **Remove** next to the tag that you want to remove\. If you are removing a previously saved tag, it is removed when you save your changes\.
 
 1. Choose **Save changes** to save your changes\.
 

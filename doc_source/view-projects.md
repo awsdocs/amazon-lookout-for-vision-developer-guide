@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Viewing your projects<a name="view-projects"></a>
 
 You can get a list of Amazon Lookout for Vision projects and information about individual projects from the console or by using the AWS SDK\.
@@ -57,35 +51,138 @@ A project manages the datasets and models for a single use case\. For example, d
 #### [ Python ]
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
+   
    
    import boto3
    
-   def list_projects():
+   from botocore.exceptions import ClientError
    
-       client=boto3.client('lookoutvision')
+   
+   def list_projects():
+       """
+       Lists the projects, models and datasets in your account.
+       """
    
        try:
-           response=client.list_projects()
+           client = boto3.client("lookoutvision")
    
-           for project in response['Projects']:
-               print("Project: " + project['ProjectName'])
-               print("ARN: " + project['ProjectArn']) 
-               
-               project_description=client.describe_project(ProjectName=project['ProjectName'])
-               for dataset in project_description['ProjectDescription']['Datasets']:
-                   print('Dataset type: ' + dataset['DatasetType'])
-                   print('Dataset status: ' + dataset['Status'])
-                   print('Dataset status: ' + dataset['StatusMessage'])
+           response = client.list_projects()
+   
+           for project in response["Projects"]:
+   
+               print("Project: " + project["ProjectName"])
+               print("\tARN: " + project["ProjectArn"])
+               print("\tCreated: " + str(["CreationTimestamp"]))
+   
+               print("Datasets")
+               project_description = client.describe_project(
+                   ProjectName=project["ProjectName"]
+               )
+               if len(project_description["ProjectDescription"]["Datasets"]) == 0:
+                   print("\tNo datasets")
+               else:
+                   for dataset in project_description["ProjectDescription"]["Datasets"]:
+                       print("\ttype: " + dataset["DatasetType"])
+                       print("\tStatus: " + dataset["StatusMessage"])
+   
+               print("Models")
+               # list models
+               response_models = client.list_models(ProjectName=project["ProjectName"])
+               if len(response_models["Models"]) == 0:
+                   print("\tNo models")
+               else:
+                   for model in response_models["Models"]:
+                       print("\tVersion: " + model["ModelVersion"])
+                       print("\tARN: " + model["ModelArn"])
+                       if "Description" in model:
+                           print("\tDescription: " + model["Description"])
+   
+                       # Get model description
+                       model_description = client.describe_model(
+                           ProjectName=project["ProjectName"],
+                           ModelVersion=model["ModelVersion"],
+                       )
+                       print(
+                           "\tStatus: " + model_description["ModelDescription"]["Status"]
+                       )
+                       print(
+                           "\tMessage: "
+                           + model_description["ModelDescription"]["StatusMessage"]
+                       )
+                       print(
+                           "\tCreated: "
+                           + str(
+                               model_description["ModelDescription"]["CreationTimestamp"]
+                           )
+                       )
+   
+                       if model_description["ModelDescription"]["Status"] == "TRAINED":
+                           print(
+                               "\tTraining duration: "
+                               + str(
+                                   model_description["ModelDescription"][
+                                       "EvaluationEndTimestamp"
+                                   ]
+                                   - model_description["ModelDescription"][
+                                       "CreationTimestamp"
+                                   ]
+                               )
+                           )
+                           print(
+                               "\tRecall: "
+                               + str(
+                                   model_description["ModelDescription"]["Performance"][
+                                       "Recall"
+                                   ]
+                               )
+                           )
+                           print(
+                               "\tPrecision: "
+                               + str(
+                                   model_description["ModelDescription"]["Performance"][
+                                       "Precision"
+                                   ]
+                               )
+                           )
+                           print(
+                               "\tF1: "
+                               + str(
+                                   model_description["ModelDescription"]["Performance"][
+                                       "F1Score"
+                                   ]
+                               )
+                           )
+                           print(
+                               "\tTraining output : s3://"
+                               + str(
+                                   model_description["ModelDescription"]["OutputConfig"][
+                                       "S3Location"
+                                   ]["Bucket"]
+                               )
+                               + "/"
+                               + str(
+                                   model_description["ModelDescription"]["OutputConfig"][
+                                       "S3Location"
+                                   ]["Prefix"]
+                               )
+                           )
+   
+                       print()
+   
                print()
-       
-       except Exception as e:
-           print(e)
-           
-       print('Done...')
-       
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
+   
+       print("Done...")
+   
+   
    def main():
        list_projects()
+   
    
    if __name__ == "__main__":
        main()

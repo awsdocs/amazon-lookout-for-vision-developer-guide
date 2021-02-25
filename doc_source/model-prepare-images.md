@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Preparing images for a dataset<a name="model-prepare-images"></a>
 
 You need a collection of images to create a dataset\. Your images must be PNG or JPEG format files\.

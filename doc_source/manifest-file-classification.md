@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Defining JSON lines for anomaly classification<a name="manifest-file-classification"></a>
 
 You define a JSON line for each image that you want to use in an Amazon Lookout for Vision manifest file\. The JSON line determines whether the image contains normal or anomalous content\. A JSON line is in SageMaker Ground Truth [Classification Job Output](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data-output.html#sms-output-class) format\. A manifest file is made of one or more JSON lines, one for each image that you want to import\. 
@@ -72,17 +66,17 @@ The following JSON line shows an image labeled as normal\. Note that the value o
 
 The following information describes the keys and values in an Amazon Lookout for Vision JSON line\.
 
-### source\-ref<a name="w36aac22c13c25b7c17c11b5"></a>
+### source\-ref<a name="w41aac22c13c25b7c17c11b5"></a>
 
 \(Required\) The Amazon S3 location of the image\. The format is `"s3://BUCKET/OBJECT_PATH"`\. Images in an imported dataset must be stored in the same Amazon S3 bucket\. 
 
-### anomaly\-label<a name="w36aac22c13c25b7c17c11b7"></a>
+### anomaly\-label<a name="w41aac22c13c25b7c17c11b7"></a>
 
 \(Required\) The label attribute\. Use the key `anomaly-label`, or another key name that you choose\. The key value \(`0` in the preceding example\) is required by Amazon Lookout for Vision, but it isn't used\. The output manifest created by Amazon Lookout for Vision converts the value to `0` for an anomalous image and a value of `1` for a normal image\. The value of `class-name` determines if the image is normal or anomalous\. 
 
 There must be corresponding metadata identified by the field name with *\-metadata* appended\. For example, `"anomaly-label-metadata"`\. 
 
-### anomaly\-label\-metadata<a name="w36aac22c13c25b7c17c11b9"></a>
+### anomaly\-label\-metadata<a name="w41aac22c13c25b7c17c11b9"></a>
 
 \(Required\) Metadata about the label attribute\. The field name must be the same as the label attribute with *\-metadata* appended\. 
 

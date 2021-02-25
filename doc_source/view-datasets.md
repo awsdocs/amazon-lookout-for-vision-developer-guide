@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Viewing your datasets<a name="view-datasets"></a>
 
 A project can have a single dataset that's used for training and testing your model\. Alternatively, You can have separate training and test datasets\. You can use the console to view your datasets\. You can also use the `DescribeDataset` operation to get information about a dataset \(training or test\)\.
@@ -53,43 +47,62 @@ You can get use the `DescribeDataset` operation to get information about the tra
 ------
 #### [ Python ]
 
-   Change the following values:
+   In the function `main`, change the following values:
    + `project_name` to the name of the project that contains the model that you want to view\.
    + `dataset_type` to the type of dataset that you want to view \(`train` or `test`\)\.
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
    import boto3
-   import json
+   
+   from botocore.exceptions import ClientError
    
    def describe_dataset(project_name, dataset_type):
+       """
+       Gets information about an Amazon Lookout for Vision dataset.
+       param: project_name: The name of the project that contains the
+        dataset that you want to describe.
+       param: dataset_type: The type (train or test) of the dataset that you want to describe.
+       """
    
-       client=boto3.client('lookoutvision')
+       try:
    
-       try: 
-           #Describe a dataset
+           client = boto3.client("lookoutvision")
    
-           response=client.describe_dataset(ProjectName=project_name, DatasetType=dataset_type)
-           print('Name: ' +  response['DatasetDescription']['ProjectName'])
-           print('Type: ' + response['DatasetDescription']['DatasetType'])
-           print('Status: ' + response['DatasetDescription']['Status'])
-           print('Message: ' + response['DatasetDescription']['StatusMessage'])
-           print('Images: ' + str(response['DatasetDescription']['ImageStats']['Total'] ))
-           print('Labeled: ' + str(response['DatasetDescription']['ImageStats']['Labeled'] ))
-           print('Normal: ' + str(response['DatasetDescription']['ImageStats']['Normal'] ))
-           print('Anomaly: ' + str(response['DatasetDescription']['ImageStats']['Anomaly'] ))
+           # Describe a dataset
    
-           print('Done...')
+           response = client.describe_dataset(
+               ProjectName=project_name, DatasetType=dataset_type
+           )
+           print("Name: " + response["DatasetDescription"]["ProjectName"])
+           print("Type: " + response["DatasetDescription"]["DatasetType"])
+           print("Status: " + response["DatasetDescription"]["Status"])
+           print("Message: " + response["DatasetDescription"]["StatusMessage"])
+           print("Images: " + str(response["DatasetDescription"]["ImageStats"]["Total"]))
+           print(
+               "Labeled: " + str(response["DatasetDescription"]["ImageStats"]["Labeled"])
+           )
+           print("Normal: " + str(response["DatasetDescription"]["ImageStats"]["Normal"]))
+           print(
+               "Anomaly: " + str(response["DatasetDescription"]["ImageStats"]["Anomaly"])
+           )
+   
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
    
    
-       except Exception as e:
-           print(e)
-       
    def main():
-       project_name='my-project'
-       dataset_type ='train'
-       describe_dataset(project_name,dataset_type)
+       project_name = (
+           "my-project"  # Change to the project name that contains the dataset.
+       )
+       dataset_type = "train"  # Change to the dataset type (train or test)
+       describe_dataset(project_name, dataset_type)
+   
    
    if __name__ == "__main__":
        main()

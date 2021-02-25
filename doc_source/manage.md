@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Managing your Amazon Lookout for Vision resources<a name="manage"></a>
 
 You can manage your Amazon Lookout for Vision resources by using the console or the AWS SDK\. Amazon Lookout for Vision has the following resources:

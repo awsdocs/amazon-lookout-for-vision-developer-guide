@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Stopping your Amazon Lookout for Vision model<a name="run-stop-model"></a>
 
 To stop a running model, you call the `StopModel` operation and pass the following:
@@ -84,37 +78,72 @@ A model might take a while to stop\. To check the current status, use `DescribeM
 ------
 #### [ Python ]
 
-   The following example stops a model that is already running\. Change the following values:
+   The following example stops a model that is already running\. In the function `main`, change the following values:
    + `project` to the name of the project that contains the model that you want to stop\.
    + `model_version` to the version of the model that you want to stop\.
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
+   import time
    import boto3
    
+   from botocore.exceptions import ClientError
+   
    def stop_model(project_name, model_version):
-   
-       client=boto3.client('lookoutvision')
-   
+       """
+       Stops a running Amazon Lookout for Vision Model
+       param: project_Name: The name of the project that contains the
+            version of the model that you want to stop hosting.
+       param: model_version: The version of the nodel that you want to stop hosting.
+       """
    
        try:
+   
+           client = boto3.client("lookoutvision")
+   
            # Stop the model
-           print('Stopping model version ' + model_version  + ' for project ' + project_name )
-           response=client.stop_model(ProjectName=project_name,
-               ModelVersion=model_version)
-           print('Status: ' + response['Status'])
+           print(
+               "Stopping model version " + model_version + " for project " + project_name
+           )
+           response = client.stop_model(
+               ProjectName=project_name, ModelVersion=model_version
+           )
+           print("Stopping...")
+           status = response["Status"]
+   
+           # Breaks when hosting has stopped.
+           while True:
+               model_description = client.describe_model(
+                   ProjectName=project_name, ModelVersion=model_version
+               )
+               status = model_description["ModelDescription"]["Status"]
+   
+               if status == "STOPPING_HOSTING":
+                   print("Host stopping in progress...")
+                   time.sleep(10)
+                   continue
+   
+               if status == "TRAINED":
+                   print("Model is no longer hosted.")
+                   break
+   
+               print("Failed. Unxexpected state for stopping model: " + status)
+               break
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
+   
+       print("Done...")
    
    
-       except Exception as e:
-           print(e)
-           
-       print('Done...')
-       
    def main():
-       project='my-project'
-       model_version=''
+       project = "my-project"  # Change to your project name.
+       model_version = "1"  # Change to the version of your model.
+   
        stop_model(project, model_version)
+   
    
    if __name__ == "__main__":
        main()

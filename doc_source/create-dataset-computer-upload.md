@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating a dataset using images stored on your local computer<a name="create-dataset-computer-upload"></a>
 
 You can create a dataset by using images that are loaded directly from your computer\. You can upload up to 30 images at a time\. In this procedure, you can create a single dataset project, or a project with separate training and test datasets\.

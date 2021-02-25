@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Viewing your models<a name="view-models"></a>
 
 A project can have multiple versions of a model\. You can use the console to view the models in a project\. You can also use the `ListModels` operation\.
@@ -62,53 +56,104 @@ To get view the versions of a model you use the `ListModels` operation\. To get 
 ------
 #### [ Python ]
 
-   Change the following value:
+   In the function `main`, change the following value:
    + `project_name` to the name of the project\. 
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
    import boto3
-   import json
+   
+   from botocore.exceptions import ClientError
    
    def describe_models(project_name):
+       """
+       Gets information about all models in an Amazon Lookout for Vsion project.
+       param: project_name: The name of the project that you want to use.
+       """
+       try:
    
-       client=boto3.client('lookoutvision')
+           client = boto3.client("lookoutvision")
    
-       try: 
-           #list models
-           response=client.list_models(ProjectName=project_name)
-           print('Project: ' + project_name)
-           for model in response['Models']:
-               print('Version: ' + model['ModelVersion'])
-               print('ARN: ' + model['ModelArn']) 
-               if 'Description'  in model:
-                   print('Description: ' + model['Description']) 
-               print('Status: ' + model['Status']) 
-               print('Status Message: ' + model['StatusMessage']) 
+           # list models
+           response = client.list_models(ProjectName=project_name)
+           print("Project: " + project_name)
+           for model in response["Models"]:
+               print("Model version: " + model["ModelVersion"])
+               print("\tARN: " + model["ModelArn"])
+               if "Description" in model:
+                   print("\tDescription: " + model["Description"])
    
-               # get model description
-               model_description=client.describe_model(ProjectName=project_name, ModelVersion=model['ModelVersion'])
-               print('Status: ' + model_description['ModelDescription']['Status'])
-               print('Message: ' + model_description['ModelDescription']['StatusMessage'])
-               
-               if 'Performance' in model_description['ModelDescription']:
-                   print('Recall: ' + str(model_description['ModelDescription']['Performance']['Recall']))
-                   print('Precision: ' + str(model_description['ModelDescription']['Performance']['Precision']))
-               
-               if 'OutputConfig' in model_description['ModelDescription']:
-                   print('Output config: ' + str(model_description['ModelDescription']['OutputConfig']))
+               # Get model description
+               model_description = client.describe_model(
+                   ProjectName=project_name, ModelVersion=model["ModelVersion"]
+               )
+               print("\tStatus: " + model_description["ModelDescription"]["Status"])
+               print(
+                   "\tMessage: " + model_description["ModelDescription"]["StatusMessage"]
+               )
+               print(
+                   "\tCreated: "
+                   + str(model_description["ModelDescription"]["CreationTimestamp"])
+               )
+   
+               if model_description["ModelDescription"]["Status"] == "TRAINED":
+                   print(
+                       "\tTraining duration: "
+                       + str(
+                           model_description["ModelDescription"]["EvaluationEndTimestamp"]
+                           - model_description["ModelDescription"]["CreationTimestamp"]
+                       )
+                   )
+                   print(
+                       "\tRecall: "
+                       + str(
+                           model_description["ModelDescription"]["Performance"]["Recall"]
+                       )
+                   )
+                   print(
+                       "\tPrecision: "
+                       + str(
+                           model_description["ModelDescription"]["Performance"][
+                               "Precision"
+                           ]
+                       )
+                   )
+                   print(
+                       "\tF1: "
+                       + str(
+                           model_description["ModelDescription"]["Performance"]["F1Score"]
+                       )
+                   )
+                   print(
+                       "\tTraining output : s3://"
+                       + str(
+                           model_description["ModelDescription"]["OutputConfig"][
+                               "S3Location"
+                           ]["Bucket"]
+                       )
+                       + "/"
+                       + str(
+                           model_description["ModelDescription"]["OutputConfig"][
+                               "S3Location"
+                           ]["Prefix"]
+                       )
+                   )
+   
                print()
    
-           print('Done...')
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
    
    
-       except Exception as e:
-           print(e)
-       
    def main():
-       project_name='my-project'
+       project_name = "my-project"  # Change to the name of your project.
        describe_models(project_name)
+   
    
    if __name__ == "__main__":
        main()

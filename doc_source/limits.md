@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Quotas in Amazon Lookout for Vision<a name="limits"></a>
 
 The following tables describe the current quotas within Amazon Lookout for Vision\. For information about quotas that can be changed, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)\.

@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # What is Amazon Lookout for Vision?<a name="what-is"></a>
 
 You can use Amazon Lookout for Vision to find visual defects in industrial products, accurately and at scale\. It uses computer vision to identify missing components in an industrial product, damage to vehicles or structures, irregularities in production lines, and even minuscule defects in silicon wafers—or any other physical item where quality is important such as a missing capacitor on printed circuit boards\.

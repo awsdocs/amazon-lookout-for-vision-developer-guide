@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating a dataset using images stored in an Amazon S3 bucket<a name="create-dataset-s3"></a>
 
 You can create a dataset using images stored in an Amazon S3 bucket\. With this option, you can use the folder structure in your Amazon S3 bucket to automatically label your images\. You can store the images in the console bucket or another Amazon S3 bucket in your account\. 
@@ -12,11 +6,11 @@ You can create a dataset using images stored in an Amazon S3 bucket\. With this 
 
 During dataset creation, you can choose to assign label names to images based on the name of the folder that contains the images\. The folders must be a child of the Amazon S3 folder path that you specify in **S3 URI** when you create the dataset\.
 
-The following is the `train` folder for the Getting Started example images\. If you specify the Amazon S3 folder location as `S3-bucket/circuit_board/train/`, the images in the folder `normal` are assigned the label `Normal`\. Images in the folder `anomaly` are assigned the label `Anomaly`\. The names of deeper child folders aren't used to label images\. 
+The following is the `train` folder for the Getting Started example images\. If you specify the Amazon S3 folder location as `S3-bucket/circuitboard/train/`, the images in the folder `normal` are assigned the label `Normal`\. Images in the folder `anomaly` are assigned the label `Anomaly`\. The names of deeper child folders aren't used to label images\. 
 
 ```
 S3-bucket
-  └── circuit_board
+  └── circuitboard
     └── train
         ├── anomaly
             ├── train-anomaly_1.jpg
@@ -84,13 +78,13 @@ Your training and test datasets can have different image sources\.
    1. If you're creating a single dataset project or a training dataset, enter the following:
 
       ```
-      s3://bucket/circuit_board/train/
+      s3://bucket/circuitboard/train/
       ```
 
    1. If you're creating a test dataset enter the following:
 
       ```
-      s3://bucket/circuit_board/test/
+      s3://bucket/circuitboard/test/
       ```
 
 1. Choose **Automatically attach labels to images based on the folder**\.

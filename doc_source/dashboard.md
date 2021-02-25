@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Using the Amazon Lookout for Vision dashboard<a name="dashboard"></a>
 
 The dashboard provides an overview of metrics for your Amazon Lookout for Vision projects, such as the total number of anomalies detected over the last week\. With the dashboard you get an overview for all of your projects and an overview for each individual project\. You can choose the timeline over which metrics are shown\. You can also use the dashboard to create a new project\. 

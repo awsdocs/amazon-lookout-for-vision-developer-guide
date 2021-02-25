@@ -1,12 +1,6 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Getting Started with the Amazon Lookout for Vision console<a name="getting-started"></a>
 
-The Getting Started instructions show you how to create, train, evaluate, and use a model that detects anomalies in images\. To help you learn, Amazon Lookout for Vision provides example images of circuit boards \(that is, `circuit_board`\) that you can use\. 
+The Getting Started instructions show you how to create, train, evaluate, and use a model that detects anomalies in images\. To help you learn, Amazon Lookout for Vision provides example images of circuit boards \(that is, `circuitboard`\) that you can use\. 
 
 The general workflow is as follows: 
 
@@ -23,7 +17,7 @@ The general workflow is as follows:
 
 ## Set up Amazon Lookout for Vision<a name="gs-example-images"></a>
 
-Set up Amazon Lookout for Vision and prepare the *circuit\_board* example images for use in Getting Started\. 
+Set up Amazon Lookout for Vision and prepare the *circuitboard* example images for use in Getting Started\. 
 
 **Step 1**: [Set up Amazon Lookout for Vision](su-set-up.md)\. 
 
@@ -44,7 +38,7 @@ A dataset is a set of images and labels \(that is, normal or anomaly\) that desc
 + Import images from an S3 bucket\. Amazon Lookout for Vision can label the images using the folder names that contain the images\.
 + Import an Amazon SageMaker Ground Truth manifest file\.
 
-To help you understand how Amazon Lookout for Vision works, create a project with a training dataset and a test dataset\. Import your training dataset images from *s3://*your bucket*/circuit\_board/train/*\. Import your test dataset images from *s3://*your bucket*/circuit\_board/test/*\. 
+To help you understand how Amazon Lookout for Vision works, create a project with a training dataset and a test dataset\. Import your training dataset images from *s3://*your bucket*/circuitboard/train/*\. Import your test dataset images from *s3://*your bucket*/circuitboard/test/*\. 
 
 **Step 3**: [Create your dataset \(Import images from Amazon S3\)](create-dataset-s3.md)\.
 

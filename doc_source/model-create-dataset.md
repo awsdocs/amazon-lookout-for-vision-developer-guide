@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating your dataset<a name="model-create-dataset"></a>
 
 A dataset contain the images and assigned labels that you use to train and test a model\. An Amazon Lookout for Vision project can have one of the following dataset configurations:

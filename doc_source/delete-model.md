@@ -1,14 +1,10 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Deleting a model<a name="delete-model"></a>
 
 You can delete a version of a model by using the console or by using the `DeleteModel` operation\. You can't delete model version that is running or being trained\.
 
 If the model is version running, first use the `StopModel` operation to stop the model version\. For more information, see [Stopping your Amazon Lookout for Vision model](run-stop-model.md)\. If a model is training, wait until it finishes before you delete the model\.
+
+It might take a few seconds to delete a model\. To determine if a model has been deleted, call [ListProjects](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListProjects) and check if the version of the model \(`ModelVersion`\) is in the `Models` array\. 
 
 ## Deleting a model \(console\)<a name="delete-model-console"></a>
 
@@ -63,35 +59,67 @@ Use the following procedure to delete model with the `DeleteModel` operation\.
 ------
 #### [ Python ]
 
-   Change the following values:
+   In the function `main`, change the following values:
    + `project_name` to the name of the project that contains the model that you want to delete\.
    + `model_version` to the version of the model that you want to delete\. 
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
+   
+   import time
    import boto3
    
-   def delete_model(project_name,model_version):
+   from botocore.exceptions import ClientError
    
-       client=boto3.client('lookoutvision')
    
-       try: 
-           #Delete the model
-           print('Deleting model:' + model_version)
-           response=client.delete_model(ProjectName=project_name,
-             ModelVersion=model_version)
-           print('Done...')
-       
-       except Exception as e:
-           print(e)
-       
+   def delete_model(project_name, model_version):
+       """
+       Deletes an Amazon Lookout for Vision model. The model must first be
+       stopped and can't be in training.
+       param: project_name: The name of the project that contains the desired model.
+       param: model_version: The version of the model that you want to delete.
+       """
+   
+       try:
+           client = boto3.client("lookoutvision")
+   
+           # Delete the model
+           print("Deleting model:" + model_version)
+           response = client.delete_model(
+               ProjectName=project_name, ModelVersion=model_version
+           )
+   
+           model_exists = True
+   
+           while model_exists:
+               model_exists = False
+               response = client.list_models(ProjectName=project_name)
+               for model in response["Models"]:
+                   if model["ModelVersion"] == model_version:
+                       model_exists = True
+   
+               if model_exists is False:
+                   print("Model deleted")
+               else:
+                   print("Model is being deleted...")
+                   time.sleep(2)
+   
+           print("Deleted Model: " + model_version)
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
+   
+   
    def main():
-       project_name='my-project'
-       model_version='model-version'
-   
+       project_name = "my-project"  # The desired project
+       model_version = "1"  # The version of the model that you want to delete.
    
        delete_model(project_name, model_version)
+   
    
    if __name__ == "__main__":
        main()

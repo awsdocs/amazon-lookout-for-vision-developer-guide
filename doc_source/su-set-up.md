@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Setting up Amazon Lookout for Vision<a name="su-set-up"></a>
 
 In this section, you sign up for an AWS account and then create an IAM user, a security group, and optionally download example images that you can use to create a model\. 

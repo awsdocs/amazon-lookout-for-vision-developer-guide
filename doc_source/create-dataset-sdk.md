@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating a dataset with a manifest file \(SDK\)<a name="create-dataset-sdk"></a>
 
 You use the [CreateDataset](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/CreateDataset) operation to create the datasets associated with an Amazon Lookout for Vision project\. 
@@ -51,45 +45,88 @@ To view information about the test and training datasets, see [Viewing your data
 ------
 #### [ Python ]
 
-   Change the following values:
+   In the function `main`, change the following values:
    + `project_name` to the name of the project that you want to associate the dataset with\.
    + `dataset_type` to the type of dataset that you want to create \(`train` or `test`\)\.
    + `bucket` to the name of the Amazon S3 bucket that contains the manifest file\. 
    + `manifest_file` to the path and file name of the manifest file within `bucket`\. 
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
    
-   import boto3
    import json
+   import time
+   import boto3
+   
+   from botocore.exceptions import ClientError
    
    def create_dataset(project_name, bucket, manifest_file, dataset_type):
+       """
+       Creates a new Amazon Lookout for Vision dataset
+       param: project_name: The name of the project in which you want to create a dataset.
+       param: bucket: The bucket that contains the manifest file.
+       param: manifest_file: The path and name of the manifest file.
+       param: dataset_type: The type of the dataset (train or test).
+       """
    
-       client=boto3.client('lookoutvision')
+       try:
+   
+           client = boto3.client("lookoutvision")
+   
+           # Create a dataset
+           print("Creating dataset...")
+           dataset = json.loads(
+               '{ "GroundTruthManifest": { "S3Object": { "Bucket": "'
+               + bucket
+               + '", "Key": "'
+               + manifest_file
+               + '" } } }'
+           )
+   
+           response = client.create_dataset(
+               ProjectName=project_name, DatasetType=dataset_type, DatasetSource=dataset
+           )
+           print("Dataset Status: " + response["DatasetMetadata"]["Status"])
+           print("Dataset Status Message: " + response["DatasetMetadata"]["StatusMessage"])
+           print("Dataset Type: " + response["DatasetMetadata"]["DatasetType"])
+   
+           # Wait until either created or failed.
+           while True:
+   
+               dataset_description = client.describe_dataset(
+                   ProjectName=project_name, DatasetType=dataset_type
+               )
+               status = dataset_description["DatasetDescription"]["Status"]
+   
+               if status == "CREATE_IN_PROGRESS":
+                   print("Dataset creation in progress...")
+                   time.sleep(2)
+                   continue
+   
+               if status == "CREATE_COMPLETE":
+                   print("Dataset created.")
+                   break
+   
+               if status == "CREATE_FAILED":
+                   print("Dataset creation failed.")
+                   break
+   
+               print("Failed. Unexpected state for dataset creation: " + status)
+               break
+   
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
    
    
-       try: 
-           #Create a project
-           print('Creating dataset...')
-           dataset=json.loads('{ "GroundTruthManifest": { "S3Object": { "Bucket": "' + bucket + '", "Key": "'+ manifest_file + '" } } }')
-   
-           response=client.create_dataset(ProjectName=project_name, DatasetType=dataset_type, DatasetSource=dataset)
-           print('Dataset Status: ' + response['DatasetMetadata']['Status'])
-           print('Dataset Status Message: ' + response['DatasetMetadata']['StatusMessage'])
-           print('Dataset Type: ' + response['DatasetMetadata']['DatasetType'])
-           print('Done...')
-   
-       
-       except Exception as e:
-           print(e)
-       
    def main():
-       project_name='my-project'
-       bucket = 'bucket'
-       manifest_file = 'input.manifest'
-       dataset_type ='train'
-       create_dataset(project_name, bucket, manifest_file, dataset_type)
+       project_name = "my-project"  # Change to your project name.
+       bucket = "bucket"  # Change to the bucket with the manifest file.
+       manifest_file = "input.manifest"  # Change to your manifest file.
+       dataset_type = "train"  # or 'test' to create the test dataset.
    
+       create_dataset(project_name, bucket, manifest_file, dataset_type)
    
    
    if __name__ == "__main__":

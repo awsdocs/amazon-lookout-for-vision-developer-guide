@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Step 1: Create an AWS account<a name="su-account"></a>
 
 In this section, you sign up for an AWS account\. If you already have an AWS account, skip this step\.

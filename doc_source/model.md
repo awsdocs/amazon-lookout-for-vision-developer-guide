@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Creating an Amazon Lookout for Vision model<a name="model"></a>
 
 An Amazon Lookout for Vision model is a machine learning model that predicts the presence of anomalies in new images by finding patterns in images used to train the model\. This section shows you how to create and train a model\. After you train your model, you evaluate its performance\. For more information, see [Improving your model](improve.md)\.

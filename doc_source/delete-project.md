@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Deleting a project<a name="delete-project"></a>
 
 You can delete a project from the projects view page in the console or by using the `DeleteProject` operation\. 
@@ -62,31 +56,44 @@ The project might take a few moments to delete\. During that time, the status of
 ------
 #### [ Python ]
 
-   Change the value of `project_name` to the name of the project you want to delete\.
+   In the function `main`, change the value of `project_name` to the name of the project you want to delete\.
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
    import boto3
    
+   from botocore.exceptions import ClientError
+   
+   
    def delete_project(project_name):
+       """
+       Deletes an Amazon Lookout for Vision Model
+       param: project_name: The name of the project that you want to delete.
+       """
    
-       client=boto3.client('lookoutvision')
+       try:
+           client = boto3.client("lookoutvision")
    
-       try: 
-           #Create a project
-           print('Deleting project:' + project_name)
-           response=client.delete_project(ProjectName=project_name)
-           print('Deleted project ARN: ' + response['ProjectArn'])
-           print('Done...')
-       
-       except Exception as e:
-           print(e)
-       
+           # Delete a project
+           print("Deleting project:" + project_name)
+           response = client.delete_project(ProjectName=project_name)
+           print("Deleted project ARN: " + response["ProjectArn"])
+           print("Done...")
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
+   
+   
    def main():
-       project_name='my-project'
+       project_name = (
+           "my-project"  # Change to the name of the project that you want to delete.
+       )
    
        delete_project(project_name)
+   
    
    if __name__ == "__main__":
        main()

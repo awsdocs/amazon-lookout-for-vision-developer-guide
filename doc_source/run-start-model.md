@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Starting your Amazon Lookout for Vision model<a name="run-start-model"></a>
 
 
@@ -89,40 +83,86 @@ A model might take a while to start\. You can check the current status by callin
 ------
 #### [ Python ]
 
-   Change the following values:
+   In the function `main`, change the following values:
    + `project` to the name of the project that contains the model that you want to start\.
    + `model_version` to the version of the model that you want to start\. Note that the console prepends the model version with the text `Model`\. You only need to specify the version number\. For example `12`\. 
    + `version_name` to the name of the model that you want to start\.
    + `min_inference_units` to the number of inference units that you want to use\.
 
    ```
-   #Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   # SPDX-License-Identifier: Apache-2.0
    
+   import time
    import boto3
    
-   def start_model(project_name, model_version, min_inference_units):
+   from botocore.exceptions import ClientError
    
-       client=boto3.client('lookoutvision')
+   def start_model(project_name, model_version, min_inference_units):
+       """
+       Starts the hosting of an Amazon Lookout for Vision model.
+       param: project_name: The name of the project that contains the version
+        of the model that you want to start hosting.
+       param: model_version  The version of the model that you want to start hosting.
+       param: min_inference_units The number of inference units to use for hosting.
+       """
    
        try:
+   
+           client = boto3.client("lookoutvision")
+   
            # Start the model
-           print('Starting model version ' + model_version  + ' for project ' + project_name )
-           response=client.start_model(ProjectName=project_name,
+           print(
+               "Starting model version " + model_version + " for project " + project_name
+           )
+           client.start_model(
+               ProjectName=project_name,
                ModelVersion=model_version,
-               MinInferenceUnits=min_inference_units)
-           print('Status: ' + response['Status'])
+               MinInferenceUnits=min_inference_units,
+           )
+   
+           print("Starting hosting...")
+   
+           # Wait until either hosted or failed.
+           while True:
+   
+               model_description = client.describe_model(
+                   ProjectName=project_name, ModelVersion=model_version
+               )
+               status = model_description["ModelDescription"]["Status"]
+   
+               if status == "STARTING_HOSTING":
+                   print("Host starting in progress...")
+                   time.sleep(10)
+                   continue
+   
+               if status == "HOSTED":
+                   print("Model is hosted and ready for use.")
+                   break
+   
+               if status == "HOSTING_FAILED":
+                   print("Model hosting failed and the model can't be used.")
+                   break
+   
+               print("Failed. Unexpected state for hosting: " + status)
+               break
+   
+       except ClientError as err:
+           print("Service error: " + format(err))
+           raise
+   
+       print("Done...")
    
    
-       except Exception as e:
-           print(e)
-           
-       print('Done...')
-       
    def main():
-       project='my-project'
-       model_version='1'
-       min_inference_units=1 
+       project = "my-project"  # Change to your project name
+       model_version = "1"  # Change to the version of your model
+       min_inference_units = (
+           1  # Change to the number of inference units that you want to use for hosting.
+       )
+   
        start_model(project, model_version, min_inference_units)
+   
    
    if __name__ == "__main__":
        main()

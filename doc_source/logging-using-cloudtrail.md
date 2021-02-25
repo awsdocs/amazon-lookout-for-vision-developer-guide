@@ -1,9 +1,3 @@
---------
-
-Amazon Lookout for Vision is in preview release and is subject to change\.
-
---------
-
 # Logging Lookout for Vision API calls with AWS CloudTrail<a name="logging-using-cloudtrail"></a>
 
 Amazon Lookout for Vision is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in Lookout for Vision\. CloudTrail captures all API calls for Lookout for Vision as events\. The calls captured include calls from the Lookout for Vision console and code calls to the Lookout for Vision API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Lookout for Vision\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to Lookout for Vision, the IP address from which the request was made, who made the request, when it was made, and additional details\. 
