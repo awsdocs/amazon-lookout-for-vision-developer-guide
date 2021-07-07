@@ -9,5 +9,7 @@ The JSON line examples in this section are formatted for readability\.
 
 The images referenced by a manifest file must be located in the same Amazon S3 bucket\. The manifest file can be in a different bucket\. You specify the location of an image in the `source-ref` field of a JSON line\. 
 
+You can create a manifest file by using code\. The [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) Python Notebook shows how to create the manifest file for the circuitboard example images\. Alternatively, you can use the [Datasets example code](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lookoutvision/datasets.py) in the AWS Code Examples Repository\.
+
 **Topics**
 + [Defining JSON lines for anomaly classification](manifest-file-classification.md)

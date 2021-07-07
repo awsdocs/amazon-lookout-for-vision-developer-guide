@@ -1,4 +1,4 @@
-# Step 5: \(Optional\) Prepare example images<a name="su-prepare-example-images"></a>
+# Step 8: \(Optional\) Prepare example images<a name="su-prepare-example-images"></a>
 
 Amazon Lookout for Vision provides example images of circuit boards that AWS customers can use to learn how to create, test, and use a model\.
 

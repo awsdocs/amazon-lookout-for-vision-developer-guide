@@ -25,4 +25,4 @@ Lookout for Vision metrics use the Lookout for Vision namespace and provide metr
 | Dimension | Description | 
 | --- | --- | 
 |  `ProjectName`  |  You can split metrics by project to see which projects are having problems or need to be updated\.  | 
-|  `ModelName`  |  You can split metrics by model to see which models are having problems or need to be updated\.  | 
+|  `ModelVersion`  |  You can split metrics by model version to see which models are having problems or need to be updated\.  | 

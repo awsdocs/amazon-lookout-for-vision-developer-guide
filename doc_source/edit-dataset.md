@@ -50,7 +50,7 @@ You can filter image labels by choosing the desired label, or label state, in th
 
 ## Adding more images<a name="add-more-images-dataset"></a>
 
-You can add more images to your datasets by uploading images from your local computer\. 
+You can add more images to your datasets by uploading images from your local computer\. To add more labeled images with the SDK, use the [UpdateDatasetEntries](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_UpdateDatasetEntries) operation\.
 
 **To add more images to your dataset \(console\)**
 

@@ -12,6 +12,6 @@ All images in a project must have the same dimensions\.
 
 All training and test images must be unique images, preferably of unique objects\. Normal images should capture the normal variations of the object being analyzed\. Anomalous images should capture a diverse sampling of anomalies\.
 
-Amazon Lookout for Vision provides example images that you can use\. For more information, see [Step 5: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+Amazon Lookout for Vision provides example images that you can use\. For more information, see [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
 
 For image limits, see [Quotas in Amazon Lookout for Vision](limits.md)\.

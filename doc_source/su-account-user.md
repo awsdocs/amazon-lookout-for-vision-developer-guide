@@ -10,7 +10,7 @@ For more information, see [How Amazon Lookout for Vision works with IAM](securit
 
 1. Create an administrator user in your AWS account\. For instructions, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.
 **Note**  
-An IAM user with administrator permissions has unrestricted access to the AWS services in your account\. You can restrict permissions as necessary\. The code examples in this guide assume that you have a user with the `AmazonLookoutVisionFullAccess` permissions\. 
+An IAM user with administrator permissions has unrestricted access to the AWS services in your account\. You can restrict permissions as necessary\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
 
 1. Sign in to the AWS Management Console\. 
 

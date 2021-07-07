@@ -11,6 +11,10 @@ You can use AWS CloudFormation to provision and configure Amazon Lookout for Vis
 
 To view your projects, see [Viewing your projects](view-projects.md) or open the [Using the Amazon Lookout for Vision dashboard](dashboard.md)\. To delete a model, see [Deleting a model](delete-model.md)\. 
 
+**Topics**
++ [Creating a project \(console\)](#create-project-console)
++ [Creating a project \(SDK\)](#create-project-sdk)
+
 ## Creating a project \(console\)<a name="create-project-console"></a>
 
 The following procedure shows you how to create a project using the console\.
@@ -27,6 +31,8 @@ The following procedure shows you how to create a project using the console\.
 
 1. Choose **Create project**\. The details page for your project is displayed\.
 
+1. Follow the steps in [Creating your dataset](model-create-dataset.md) to create your dataset\.
+
 ## Creating a project \(SDK\)<a name="create-project-sdk"></a>
 
 You use the [CreateProject](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateProject) operation to create an Amazon Lookout for Vision project\. The response from `CreateProject` includes the project name and the Amazon Resource Name \(ARN\) of the project\. Afterwards, call [CreateDataset](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateDataset) to add a training and a test dataset to your project\. For more information, see [Creating a dataset with a manifest file \(SDK\)](create-dataset-sdk.md)\. 
@@ -37,9 +43,9 @@ To view the projects that you have created in a project, call `ListProjects`\. F
 
 1. If you haven't already done so, do the following:
 
-   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` and permissions\. For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
 
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to create a model\.
 
@@ -97,3 +103,5 @@ To view the projects that you have created in a project, call `ListProjects`\. F
    ```
 
 ------
+
+1. Follow the steps in [Creating a dataset using an Amazon SageMaker Ground Truth manifest file](create-dataset-ground-truth.md) to create your dataset\.

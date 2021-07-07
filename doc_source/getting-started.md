@@ -21,7 +21,7 @@ Set up Amazon Lookout for Vision and prepare the *circuitboard* example images f
 
 **Step 1**: [Set up Amazon Lookout for Vision](su-set-up.md)\. 
 
-Be sure to do [Step 5: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+Be sure to do [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
 
 ## Create a project<a name="gs-project"></a>
 

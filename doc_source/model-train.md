@@ -17,6 +17,10 @@ To view the existing models in a project, [Viewing your models](view-models.md)\
 **Note**  
 If you've just completed [Creating your dataset](model-create-dataset.md) or [Editing your dataset](edit-dataset.md)\. The console should currently show your model dashboard and you don't need to do steps 1 \- 4\.
 
+**Topics**
++ [Training a model \(console\)](#create-model-console)
++ [Training a model \(SDK\)](#create-model-sdk)
+
 ## Training a model \(console\)<a name="create-model-console"></a>
 
 The following procedure shows you how to train your model using the console\.
@@ -61,7 +65,7 @@ The following procedure shows you how to train your model using the console\.
 
 ## Training a model \(SDK\)<a name="create-model-sdk"></a>
 
-You use the [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/CreateModel) operation to start the training, testing and evaluation of a model\. Amazon Lookout for Vision trains the model using the training and test dataset associated with the project\. For more information, see [Creating a project \(SDK\)](model-create-project.md#create-project-sdk)\.
+You use the [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateModel.html) operation to start the training, testing and evaluation of a model\. Amazon Lookout for Vision trains the model using the training and test dataset associated with the project\. For more information, see [Creating a project \(SDK\)](model-create-project.md#create-project-sdk)\.
 
  Each time you call `CreateModel`, a new version of the model is created\. The response from `CreateModel` includes the version of the model\. 
 
@@ -77,9 +81,9 @@ To view the models that you have created in a project, call `ListModels`\. For e
 
 1. If you haven't already done so, do the following:
 
-   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` and permissions\. For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
 
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to train a model\.
 
@@ -212,3 +216,5 @@ To view the models that you have created in a project, call `ListModels`\. For e
    ```
 
 ------
+
+1. When training is finished, you can evaluate its performance\. For more information, see [Improving your model](improve.md)\.

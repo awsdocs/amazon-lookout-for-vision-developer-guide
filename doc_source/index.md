@@ -1,7 +1,7 @@
 # Amazon Lookout for Vision Developer Guide
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -18,9 +18,12 @@ Amazon's trademarks and trade dress may not be used in
 + [Setting up Amazon Lookout for Vision](su-set-up.md)
    + [Step 1: Create an AWS account](su-account.md)
    + [Step 2: Create an IAM administrator user and group](su-account-user.md)
-   + [Step 3: Create the console bucket](su-create-console-bucket.md)
-   + [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)
-   + [Step 5: (Optional) Prepare example images](su-prepare-example-images.md)
+   + [Step 3: Set up permissions](su-setup-permissions.md)
+   + [Step 4: Create the console bucket](su-create-console-bucket.md)
+   + [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)
+   + [Step 6: Set up SDK permissions](su-sdk-permissions.md)
+   + [Step 7: (Optional) Using your own AWS Key Management Service key](su-kms-encryption.md)
+   + [Step 8: (Optional) Prepare example images](su-prepare-example-images.md)
 + [Getting Started with the Amazon Lookout for Vision console](getting-started.md)
 + [Getting started with the AWS SDK](getting-started-sdk.md)
 + [Using the Amazon Lookout for Vision dashboard](dashboard.md)
@@ -61,6 +64,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Identity and access management for Amazon Lookout for Vision](security-iam.md)
       + [How Amazon Lookout for Vision works with IAM](security_iam_service-with-iam.md)
       + [Amazon Lookout for Vision identity-based policy examples](security_iam_id-based-policy-examples.md)
+      + [AWS managed policies for Amazon Lookout for Vision](security-iam-awsmanpol.md)
       + [Troubleshooting Amazon Lookout for Vision identity and access](security_iam_troubleshoot.md)
    + [Logging and monitoring in Amazon Lookout for Vision](security-logging-monitoring.md)
       + [Logging Lookout for Vision API calls with AWS CloudTrail](logging-using-cloudtrail.md)

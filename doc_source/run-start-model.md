@@ -5,7 +5,7 @@
 Before you can use an Amazon Lookout for Vision model to detect anomalies, you must first start the model\. You start a model by calling the [StartModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModel) API and passing the following:
 + **ProjectName** – The name of the project that contains the model that you want to start\.
 + **ModelVersion** – The version of the model that you want to start\.
-+ **MinInferenceUnits** – The minimum number of inference units\. One unit corresponds to 5 transactions per second \(TPS\)\.
++ **MinInferenceUnits** – The minimum number of inference units\. For more information, see [Running your trained Amazon Lookout for Vision model](running-model.md)\.
 
 The Amazon Lookout for Vision console provides example code that you can use to start and stop a model\. 
 
@@ -24,9 +24,9 @@ The Amazon Lookout for Vision console provides a AWS CLI command that you can us
 
 1. If you haven't already done so, do the following:
 
-   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` and permissions\. For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
 
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 
@@ -48,7 +48,7 @@ The Amazon Lookout for Vision console provides a AWS CLI command that you can us
 
 1. In the console, choose **Models** in the left navigation page\.
 
-1. Check the **Status** column for the current status of the model, When the status is **Hosted**, you can use the model to detect anomalies in images\. 
+1. Check the **Status** column for the current status of the model, When the status is **Hosted**, you can use the model to detect anomalies in images\. For more information, see [Detecting anomalies in an image](inference-detect-anomalies.md)\. 
 
 ## Starting your Amazon Lookout for Vision model \(SDK\)<a name="start-model-sdk"></a>
 
@@ -60,9 +60,9 @@ A model might take a while to start\. You can check the current status by callin
 
 1. If you haven't already done so, do the following:
 
-   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` and permissions\. For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
 
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to start a model\.
 
@@ -169,3 +169,5 @@ A model might take a while to start\. You can check the current status by callin
    ```
 
 ------
+
+1. If the output of the code is `Model is hosted and ready for use`, you can use the model to detect anomalies in images\. For more information, see [Detecting anomalies in an image](inference-detect-anomalies.md)\.

@@ -2,6 +2,14 @@
 
 During training Lookout for Vision tests your model with the test dataset and uses the results to create performance metrics\. You can use performance metrics to evaluate the performance of your model\. If necessary, you can take steps to improve your datasets and then retrain your model\.
 
+If you're satisfied with the performance of your model, you can begin to use it\. For more information, see [Running your trained Amazon Lookout for Vision model](running-model.md)\. 
+
+**Topics**
++ [Step 1: Evaluate the performance of your model](#evaluate-model)
++ [Step 2: Improve your model](#improve-model)
++ [Viewing performance metrics](performance-metrics.md)
++ [Verifying your model with a trial detection task](trial-detection.md)
+
 ## Step 1: Evaluate the performance of your model<a name="evaluate-model"></a>
 
 You can access the performance metrics from the console and from the `DescribeModel` operation\. Amazon Lookout for Vision provides summary performance metrics for the test dataset and the predicted results for all individual images\. 

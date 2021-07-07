@@ -1,9 +1,13 @@
 # Verifying your model with a trial detection task<a name="trial-detection"></a>
 
-If you want to verify or improve the quality of your model, you can run a trial detection task\. A trial detection task detects anomalies in new images that you supply\. You can verify the detection results and add the verified images to your dataset\. If you have separate training and test datasets, the verified images are added to the training dataset\.
+If you want to verify or improve the quality of your model, you can run a trial detection task\. A trial detection task detects anomalies in new images that you supply\. 
+
+You can verify the detection results and add the verified images to your dataset\. If you have separate training and test datasets, the verified images are added to the training dataset\.
+
+You can verify images from your local computer or images located in an Amazon S3 bucket\. If you want to add verified images to the dataset, images located in an S3 bucket must be in the same S3 bucket as the images in your dataset\.
 
 **Note**  
-To run a trial detect task, ensure that your S3 bucket has versioning enabled\. For more information, see [Using versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html)\. The console bucket is created with versioning enabled\.
+To run a trial detection task, ensure that your S3 bucket has versioning enabled\. For more information, see [Using versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html)\. The console bucket is created with versioning enabled\.
 
 By default your images are encrypted with a key that AWS owns and manages\. You can also choose to use your own AWS Key Management Service \(KMS\) key\. For more information, see [AWS Key Management Service concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)\.
 

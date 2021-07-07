@@ -83,7 +83,7 @@ You can use the AWS SDK to:
 + List the tags attached to a model 
 + Remove tags from a model 
 
-This section includes AWS CLI examples\. If you haven't installed the AWS CLI, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+This section includes AWS CLI examples\. If you haven't installed the AWS CLI, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 ### Adding tags to a new model \(SDK\)<a name="tagging-new-model-sdk"></a>
 
@@ -115,6 +115,8 @@ aws lookoutvision list-tags-for-resource --resource-arn resource-arn
 ```
 
 To see which models in a project have a specific tag, call `ListModels` to get a list of models\. Then call `ListTagsForResource` for each model in the response from `ListModels`\. Inspect the response from `ListTagsForResource` to see if the required tag is present\. 
+
+For example code that searches for a tag value across all projects, see [find\_tag\.py](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lookoutvision/find_tag.py)\.
 
 ### Removing tags from a model \(SDK\)<a name="removing-a-tag-sdk"></a>
 

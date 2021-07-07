@@ -36,9 +36,9 @@ If you're finding the confidence values returned by `DetectAnomalies` are too lo
 
 1. If you haven't already done so, do the following:
 
-   1. Create or update an IAM user with `AmazonLookoutVisionFullAccess` For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
+   1. Create or update an IAM user\.  For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
 
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
    1. [Train your model](model.md)\.
 

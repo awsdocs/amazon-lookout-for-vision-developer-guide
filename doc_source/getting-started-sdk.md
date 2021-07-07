@@ -2,7 +2,7 @@
 
 The Getting Started instructions show you how to use the AWS SDK to create, train, evaluate, and use a model that detects anomalies in an image\. We recommend reading [Getting Started with the Amazon Lookout for Vision console](getting-started.md) first\. This section includes AWS CLI commands\. You can get more information and Python examples by choosing the **More information** link at the end of each section\.
 
-Also, the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository includes a Python Notebook that you can use to create a model with the circuitboard example images\. 
+The [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository includes a Python Notebook that you can use to create a model with the [circuitboard example images](su-prepare-example-images.md)\. Alternatively, you can use the [Amazon Lookout for Vision example code](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code/lookoutvision) in the AWS Code Examples Repository\. 
 
 To prepare, train, evaluate, improve, and use a model, do the following:
 
@@ -22,7 +22,7 @@ Set up Amazon Lookout for Vision and prepare the example images for use in Getti
 
 **More information**: [Setup Amazon Lookout for Vision](su-set-up.md)\. 
 
-Be sure to do [Step 5: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+Be sure to do [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
 
 ## Create a project<a name="gs-project"></a>
 
@@ -53,7 +53,7 @@ The JSON response examples use a project named `my-sdk-project`\.
 
 ## Upload your images<a name="gs-upload-images-sdk"></a>
 
-You store the images used to train a model in an Amazon S3 bucket\. For Getting Started, use the circuitboard images in the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository\. If you haven't already, do [Step 5: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+You store the images used to train a model in an Amazon S3 bucket\. For Getting Started, use the circuitboard images in the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository\. If you haven't already, do [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
 
 ## Create a manifest file<a name="gs-create-manifest-sdk"></a>
 
@@ -78,7 +78,7 @@ You can use an existing manifest file, such as the output from an SageMaker Grou
 
 **Tip**  
 If you are creating your dataset using the circuitboard example images, you have two options:  
-Create the manifest file using code\. The [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) Python Notebook shows how to create the manifest file for the circuitboard example images\. 
+Create the manifest file using code\. The [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) Python Notebook shows how to create the manifest file for the circuitboard example images\. Alternatively, use the [Datasets example code](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lookoutvision/datasets.py) in the AWS Code Examples Repository\.
 If you've already followed [Getting Started with the Amazon Lookout for Vision console](getting-started.md) and created a dataset with the circuitboard example images, reuse the manifest files created for you by Amazon Lookout for Vision\. The training and test manifest file locations are `s3://bucket/datasets/project name/train or test/manifests/output/output.manifest`\. 
 
 Upload your completed manifest files to a folder within the bucket that contains your images\. 

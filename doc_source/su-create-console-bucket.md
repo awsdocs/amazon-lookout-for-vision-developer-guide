@@ -1,10 +1,12 @@
-# Step 3: Create the console bucket<a name="su-create-console-bucket"></a>
+# Step 4: Create the console bucket<a name="su-create-console-bucket"></a>
 
 You use an Amazon Lookout for Vision project to create and manage your models\. When you first open the Amazon Lookout for Vision console in a new AWS Region, Lookout for Vision creates an Amazon S3 bucket \(console bucket\) to store your projects\. You should note the console bucket name somewhere where you can refer to it later because you might need to use the bucket name in AWS SDK operations or console tasks, such as creating a dataset\.
 
 The format of the bucket name is `lookoutvision`\-*<region>*\-*<random value>*\. The random value ensures that there isn't a collision between bucket names\.
 
 **To create the console bucket**
+
+1. Ensure that the IAM user or group you are using has `AmazonLookoutVisionConsoleFullAccess` permission\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 

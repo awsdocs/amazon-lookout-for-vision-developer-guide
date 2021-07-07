@@ -37,7 +37,7 @@ If you've just completed [Creating your project](model-create-project.md), the c
 
 **To create a dataset using images stored in an Amazon S3 bucket**
 
-1. If you haven't already done so, upload the getting started images to your Amazon S3 bucket\. For more information, see [Step 5: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+1. If you haven't already done so, upload the getting started images to your Amazon S3 bucket\. For more information, see [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 
@@ -90,3 +90,5 @@ Your training and test datasets can have different image sources\.
 1. Choose **Automatically attach labels to images based on the folder**\.
 
 1. Choose **Create dataset**\. A dataset page opens with your labeled images\.
+
+1. Follow the steps in [Training your model](model-train.md) to train your model\.
