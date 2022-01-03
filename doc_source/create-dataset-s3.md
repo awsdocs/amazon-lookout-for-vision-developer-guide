@@ -54,18 +54,18 @@ If you're following the Getting Started instructions, choose **Create a training
 ------
 #### [ Single dataset ]
 
-   1. Choose **Create a single dataset**\.
+   1. In the **Dataset configuration** section, choose **Create a single dataset**\.
 
-   1. Enter the information for steps 8 \- 10 in the **Image source configuration** section\.
+   1. Enter the information for steps 7 \- 9 in the **Image source configuration** section\.
 
 ------
 #### [ Separate training and test datasets ]
 
-   1. Choose **Create a training dataset and a test dataset**\.
+   1. In the **Dataset configuration** section, choose **Create a training dataset and a test dataset**\.
 
-   1. For your training dataset, enter the information for steps 8 \- 10 in the **Training dataset details** section\.
+   1. For your training dataset, enter the information for steps 7 \- 9 in the **Training dataset details** section\.
 
-   1. For your test dataset, enter the information for steps 8 \- 10 in the **Test dataset details** section\.
+   1. For your test dataset, enter the information for steps 7 \- 9 in the **Test dataset details** section\.
 **Note**  
 Your training and test datasets can have different image sources\.
 

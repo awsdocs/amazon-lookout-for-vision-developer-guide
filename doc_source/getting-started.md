@@ -6,6 +6,8 @@ The general workflow is as follows:
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/lfv.png)
 
+You can also use a Lookout for Vision model on an AWS IoT Greengrass Version 2 core device\. For more information, see [Using your Amazon Lookout for Vision model on an edge device](models-devices.md)\.
+
 **Topics**
 + [Set up Amazon Lookout for Vision](#gs-example-images)
 + [Create a project](#gs-project)

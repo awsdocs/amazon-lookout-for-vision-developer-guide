@@ -2,6 +2,9 @@
 
 You can get a list of Amazon Lookout for Vision projects and information about individual projects from the console or by using the AWS SDK\.
 
+**Note**  
+The list of projects is eventually consistent\. If you create or delete a project, you might have to wait a short while before the projects list is up to date\. 
+
 ## Viewing your projects \(console\)<a name="view-projects-console"></a>
 
 Perform the steps in the following procedure to view your projects in the console\. 

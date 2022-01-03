@@ -1,10 +1,12 @@
 # Document History for Amazon Lookout for Vision<a name="document-history"></a>
 
 The following table describes important changes in each release of the *Amazon Lookout for Vision Developer Guide*\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
-+ **Latest documentation update:** May 11th, 2021
++ **Latest documentation update:** December 7th, 2021
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Preview release of model deployment to an edge device](#document-history) | The preview release of model deployment to an edge device managed by AWS IoT Greengrass Version 2 is now available\. For more information, see [Using your Amazon Lookout for Vision model on an edge device](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/models-devices.html)\. | December 7, 2021 | 
+| [New Python and Java 2 examples added](#document-history) | Added Python and Java 2 examples for analyzing images with `DetectAnomalies`\. For more information, see [Detecting anomalies in an image](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/inference-detect-anomalies.html)\. | September 7, 2021 | 
 | [New AWS managed policies added\.](#document-history) | Amazon Lookout for Vision adds support for AWS managed policies\. For more information, see [AWS managed policies for Amazon Lookout for Vision](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)\. | May 11, 2021 | 
 | [Updated inference unit information\.](#document-history) | Added information describing inference units and how they are charged\. For more information, see [Running your trained Amazon Lookout for Vision model](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/running-model.html)\. | March 15, 2021 | 
 | [General availability for Amazon Lookout for Vision\.](#document-history) | Amazon Lookout for Vision is now generally available\. Python code examples updated to handle asynchronous tasks such as [training a model](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/model-train.html#create-model-sdk)\. | February 17, 2021 | 

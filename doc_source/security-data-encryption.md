@@ -6,11 +6,11 @@ The following information explains where Amazon Lookout for Vision uses data enc
 
 ### Images<a name="security-images"></a>
 
- To train your model, Amazon Lookout for Vision makes a copy of your source training and test images\. The copied images are encrypted at rest in Amazon Simple Storage Service \(S3\) using server\-side encryption with an AWS owned Customer master key \(CMK\) or a CMK that you provide\. The keys are stored using AWS Key Management Service \(SSE\-KMS\)\. Your source images are unaffected\. For more information, see [Training your model](model-train.md)\. 
+ To train your model, Amazon Lookout for Vision makes a copy of your source training and test images\. The copied images are encrypted at rest in Amazon Simple Storage Service \(S3\) using server\-side encryption with an AWS owned key or a key that you provide\. The keys are stored using AWS Key Management Service \(SSE\-KMS\)\. Your source images are unaffected\. For more information, see [Training your model](model-train.md)\. 
 
 ### Amazon Lookout for Vision models<a name="security-models"></a>
 
-By default, trained models and manifest files are encrypted in Amazon S3 using server\-side encryption with CMKs stored in AWS Key Management Service \(SSE\-KMS\)\. Lookout for Vision uses an AWS owned CMK\. For more information, see [ Protecting Data Using Server\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)\. Training results are written to the bucket specified in the `output_bucket` input parameter to `CreateModel`\. The training results are encrypted using the configured encryption settings for the bucket \(`output_bucket`\)\. 
+By default, trained models and manifest files are encrypted in Amazon S3 using server\-side encryption with KMS keys stored in AWS Key Management Service \(SSE\-KMS\)\. Lookout for Vision uses an AWS owned key\. For more information, see [ Protecting Data Using Server\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)\. Training results are written to the bucket specified in the `output_bucket` input parameter to `CreateModel`\. The training results are encrypted using the configured encryption settings for the bucket \(`output_bucket`\)\. 
 
 ### Amazon Lookout for Vision console bucket<a name="security-console"></a>
 

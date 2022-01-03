@@ -20,7 +20,7 @@ If you've just completed [Creating your project](model-create-project.md), the c
 ------
 #### [ Single dataset ]
 
-   1. Choose **Create a single dataset**\.
+   1. In the **Dataset configuration** section, choose **Create a single dataset**\.
 
    1. In the **Image source configuration** section, choose **Upload images from your computer**\.
 
@@ -35,7 +35,7 @@ If you've just completed [Creating your project](model-create-project.md), the c
 ------
 #### [ Separate training and test datasets ]
 
-   1. Choose **Create a training dataset and a test dataset**\.
+   1. In the **Dataset configuration** section, choose **Create a training dataset and a test dataset**\.
 
    1. In the **Training dataset details** section, choose **Upload images from your computer**\.
 
@@ -51,7 +51,7 @@ Your training and test datasets can have different image sources\.
 
    1. Choose **Upload images**\.
 
-   1. Repeat steps 6e \- 6g\. For step 6e, choose **Actions** and then choose **Add images to test dataset**\.
+   1. Repeat steps 5e \- 5g\. For step 5e, choose **Actions** and then choose **Add images to test dataset**\.
 
 ------
 

@@ -13,6 +13,12 @@ The transactions per second \(TPS\) that a single inference unit supports is aff
 + Higher resolution images require more time for analysis\.
 + Smaller sized images \(measured in MBs\) are analyzed faster than larger images\.
 
+Amazon Lookout for Vision distributes inference units across multiple Availability Zones within an AWS Region to provide increased availability\. For more information, see [Availability Zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/#Availability_Zones)\. To help protect your production models from Availability Zone outages and inference unit failures, we strongly recommend that you start your production models with at least 2 inference units\. 
+
+If an Availability Zone outage occurs, all inference units in the Availability Zone are unavailable and model capacity is reduced\. Calls to [DetectAnomalies](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DetectAnomalies) are redistributed across the remaining inference units and succeed if the calls don’t exceed the supported Transactions Per Seconds \(TPS\) of the remaining inference units\. After AWS repairs the Availability Zone, the inference units are restarted, and full capacity is restored\. 
+
+If a single inference unit fails, Lookout for Vision automatically starts a new inference unit in the same Availability Zone\. Model capacity is reduced until the new inference unit starts\.
+
 You are charged for the number of hours that your model is running and for the number of inference units that your model uses whilst it is running\. For example, if you start the model with 2 inference units and you use the model for 8 hours, you are charged for 16 inference hours \(8 hours running time \* 2 inference units\)\. 
 
 **Warning**  

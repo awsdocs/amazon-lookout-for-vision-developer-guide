@@ -2,6 +2,9 @@
 
 A project can have multiple versions of a model\. You can use the console to view the models in a project\. You can also use the `ListModels` operation\.
 
+**Note**  
+The list of models is eventually consistent\. If you create a model, you might have to wait a short while before the models list is up to date\. 
+
 ## Viewing your models \(console\)<a name="view-models-console"></a>
 
 Perform the steps in the following procedure to view the your project's models in the console\. 

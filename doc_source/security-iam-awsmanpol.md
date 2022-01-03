@@ -25,8 +25,10 @@ Additionally, AWS supports managed policies for job functions that span multiple
 Use the `AmazonLookoutVisionReadOnlyAccess` policy to allow users read\-only access to Amazon Lookout for Vision \(and its dependencies\) with the following Amazon Lookout for Vision actions \(SDK operations\)\. For example, you can use `DescribeModel` to get information about an existing model\. 
 + [DescribeDataset](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeDataset)
 + [DescribeModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModel)
++ [DescribeModelPackagingJob](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModelPackagingJob)
 + [DescribeProject](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeProject)
 + [ListDatasetEntries](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListDatasetEntries)
++ [ListModelPackagingJobs](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListModels)
 + [ListModels](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListModels)
 + [ListProjects](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListProjects)
 + [ListTagsForResource](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource)
@@ -60,10 +62,12 @@ This policy includes the following permissions\.
                 "lookoutvision:DescribeDataset",
                 "lookoutvision:DescribeModel",
                 "lookoutvision:DescribeProject",
+                "lookoutvision:DescribeModelPackagingJob",
                 "lookoutvision:ListDatasetEntries",
                 "lookoutvision:ListModels",
                 "lookoutvision:ListProjects",
-                "lookoutvision:ListTagsForResource"
+                "lookoutvision:ListTagsForResource",
+                "lookoutvision:ListModelPackagingJobs"
             ],
             "Resource": "*"
         }
@@ -270,11 +274,13 @@ This policy is grouped into statements based on the set of permissions provided:
                 "lookoutvision:DescribeModel",
                 "lookoutvision:DescribeProject",
                 "lookoutvision:DescribeTrialDetection",
+                "lookoutvision:DescribeModelPackagingJob",
                 "lookoutvision:ListDatasetEntries",
                 "lookoutvision:ListModels",
                 "lookoutvision:ListProjects",
                 "lookoutvision:ListTagsForResource",
-                "lookoutvision:ListTrialDetections"
+                "lookoutvision:ListTrialDetections",
+                "lookoutvision:ListModelPackagingJobs"
             ],
             "Resource": "*"
         },
@@ -321,6 +327,6 @@ View details about updates to AWS managed policies for Lookout for Vision since 
 
 
 
-| Change | Description | Date | New policies added  | Amazon Lookout for Vision added the following policies\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | May 11th, 2021 | 
-| --- | --- | --- | --- | --- | --- | 
+| Change | Description | Date | Model packaging operations added | Amazon Lookout for Vision added the following model packaging operations to the [AmazonLookoutVisionFullAccess](#security-iam-awsmanpol-AmazonLookoutVisionFullAccess) and [AmazonLookoutVisionConsoleFullAccess](#security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess) policies: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html) Amazon Lookout for Vision added the following model packaging operations to the [AmazonLookoutVisionReadOnlyAccess](#security-iam-awsmanpol-AmazonLookoutVisionReadOnlyAccess) and [AmazonLookoutVisionConsoleReadOnlyAccess](#security-iam-awsmanpol-AmazonLookoutVisionConsoleReadOnlyAccess) policies: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | TBD | New policies added  | Amazon Lookout for Vision added the following policies\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | May 11th, 2021 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 |  Lookout for Vision started tracking changes  |  Amazon Lookout for Vision started tracking changes for its AWS managed policies\.  | March 1st, 2021 | 

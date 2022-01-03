@@ -2,6 +2,9 @@
 
 You can view your trial detections by using the console\. You can't use the AWS SDK to view trial detection tasks\.
 
+**Note**  
+The list of trial detections is eventually consistent\. If you create a trial detection, you might have to wait a short while before the trial detections list is up to date\. 
+
 ## Viewing your trial detection tasks \(console\)<a name="view-trial-detections-console"></a>
 
 Use the following procedures to view your trial detections\. 

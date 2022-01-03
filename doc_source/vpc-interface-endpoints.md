@@ -12,7 +12,7 @@ Before you set up an interface VPC endpoint for Lookout for Vision, ensure that 
 
 Lookout for Vision supports making calls to all of its API actions from your VPC\. 
 
-VPC endpoint policies are not supported for Lookout for Vision\. By default, full access to Lookout for Vision is allowed through the endpoint\. For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
+VPC endpoint policies are supported for Lookout for Vision\. By default, full access to Lookout for Vision is allowed through the endpoint\. For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
 
 ## Creating an interface VPC endpoint for Lookout for Vision<a name="vpc-endpoint-create"></a>
 
