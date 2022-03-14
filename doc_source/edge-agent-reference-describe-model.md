@@ -1,10 +1,5 @@
 # DescribeModel<a name="edge-agent-reference-describe-model"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 Describes an Amazon Lookout for Vision model that's deployed to an AWS IoT Greengrass Version 2 core device\. 
 
 ```

@@ -1,10 +1,5 @@
 # Package settings<a name="package-settings"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 Use the following information to decide the package settings for your model packaging job\.
 
 To create a model packaging job, see [Packaging your model \(Console\)](package-job-console.md) or [Packaging your model \(SDK\)](package-job-sdk.md)\. 
@@ -17,23 +12,25 @@ To create a model packaging job, see [Packaging your model \(Console\)](package-
 
 You can choose a target device or target platform for your model, but not both\. For more information, see [Tested devices, chip architectures, and operating systems](models-devices-setup-requirements.md#models-devices-setup-core-device-tested)\. 
 
-**Target device**  
-The target device for the model, such as [NVIDIA® Jetson AGX Xavier](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-agx-xavier/)\. 
+### Target device<a name="package-settings-target-hardware"></a>
 
-**Target platform**  
-Amazon Lookout for Vision supports the X86\_64 \(64\-bit version of the x86 instruction set\) and ARM\_64 \(ARMv8 64\-bit CPU\) architectures\. Lookout for Vision supports the Linux operating system and various NVIDIA accelerators\. 
+The target device for the model, such as [NVIDIA® Jetson AGX Xavier](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-agx-xavier/)\. You don't need to specify compiler options\. 
 
-### Compiler options<a name="package-settings-compiler-options"></a>
+### Target platform<a name="package-settings-target-platform"></a>
 
-Compiler options allow you to specify the correct hardware or device options  for your AWS IoT Greengrass Version 2 core device\. Currently you can specify the following compiler options, which are required for the NVIDIA accelerator \(target platform\) and NVIDIA Jetson Xavier \(target device\):
-+ `gpu-code` — Specifies the gpu code of the core device that runs the model component\. Not required when you target a Jetson Xavier target device\. 
+Amazon Lookout for Vision supports the X86\_64 \(64\-bit version of the x86 instruction set\) and ARM\_64 \(ARMv8 64\-bit CPU\) architectures\. Lookout for Vision supports the Linux operating system and various NVIDIA accelerators\. You need to specify the correct compiler options for your target platform\.
+
+#### Compiler options<a name="package-settings-compiler-options"></a>
+
+Compiler options allow you to specify the target platform  for your AWS IoT Greengrass Version 2 core device\. Currently you can specify the following compiler options\. 
++ `gpu-code` — Specifies the gpu code of the core device that runs the model component\. 
 + `trt-ver` — Specifies the TensorRT version in x\.y\.z\. format\.
 + `cuda-ver` — Specifies the CUDA version in x\.y format\.
 
 You specify the options in JSON format\. For example:
 
 ```
-{'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}
+{'gpu-code': 'sm_75', 'trt-ver': '7.1.3', 'cuda-ver': '10.2'}
 ```
 
 For more examples, see [Tested devices, chip architectures, and operating systems](models-devices-setup-requirements.md#models-devices-setup-core-device-tested)\.
@@ -45,7 +42,7 @@ The model packaging job creates a model component that contains your model\. The
  You can't create a model component with the same component name and component version as an existing component\. 
 
 **Component name**  
-A name for the model component that Lookout for Vision creates during model packaging\. The component name you specify is displayed in the AWS IoT Greengrass V2 console\. 
+A name for the model component that Lookout for Vision creates during model packaging\. The component name you specify is displayed in the AWS IoT Greengrass V2 console\. You use the component name in the recipe that you create for the client application component\. For more information, see [Creating the client application component](edge-inference-create-custom-component.md)\. 
 
 **Component description**  
 \(Optional\) A description for the model component\.

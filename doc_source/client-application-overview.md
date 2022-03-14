@@ -1,10 +1,5 @@
 # Writing your client application component<a name="client-application-overview"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 A client application component is a custom AWS IoT Greengrass Version 2 component that you write\. It implements the business logic you need to use an Amazon Lookout for Vision model on an AWS IoT Greengrass Version 2 core device\.
 
 To access a model, your client application component uses the Lookout for Vision Edge Agent component\. The Lookout for Vision Edge Agent component provides an API that you use to analyze images with a model and manage the models on a core device\.

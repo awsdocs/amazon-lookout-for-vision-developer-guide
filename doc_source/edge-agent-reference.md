@@ -1,10 +1,5 @@
 # Amazon Lookout for Vision Edge Agent API reference<a name="edge-agent-reference"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 This section is the API reference for the Amazon Lookout for Vision Edge Agent\.
 
 ## Detecting anomalies with a model<a name="edge-agent-reference-find-anomalies"></a>

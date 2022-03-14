@@ -1,10 +1,5 @@
 # Packaging your model \(SDK\)<a name="package-job-sdk"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 You package a model as a model component by creating a model packaging job\. To create a model packaging job you call the [StartModelPackagingJob](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModelPackagingJob) API\. The job might take a while to complete\. To find out the current status, call [DescribeModelPackagingJob](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModelPackagingJob) and check the `Status` field in the response\. 
 
 For information about package settings, see [Package settings](package-settings.md)\.
@@ -51,7 +46,7 @@ The following procedure shows you how to start a packaging job by using the AWS 
    + \(Optional\) `tag_value1` and `tag_value2` to the key values for the tags that are attached to the model component\.
 
    ```
-   lookoutvision start-model-packaging-job \
+   aws lookoutvision start-model-packaging-job \
      --project-name project_name \
      --model-version model_version \
      --description="description" \
@@ -61,11 +56,11 @@ The following procedure shows you how to start a packaging job by using the AWS 
    For example:
 
    ```
-   lookoutvision start-model-packaging-job \
+   aws lookoutvision start-model-packaging-job \
      --project-name test-project-01 \
      --model-version 1 \
      --description="Model Packaging Job for G4 Instance using TargetPlatform Option" \
-     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='X86_64',Accelerator='NVIDIA'},CompilerOptions='{\'gpu-code\': \'sm_75\', \'trt-ver\': \'7.0.0\', \'cuda-ver\': \'10.2\'}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/folder'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='0.1.0',ComponentDescription='This is my component',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}"
+     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='X86_64',Accelerator='NVIDIA'},CompilerOptions='{\'gpu-code\': \'sm_75\', \'trt-ver\': \'7.1.3\', \'cuda-ver\': \'10.2\'}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/folder'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='0.1.0',ComponentDescription='This is my component',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}"
    ```
 
 ------
@@ -77,9 +72,6 @@ The following procedure shows you how to start a packaging job by using the AWS 
    + `project_name` to the name of the project that contains the model that you want to package\.
    + `model_version` to the version of the model that you want to package\.
    + \(Optional\) `description` to a description for your model packaging job\.
-   + `gpu_code` to the gpu code of the core device where you run the model component\.
-   + `trt_ver` to the TensorRT version you have installed on your core device\.
-   + `cuda_ver` to the CUDA version you have installed on your core device\.
    + `component_name` to a name for the model component that you want to create on AWS IoT Greengrass V2\.
    + \(Optional\) `component_version` to a version for the model component that the packaging job creates\. Use the format `major.minor.patch`\. For example, 1\.0\.0 represents the first major release for a component\. 
    + `bucket` to the Amazon S3 bucket where the packaging job stores the model component artifacts\.
@@ -93,17 +85,17 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name project_name \
      --model-version model_version \
      --description="description" \
-     --configuration "Greengrass={TargetDevice='jetson_xavier',CompilerOptions='{\'gpu-code\': \'gpu_code\', \'trt-ver\': \'trt_ver\', \'cuda-ver\': \'cuda_ver\'}',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
+     --configuration "Greengrass={TargetDevice='jetson_xavier',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
    ```
 
    For example:
 
    ```
    aws lookoutvision start-model-packaging-job \
-     --project-name test-project-01 \
+     --project-name project_01 \
      --model-version 1 \
-     --description="Model Packaging Job for jetson_xavier using TargetDevice Option" \
-     --configuration "Greengrass={TargetDevice='jetson_xavier',CompilerOptions='{\'gpu-code\': \'sm_72\', \'trt-ver\': \'6.0.1\', \'cuda-ver\': \'10.1\'}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/01/GreengrassCOmponent/SampleComponentNameX86TargetPlatform'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='1.0.0',ComponentDescription='This is my component for target platform with x86',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}"
+     --description="description" \
+     --configuration "Greengrass={TargetDevice='jetson_xavier',S3OutputLocation={Bucket='bucket',Prefix='component_folder'},ComponentName='jetson_component',ComponentVersion='2.0.0',ComponentDescription='jetson model component',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
    ```
 
 ------

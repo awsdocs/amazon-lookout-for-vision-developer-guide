@@ -32,16 +32,16 @@ Use the following information to decide which permissions are needed for the tas
 
 #### Creating a dataset<a name="su-sdk-permissions-create-dataset"></a>
 
-To create a dataset with [CreateDataset](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/CreateDataset), you need the following permissions\.
+To create a dataset with [CreateDataset](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateDataset), you need the following permissions\.
 + `s3:GetBucketLocation` — allows Lookout for Vision to validate that your bucket is in the same region in which you are using Lookout for Vision\.
 + `s3:GetObject` — Allows access to the manifest file specifed in the `DatasetSource` input parameter\. If you want to specify an exact S3 object version of the manifest file, you also need `s3:GetObjectVersion` on the manifest file\. For more information, see [Using versioning in S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)\. 
 
 #### Creating a model<a name="su-sdk-permissions-create-model"></a>
 
-To create a model with [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/CreateModel), you need the following permissions\.
+To create a model with [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateModel), you need the following permissions\.
 + `s3:GetBucketLocation` — allows Lookout for Vision to validate that your bucket is in the same region in which you are using Lookout for Vision\.
 + `s3:GetObject` — allows access to the images specified in the project’s training and test datasets\.
-+ `s3:PutObject` — allows permission to store training output in the specified bucket\. You specify the output bucket location in the `OutputConfig` parameter\. Optionally, you can scope permissions down to only object keys specified in the `Prefix` field of the `S3Location` input field\. For more information, see [API\_OutputConfig](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_OutputConfig.html)\.
++ `s3:PutObject` — allows permission to store training output in the specified bucket\. You specify the output bucket location in the `OutputConfig` parameter\. Optionally, you can scope permissions down to only object keys specified in the `Prefix` field of the `S3Location` input field\. For more information, see [OutputConfig](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_OutputConfig.html)\.
 
 #### Accessing images, manifest files, and training output<a name="su-sdk-permissions-read-bucket"></a>
 

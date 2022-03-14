@@ -50,9 +50,6 @@ Be sure to do [Step 8: \(Optional\) Prepare example images](su-prepare-example-i
 
 You create a project to manage the datasets and the models that you create\. 
 
-**Note**  
-Amazon Lookout for Vision stores your project files in an Amazon S3 bucket created for you when you first open the console\. If you haven't previously used the console, [create the console bucket](su-create-console-bucket.md)\. 
-
 To create a project, call the [CreateProject](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateProject) operation and specify a project name\. The following example creates a project named `my-sdk-project`\.
 
 ```
@@ -75,7 +72,7 @@ The JSON response examples use a project named `my-sdk-project`\.
 
 ## Upload your images<a name="gs-upload-images-sdk"></a>
 
-You store the images used to train a model in an Amazon S3 bucket\. For Getting Started, use the circuitboard images in the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository\. If you haven't already, do [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+You store the images used to train a model in an Amazon S3 bucket\. To create a bucket, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)\. For Getting Started, use the circuitboard images in the [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) GitHub repository\. If you haven't already, do [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
 
 ## Create a manifest file<a name="gs-create-manifest-sdk"></a>
 

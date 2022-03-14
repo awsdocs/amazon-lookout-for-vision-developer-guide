@@ -1,10 +1,5 @@
 # StopModel<a name="edge-agent-reference-stop-model"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 Stops a model running on an AWS IoT Greengrass Version 2 core device\. `StopModel` returns after the model has stopped\. The model has stopped successfully if the `Status` field in the response is `STOPPED`\.
 
 ```

@@ -1,10 +1,5 @@
 # DetectAnomalies<a name="edge-agent-reference-detect-anomalies"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 Detects anomalies in the supplied image\.
 
 The response from `DetectAnomalies` includes a Boolean prediction that the image contains one or more anomalies and a confidence value for the prediction\. 

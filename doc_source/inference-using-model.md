@@ -1,10 +1,5 @@
 # Using a model in your client application component<a name="inference-using-model"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 The steps for using a model from a client application component are similar to using a model hosted in the cloud\.
 
 1. Start running the model\. 
@@ -49,31 +44,40 @@ import edge_agent_pb2 as pb2
 
 ### Example code<a name="client-application-overview-start-model-example"></a>
 
+Replace *component\_name* with the name of your model component\.
+
 ```
 import time
 
-# Starting a Model.
-model_component_name = "component_name"
-start_model_response = stub.StartModel(
-    pb2.StartModelRequest(
-         model_component=model_component_name   
-    )
-)
-print(f"New status of the model is {start_model_response.status}")
+import grpc
+from edge_agent_pb2_grpc import EdgeAgentStub
+import edge_agent_pb2 as pb2
 
-# Waiting for the model to load.
-while True:
-    describe_model_response = stub.DescribeModel(
-        pb2.DescribeModelRequest(
-            model_component=model_component_name
-        )
-    )
-    model_status = describe_model_response.model_description.status
-    if model_status == pb2.RUNNING:
-        break
-    elif model_status == pb2.FAILED:
-        raise Exception("Model loading failed")
-    time.sleep(1)
+
+model_component_name = "component_name"
+
+
+def start_model_if_needed(stub, model_name):
+    # Starting model if needed.
+    while True:
+        model_description_response = stub.DescribeModel(pb2.DescribeModelRequest(model_component=model_name))
+        if model_description_response.model_description.status == pb2.RUNNING:
+            print("Model is already running.")
+            break
+        elif model_description_response.model_description.status == pb2.STOPPED:
+            print("Starting the model.")
+            stub.StartModel(pb2.StartModelRequest(model_component=model_name))
+            continue
+        print(f"Waiting for model to start.")
+        if model_description_response.model_description.status != pb2.STARTING:
+            break
+        time.sleep(1.0)
+
+
+# Creating stub.
+with grpc.insecure_channel("unix:///tmp/aws.iot.lookoutvision.EdgeAgent.sock") as channel:
+    stub = EdgeAgentStub(channel)
+    start_model_if_needed(stub, model_component_name)
 ```
 
 ## Detecting anomalies<a name="client-application-overview-detect-anomalies"></a>
@@ -84,24 +88,43 @@ You use the [DetectAnomalies](edge-agent-reference-detect-anomalies.md) API to d
 
 You can detect anomalies in an image by supplying the image as image bytes\. In the following example, the image bytes are retrieved from an image stored in the local file system\. 
 
-Replace *image\.jpg* with the name of the image file that you want to analyze\.
+Replace *sample\.jpg* with the name of the image file that you want to analyze\. Replace *component\_name* with the name of your model component\.
 
 ```
-from PIL import Image
+import time
 
-image = Image.open("image.jpg")
-image = image.convert("RGB")
-detect_anomalies_response = stub.DetectAnomalies(
-    pb2.DetectAnomaliesRequest(
-        model_component=model_component_name,
-        bitmap=pb2.Bitmap(
-            width=image.size[0]
-            height=image.size[1]
-            byte_data=bytes(image.tobytes())
-        ) 
+from PIL import Image
+import grpc
+from edge_agent_pb2_grpc import EdgeAgentStub
+import edge_agent_pb2 as pb2
+
+
+model_component_name = "component_name"
+
+....
+# Detecting anomalies.
+def detect_anomalies(stub, model_name, image_path):
+    image = Image.open(image_path)
+    image = image.convert("RGB")
+    detect_anomalies_response = stub.DetectAnomalies(
+        pb2.DetectAnomaliesRequest(
+            model_component=model_name,
+            bitmap=pb2.Bitmap(
+                width=image.size[0]
+                height=image.size[1]
+                byte_data=bytes(image.tobytes())
+            ) 
+        )
     )
-)
-print(f"Image is anomalous - {detect_anomalies_response.detect_anomaly_result.is_anomalous}")
+    print(f"Image is anomalous - {detect_anomalies_response.detect_anomaly_result.is_anomalous}")
+    return detect_anomalies_response.detect_anomaly_result
+
+
+# Creating stub.
+with grpc.insecure_channel("unix:///tmp/aws.iot.lookoutvision.EdgeAgent.sock") as channel:
+    stub = EdgeAgentStub(channel)
+    start_model_if_needed(stub, model_component_name)
+    detect_anomalies(stub, model_component_name, "sample.jpg")
 ```
 
 ### Detecting Anomalies by using shared memory segment<a name="client-application-overview-detect-anomalies-shared-memory"></a>

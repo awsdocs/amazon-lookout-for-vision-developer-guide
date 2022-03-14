@@ -1,17 +1,12 @@
 # Packaging your model \(Console\)<a name="package-job-console"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 You can create a model packaging job by using the Amazon Lookout for Vision console\.
 
 For information about package settings, see [Package settings](package-settings.md)\.
 
 **To package a model \(console\)**
 
-1. [Create an Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html), or reuse an existing bucket, to store the packaging job artifacts \(model component\)\. 
+1. [Create an Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html), or reuse an existing bucket, that Lookout for Vision uses to store the packaging job artifacts \(model component\)\. 
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 

@@ -1,10 +1,5 @@
 # ListModels<a name="edge-agent-reference-list-models"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 Lists the models deployed to an AWS IoT Greengrass Version 2 core device\. 
 
 ```

@@ -1,10 +1,5 @@
 # Getting information about model packaging jobs<a name="package-job-info"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 You can use the Amazon Lookout for Vision console and AWS SDK to get information about the model packaging jobs that you create\. 
 
 **Topics**

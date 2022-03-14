@@ -1,11 +1,10 @@
 # Setting up your environment<a name="edge-client-application-setup-environment"></a>
 
+To write client code, your development environment connects remotely to an AWS IoT Greengrass Version 2 core device to which you have deployed a Amazon Lookout for Vision model component and dependencies\. Alternatively, you can write code on a core device\. For more information, see [AWS IoT Greengrass development tools](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-development-tools.html) and [Develop AWS IoT Greengrass components](https://docs.aws.amazon.com/greengrass/v2/developerguide/develop-greengrass-components.html)\.  
 
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
+Your client code should use gRPC client to access the Amazon Lookout for Vision Edge Agent\. This section shows how to set up your development environment with gRPC and install third\-party dependencies needed for the `DetectAnomalies` example code\. 
 
-Your client code should use gRPC client to access the Amazon Lookout for Vision Edge Agent\. This section shows how to set up your environment with gRPC and install third\-party dependencies needed for the `DetectAnomalies` example code\. 
+After you finish writing your client code, you create a custom component and deploy the custom component to your edge devices\. For more information, see [Creating the client application component](edge-inference-create-custom-component.md)\.
 
 **Topics**
 + [Setting up gRPC](#edge-client-application-create-stub)
@@ -13,11 +12,14 @@ Your client code should use gRPC client to access the Amazon Lookout for Vision 
 
 ## Setting up gRPC<a name="edge-client-application-create-stub"></a>
 
- You need a gRPC client that you use in your code to call the Lookout for Vision Edge Agent API\. To do this, you create a gRPC stub by using the `.proto` service definition file available in the Lookout for Vision Edge Agent application bundle\. The application bundle is installed when the Lookout for Vision Edge Agent component is installed as a dependency of the model component\. The application bundle is located at `/greengrass/v2/packages/artifacts-unarchived/aws.iot.lookoutvision.EdgeAgent/edge_agent_version/lookoutvision_edge_agent`\. Replace `edge_agent_version` with version of the Lookout for Vision Edge Agent that you are using\.
+In your development environment, you need a gRPC client that you use in your code to call the Lookout for Vision Edge Agent API\. To do this, you create a gRPC stub by using the `.proto` service definition file available from [GitHub](https://github.com/awsdocs/amazon-lookout-for-vision-developer-guide/proto/edge-agent.proto)\.
+
+**Note**  
+You can also get the service definition file from the Lookout for Vision Edge Agent application bundle\. The application bundle is installed when the Lookout for Vision Edge Agent component is installed as a dependency of the model component\. The application bundle is located at `/greengrass/v2/packages/artifacts-unarchived/aws.iot.lookoutvision.EdgeAgent/edge_agent_version/lookoutvision_edge_agent`\. Replace `edge_agent_version` with version of the Lookout for Vision Edge Agent that you are using\. To get the application bundle, you need to deploy the Lookout for Vision Edge Agent to a core device\.
 
 **To set up gRPC**
 
-1. Copy the file `edge-agent.proto` from `/greengrass/v2/packages/artifacts-unarchived/aws.iot.lookoutvision.EdgeAgent/edge_agent_version/lookoutvision_edge_agent/protos/edge-agent.proto` to your working directory\. 
+1. Download the `.proto` service definition file from [GitHub](https://github.com/awsdocs/amazon-lookout-for-vision-developer-guide/proto/edge-agent.proto)\.
 
 1. Use the following commands to generate the Python client interfaces from the `.proto` service definition for the Lookout for Vision Edge Agent\.
 

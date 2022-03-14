@@ -1,10 +1,5 @@
 # Using your Amazon Lookout for Vision model on an edge device<a name="models-devices"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 You can use your Amazon Lookout for Vision model on edge devices managed by AWS IoT Greengrass Version 2\. AWS IoT Greengrass is an open source Internet of Things \(IoT\) edge runtime and cloud service\. You can use it to build, deploy, and manage IoT applications on your devices\. For more information, see [AWS IoT Greengrass](https://aws.amazon.com/greengrass)\.
 
 You deploy the same Amazon Lookout for Vision models that you've trained in the cloud onto AWS IoT Greengrass V2 compatible edge devices\. You can then use your deployed model to perform anomaly detection on premises, such as a factory floor, without continually streaming data to the cloud\. That way you can minimize bandwidth costs and detect anomalies locally with real\-time image analysis\. 
@@ -27,9 +22,9 @@ After you create the model component and client application component, you can u
 The predictions that your model makes with `DetectAnomalies` on a core device might differ from predictions made using the same model hosted in the cloud\. We recommend that you test your model on a core device before using it in a production environment\.    
 To reduce prediction mismatches between device hosted models and cloud hosted models, we recommend increasing the number of normal and anomalous images in your training dataset\. We don't recommend reusing existing images to increase the size of the training dataset\.
 
-## Deploying a model to a AWS IoT Greengrass Version 2 core device<a name="models-devices-using-model"></a>
+## Deploying a model and client application component to a AWS IoT Greengrass Version 2 core device<a name="models-devices-using-model"></a>
 
-The overall procedure for deploying an Amazon Lookout for Vision model on an AWS IoT Greengrass Version 2 core device is as follows:
+The procedure for deploying an Amazon Lookout for Vision model and client application component on an AWS IoT Greengrass Version 2 core device is as follows:
 
 1. [Set up your core devices](models-devices-setup-core-device.md) with AWS IoT Greengrass Version 2\. 
 
@@ -40,3 +35,6 @@ The overall procedure for deploying an Amazon Lookout for Vision model on an AWS
 1. [Deploy the model component and client application component](device-deploy-components.md) to the core device by using AWS IoT Greengrass V2\.
 
 After the components and dependencies are deployed to the core device, you can use the model on the core device\. 
+
+**Note**  
+You must use the same AWS Region and AWS account to create and deploy your Lookout for Vision model and client application component\. 

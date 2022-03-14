@@ -1,10 +1,5 @@
 # Packaging your Amazon Lookout for Vision model<a name="package-job"></a>
 
-
-|  | 
-| --- |
-| The model packaging feature is in preview release for Amazon Lookout for Vision and is subject to change\. | 
-
 A model packaging job packages an Amazon Lookout for Vision model as a model component\. 
 
 To create a model packaging job, you choose the model you want to package and provide settings for the model component that the job creates\. You can only package a model that has been successfully trained\.
