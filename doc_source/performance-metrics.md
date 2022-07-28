@@ -1,19 +1,26 @@
 # Viewing performance metrics<a name="performance-metrics"></a>
 
-You can get performance metrics from the console and by calling the `DescribeModel` operation\. After training is complete, the console displays the performance metrics\. The following procedure shows how to get the performance metrics from a project's model list view\.
-
-The Amazon Lookout for Vision console shows the following performance metrics:
-+ [Precision](improve.md#precision-metric)
-+ [Recall](improve.md#recall-metric)
-+ [F1 score](improve.md#f1-metric)
-
-The test results overview section shows you the total correct and incorrect predictions for images in the test dataset\. You can also see the predicted and actual label assignments for individual images in the test dataset\.
+You can get performance metrics from the console and by calling the `DescribeModel` operation\. 
 
 **Topics**
 + [Viewing performance metrics \(console\)](#performance-metrics-console)
 + [Viewing performance metrics \(SDK\)](#performance-metrics-sdk)
 
 ## Viewing performance metrics \(console\)<a name="performance-metrics-console"></a>
+
+After training is complete, the console displays the performance metrics\. The following procedure shows how to get the performance metrics from a project's model list view\.
+
+The Amazon Lookout for Vision console shows the following performance metrics for the model:
++ [Precision](improve.md#precision-metric)
++ [Recall](improve.md#recall-metric)
++ [F1 score](improve.md#f1-metric)
+
+If the model is a segmentation model, the console also shows the following performance metrics for each anomaly type:
++ The number of test images with the anomaly type\.
++ [F1 score](improve.md#f1-metric)
++ [Average Intersection over Union \(IoU\)](improve.md#iou-metric)
+
+The test results overview section shows you the total correct and incorrect predictions for images in the test dataset\. You can also see the predicted and actual label assignments for individual images in the test dataset\.
 
 **To view performance metrics \(console\)**
 
@@ -33,11 +40,11 @@ The test results overview section shows you the total correct and incorrect pred
 
 ## Viewing performance metrics \(SDK\)<a name="performance-metrics-sdk"></a>
 
-You can use the [DescribeModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModel) operation to get the summary performance metrics, the evaluation manifest, and the evaluation results for a model\. 
+You can use the [DescribeModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModel) operation to get the summary performance metrics for the model, the evaluation manifest, and the evaluation results for a model\. 
 
 ### Getting the summary performance metrics<a name="performance-metrics-summary-sdk"></a>
 
-The summary performance metrics \([Precision](improve.md#precision-metric), [Recall](improve.md#recall-metric), and [F1 score](improve.md#f1-metric)\) are returned in the `Performance` field returned by a call to `DescribeModel`\.
+The summary performance metrics for the model \([Precision](improve.md#precision-metric), [Recall](improve.md#recall-metric), and [F1 score](improve.md#f1-metric)\) are returned in the `Performance` field returned by a call to `DescribeModel`\.
 
 ```
         "Performance": {
@@ -46,6 +53,8 @@ The summary performance metrics \([Precision](improve.md#precision-metric), [Rec
             "Precision": 0.9
         },
 ```
+
+The `Performance` field doesn't include the anomaly type performance metrics returned by a segmentation model\. You can get them from the `EvaluationResult` field\. For more information, see [Reviewing the evaluation result](#evaluation-result)\. 
 
 For information about summary performance metrics see [Step 1: Evaluate the performance of your model](improve.md#evaluate-model)\. For example code, see [Viewing your models \(SDK\)](view-models.md#view-models-sdk)\.
 
@@ -103,10 +112,17 @@ The evaluation result has the following aggregate performance metrics for the en
 + [Recall](improve.md#recall-metric)
 + ROC curve \(not shown in console\)
 + Average precision \(not shown in console\)
++ [F1 score](improve.md#f1-metric)
 
 The evaluation result also includes the number of images used for training and testing the model\.
 
- Amazon Lookout for Vision stores the evaluation result in an Amazon S3 bucket\. You can get the location by checking the value of `EvaluationResult` in the response from `DescribeModel` operation\.
+If the model is a segmentation model, the evaluation result also includes the following metrics for each anomaly type found in the test dataset:
++ [Precision](improve.md#precision-metric)
++ [Recall](improve.md#recall-metric)
++ [F1 score](improve.md#f1-metric)
++ [Average Intersection over Union \(IoU\)](improve.md#iou-metric)
+
+Amazon Lookout for Vision stores the evaluation result in an Amazon S3 bucket\. You can get the location by checking the value of `EvaluationResult` in the response from `DescribeModel` operation\.
 
 ```
 "EvaluationResult": {
@@ -120,22 +136,36 @@ The file name format is `EvaluationResult-project name.json`\. For an example, s
 The following schema shows the evaluation result\.
 
 ```
-{
-    "Version": 1,
-    "EvaluationDetails": {
-        "ModelArn": "string", // The Amazon Resource Name (ARN) of the model version.
-        "EvaluationEndTimestamp": "string",  // The date and time that evaluation finished.
-        "NumberOfTrainingImages": "int",     // The number of images that were successfully used for training.
-        "NumberOfTestingImages": "int",      // The number of images that were successfully used for testing.
-    },
-    "AggregatedEvaluationResults": {
-        "Metrics": {
-            "ROCAUC": "float",               // ROC area under the curve.
-            "AveragePrecision": "float",     // The average precision of the model.
-            "Precision": "float",            // The overall precision of the model.
-            "Recall": "float",               // The overall recall of the model.
+    {
+        "Version": 1,
+        "EvaluationDetails":
+        {
+            "ModelArn": "string", // The Amazon Resource Name (ARN) of the model version.
+            "EvaluationEndTimestamp": "string",   // The UTC date and time that evaluation finished.
+            "NumberOfTrainingImages": int,        // The number of images that were successfully used for training.
+            "NumberOfTestingImages": int          // The number of images that were successfully used for testing.
+        },
+        "AggregatedEvaluationResults":
+        {
+            "Metrics":
+            {                       //Classification metrics.
+                "ROCAUC": float,            // ROC area under the curve.
+                "AveragePrecision": float,  // The average precision of the model.
+                "Precision": float,         // The overall precision of the model.
+                "Recall": float,            // The overall recall of the model.
+                "F1Score": float,           // The overal F1 score for the model.
+                
+                "PixelAnomalyClassMetrics":     //Segmentation metrics.
+                [
+                    {
+                        "Precision": float,       // The precision for the anomaly type.
+                        "Recall": float,          // The recall for the anomaly type.
+                        "F1Score": float,         // The F1 score for the anomaly type.
+                        "AIOU" : float,           // The average Intersection Over Union for the anomaly type.
+                        "ClassName": "string"   // The anomaly type.
+                    }
+                ]
+            }
         }
     }
-    
-}
 ```

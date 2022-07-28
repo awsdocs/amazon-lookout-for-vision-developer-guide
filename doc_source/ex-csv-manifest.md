@@ -1,8 +1,8 @@
-# Creating a manifest file from a CSV file<a name="ex-csv-manifest"></a>
+# Creating a classification manifest file from a CSV file<a name="ex-csv-manifest"></a>
 
-This example Python script simplifies the creation of a manifest file by using a Comma Separated Values \(CSV\) file to label images\. You create the CSV file\. 
+This example Python script simplifies the creation of a classification manifest file by using a Comma Separated Values \(CSV\) file to label images\. You create the CSV file\. 
 
-A manifest file describes the images used to train a model\. A manifest file is made up of one or more JSON lines\. Each JSON line describes a single image\. For more information, see [Defining JSON lines for anomaly classification](manifest-file-classification.md)\. 
+A manifest file describes the images used to train a model\. A manifest file is made up of one or more JSON lines\. Each JSON line describes a single image\. For more information, see [Defining JSON lines for image classification](manifest-file-classification.md)\. 
 
 A CSV file represents tabular data over multiple rows in a text file\. Fields on a row are separated by commas\. For more information, see [comma separated values](https://en.wikipedia.org/wiki/Comma-separated_values)\. For this script, each row in your CSV file includes the S3 location of an image and the anomaly classification for the image \(`normal` or `anomaly`\)\. Each row maps to a JSON Line in the manifest file\.
 

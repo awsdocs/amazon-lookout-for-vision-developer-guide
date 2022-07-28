@@ -56,47 +56,56 @@ The project might take a few moments to delete\. During that time, the status of
 ------
 #### [ Python ]
 
-   In the function `main`, change the value of `project_name` to the name of the project you want to delete\.
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def delete_project(lookoutvision_client, project_name):
+           """
+           Deletes a Lookout for Vision Model
    
-   import boto3
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project that you want to delete.
+           """
+           try:
+               logger.info("Deleting project: %s", project_name)
+               response = lookoutvision_client.delete_project(ProjectName=project_name)
+               logger.info("Deleted project ARN: %s ", response["ProjectArn"])
+           except ClientError as err:
+               logger.exception("Couldn't delete project %s.", project_name)
+               raise
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/DeleteProject.java)\. 
+
+   ```
+   /**
+    * Deletes an Amazon Lookout for Vision project.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project that you want to create.
+    * @return String The ARN of the deleted project.
+    */
+   public static String deleteProject(LookoutVisionClient lfvClient, String projectName)
+                   throws LookoutVisionException {
    
-   from botocore.exceptions import ClientError
+           logger.log(Level.INFO, "Deleting project: {0}", projectName);
    
+           DeleteProjectRequest deleteProjectRequest = DeleteProjectRequest.builder()
+                           .projectName(projectName)
+                           .build();
    
-   def delete_project(project_name):
-       """
-       Deletes an Amazon Lookout for Vision Model
-       param: project_name: The name of the project that you want to delete.
-       """
+           DeleteProjectResponse response = lfvClient.deleteProject(deleteProjectRequest);
    
-       try:
-           client = boto3.client("lookoutvision")
+           logger.log(Level.INFO, "Deleted project: {0} ARN: {1}",
+                           new Object[] { projectName, response.projectArn() });
    
-           # Delete a project
-           print("Deleting project:" + project_name)
-           response = client.delete_project(ProjectName=project_name)
-           print("Deleted project ARN: " + response["ProjectArn"])
-           print("Done...")
+           return response.projectArn();
    
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
-   
-   
-   def main():
-       project_name = (
-           "my-project"  # Change to the name of the project that you want to delete.
-       )
-   
-       delete_project(project_name)
-   
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

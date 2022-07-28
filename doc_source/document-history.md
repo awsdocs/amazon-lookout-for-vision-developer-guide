@@ -1,10 +1,11 @@
 # Document History for Amazon Lookout for Vision<a name="document-history"></a>
 
 The following table describes important changes in each release of the *Amazon Lookout for Vision Developer Guide*\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
-+ **Latest documentation update:**March 14th, 2022
++ **Latest documentation update: **May 2nd, 2022
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Java examples added](#document-history) | The Amazon Lookout for Vision developer guide now includes Java examples\. For more information, see [Getting started with the AWS SDK](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/getting-started-sdk.html)\. | May 2, 2022 | 
 | [General availability of model deployment to an edge device](#document-history) | Model deployment to an edge device managed by AWS IoT Greengrass Version 2 is now generally available\. For more information, see [Using your Amazon Lookout for Vision model on an edge device](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/models-devices.html)\. | March 14, 2022 | 
 | [Updated console bucket information](#document-history) | Updated information on console bucket contents and alternative approaches to creating the console bucket\. For more information, see [Step 4: Create the console bucket](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/su-create-console-bucket.html)\. | March 7, 2022 | 
 | [Create a manifest file from a CSV file](#document-history) | You can now simplify the creation of a manifest file by using a script that reads classification information from a CSV file\. For more information, see [Creating a manifest file from a CSV file](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/ex-csv-manifest.html)\. | February 10, 2022 | 

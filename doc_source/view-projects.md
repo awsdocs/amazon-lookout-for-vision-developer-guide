@@ -21,7 +21,7 @@ Perform the steps in the following procedure to view your projects in the consol
 
 ## Viewing your projects \(SDK\)<a name="view-projects-sdk"></a>
 
-A project manages the datasets and models for a single use case\. For example, detecting anomalies in machine parts\. The following example calls `ListProjects` to get a list of your projects\. The example then calls `DescribeProject` to get the current status of each project\.
+A project manages the datasets and models for a single use case\. For example, detecting anomalies in machine parts\. The following example calls `ListProjects` to get a list of your projects\. 
 
 **To view your projects \(SDK\)**
 
@@ -53,142 +53,88 @@ A project manages the datasets and models for a single use case\. For example, d
 ------
 #### [ Python ]
 
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
+
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def list_projects(lookoutvision_client):
+           """
+           Lists information about the projects that are in in your AWS account
+           and in the current AWS Region.
    
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           """
+           try:
+               response = lookoutvision_client.list_projects()
+               for project in response["Projects"]:
+                   print("Project: " + project["ProjectName"])
+                   print("\tARN: " + project["ProjectArn"])
+                   print("\tCreated: " + str(["CreationTimestamp"]))
+                   print("Datasets")
+                   project_description = lookoutvision_client.describe_project(
+                       ProjectName=project["ProjectName"])
+                   if not project_description["ProjectDescription"]["Datasets"]:
+                       print("\tNo datasets")
+                   else:
+                       for dataset in project_description["ProjectDescription"]["Datasets"]:
+                           print(f"\ttype: {dataset['DatasetType']}")
+                           print(f"\tStatus: {dataset['StatusMessage']}")
    
-   import boto3
+                   print("Models")
+                   response_models = lookoutvision_client.list_models(
+                       ProjectName=project["ProjectName"])
+                   if not response_models["Models"]:
+                       print("\tNo models")
+                   else:
+                       for model in response_models["Models"]:
+                           Models.describe_model(
+                               lookoutvision_client, project["ProjectName"],
+                               model["ModelVersion"])
    
-   from botocore.exceptions import ClientError
+                   print("------------------------------------------------------------\n")
+               print("Done!")
+           except ClientError:
+               logger.exception("Problem listing projects.")
+               raise
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/ListProjects.java)\. 
+
+   ```
+   /**
+    * Lists the Amazon Lookout for Vision projects in the current AWS account and AWS
+    * Region.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project that you want to create.
+    * @return List<ProjectMetadata> Metadata for each project.
+    */
+   public static List<ProjectMetadata> listProjects(LookoutVisionClient lfvClient)
+                   throws LookoutVisionException {
    
+           logger.log(Level.INFO, "Getting projects:");
+           ListProjectsRequest listProjectsRequest = ListProjectsRequest.builder()
+                           .maxResults(100)
+                           .build();
    
-   def list_projects():
-       """
-       Lists the projects, models and datasets in your account.
-       """
+           List<ProjectMetadata> projectMetadata = new ArrayList<>();
    
-       try:
-           client = boto3.client("lookoutvision")
+           ListProjectsIterable projects = lfvClient.listProjectsPaginator(listProjectsRequest);
    
-           response = client.list_projects()
+           projects.stream().flatMap(r -> r.projects().stream())
+                           .forEach(project -> {
+                                   projectMetadata.add(project);
+                                   logger.log(Level.INFO, project.projectName());
+                           });
    
-           for project in response["Projects"]:
+           logger.log(Level.INFO, "Finished getting projects.");
    
-               print("Project: " + project["ProjectName"])
-               print("\tARN: " + project["ProjectArn"])
-               print("\tCreated: " + str(["CreationTimestamp"]))
+           return projectMetadata;
    
-               print("Datasets")
-               project_description = client.describe_project(
-                   ProjectName=project["ProjectName"]
-               )
-               if len(project_description["ProjectDescription"]["Datasets"]) == 0:
-                   print("\tNo datasets")
-               else:
-                   for dataset in project_description["ProjectDescription"]["Datasets"]:
-                       print("\ttype: " + dataset["DatasetType"])
-                       print("\tStatus: " + dataset["StatusMessage"])
-   
-               print("Models")
-               # list models
-               response_models = client.list_models(ProjectName=project["ProjectName"])
-               if len(response_models["Models"]) == 0:
-                   print("\tNo models")
-               else:
-                   for model in response_models["Models"]:
-                       print("\tVersion: " + model["ModelVersion"])
-                       print("\tARN: " + model["ModelArn"])
-                       if "Description" in model:
-                           print("\tDescription: " + model["Description"])
-   
-                       # Get model description
-                       model_description = client.describe_model(
-                           ProjectName=project["ProjectName"],
-                           ModelVersion=model["ModelVersion"],
-                       )
-                       print(
-                           "\tStatus: " + model_description["ModelDescription"]["Status"]
-                       )
-                       print(
-                           "\tMessage: "
-                           + model_description["ModelDescription"]["StatusMessage"]
-                       )
-                       print(
-                           "\tCreated: "
-                           + str(
-                               model_description["ModelDescription"]["CreationTimestamp"]
-                           )
-                       )
-   
-                       if model_description["ModelDescription"]["Status"] == "TRAINED":
-                           print(
-                               "\tTraining duration: "
-                               + str(
-                                   model_description["ModelDescription"][
-                                       "EvaluationEndTimestamp"
-                                   ]
-                                   - model_description["ModelDescription"][
-                                       "CreationTimestamp"
-                                   ]
-                               )
-                           )
-                           print(
-                               "\tRecall: "
-                               + str(
-                                   model_description["ModelDescription"]["Performance"][
-                                       "Recall"
-                                   ]
-                               )
-                           )
-                           print(
-                               "\tPrecision: "
-                               + str(
-                                   model_description["ModelDescription"]["Performance"][
-                                       "Precision"
-                                   ]
-                               )
-                           )
-                           print(
-                               "\tF1: "
-                               + str(
-                                   model_description["ModelDescription"]["Performance"][
-                                       "F1Score"
-                                   ]
-                               )
-                           )
-                           print(
-                               "\tTraining output : s3://"
-                               + str(
-                                   model_description["ModelDescription"]["OutputConfig"][
-                                       "S3Location"
-                                   ]["Bucket"]
-                               )
-                               + "/"
-                               + str(
-                                   model_description["ModelDescription"]["OutputConfig"][
-                                       "S3Location"
-                                   ]["Prefix"]
-                               )
-                           )
-   
-                       print()
-   
-               print()
-   
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
-   
-       print("Done...")
-   
-   
-   def main():
-       list_projects()
-   
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

@@ -53,48 +53,64 @@ Use the `DeleteDataset` operation to delete a dataset\.
 ------
 #### [ Python ]
 
-   In the function `main`, change the following values:
-   + `project_name` to the name of the project that contains the model that you want to delete\.
-   + `dataset_type` to either `train` or `test`, depending on which dataset you want to delete\.
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def delete_dataset(lookoutvision_client, project_name, dataset_type):
+           """
+           Deletes a Lookout for Vision dataset
    
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project that contains the dataset that
+                                you want to delete.
+           :param dataset_type: The type (train or test) of the dataset that you
+                                want to delete.
+           """
+           try:
+               logger.info(
+                   "Deleting the %s dataset for project %s.", dataset_type, project_name)
+               lookoutvision_client.delete_dataset(
+                   ProjectName=project_name, DatasetType=dataset_type)
+               logger.info("Dataset deleted.")
+           except ClientError:
+               logger.exception("Service error: Couldn't delete dataset.")
+               raise
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/DeleteDataset.java)\. 
+
+   ```
+   /**
+    * Deletes the train or test dataset in an Amazon Lookout for Vision project.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project in which you want to delete a
+    *                    dataset.
+    * @param datasetType The type of the dataset that you want to delete (train or
+    *                    test).
+    * @return Nothing.
+    */
+   public static void deleteDataset(LookoutVisionClient lfvClient, String projectName, String datasetType)
+                   throws LookoutVisionException {
    
-   import boto3
+           logger.log(Level.INFO, "Deleting {0} dataset for project {1}",
+                           new Object[] { datasetType, projectName });
    
-   from botocore.exceptions import ClientError
+           DeleteDatasetRequest deleteDatasetRequest = DeleteDatasetRequest.builder()
+                           .projectName(projectName)
+                           .datasetType(datasetType)
+                           .build();
    
+           lfvClient.deleteDataset(deleteDatasetRequest);
    
-   def delete_dataset(project_name, dataset_type):
-       """
-       Deletes an Amazon Lookout for Vision dataset
-       param: project_name: The name of the project that contains the dataset that you want to delete.
-       param: dataset_type: the type (train or test) of the dataset that you want to delete.
-       """
-       try:
-           client = boto3.client("lookoutvision")
+           logger.log(Level.INFO, "Deleted {0} dataset for project {1}",
+                           new Object[] { datasetType, projectName });
    
-           # Delete the dataset
-           print("Deleting dataset:" + dataset_type)
-           client.delete_dataset(ProjectName=project_name, DatasetType=dataset_type)
-   
-           print("Done...")
-   
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
-   
-   
-   def main():
-       project_name = "my-project"  # the desired project.
-       dataset_type = "train"  # or 'test' to delete the test dataset.
-       delete_dataset(project_name, dataset_type)
-   
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

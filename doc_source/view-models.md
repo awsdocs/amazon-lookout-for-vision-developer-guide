@@ -59,107 +59,65 @@ To get view the versions of a model you use the `ListModels` operation\. To get 
 ------
 #### [ Python ]
 
-   In the function `main`, change the following value:
-   + `project_name` to the name of the project\. 
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def describe_models(lookoutvision_client, project_name):
+           """
+           Gets information about all models in a Lookout for Vision project.
    
-   import boto3
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project that you want to use.
+           """
+           try:
+               response = lookoutvision_client.list_models(ProjectName=project_name)
+               print("Project: " + project_name)
+               for model in response["Models"]:
+                   Models.describe_model(
+                       lookoutvision_client, project_name, model["ModelVersion"])
+                   print()
+               print("Done...")
+           except ClientError:
+               logger.exception("Couldn't list models.")
+               raise
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/ListModels.java)\. 
+
+   ```
+   /**
+    * Lists the models in an Amazon Lookout for Vision project.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project that contains the models that
+    *                    you want to list.
+    * @return List <Metadata> A list of models in the project.
+    */
+   public static List<ModelMetadata> listModels(LookoutVisionClient lfvClient, String projectName)
+                   throws LookoutVisionException {
    
-   from botocore.exceptions import ClientError
+           ListModelsRequest listModelsRequest = ListModelsRequest.builder()
+                           .projectName(projectName)
+                           .build();
    
-   def describe_models(project_name):
-       """
-       Gets information about all models in an Amazon Lookout for Vsion project.
-       param: project_name: The name of the project that you want to use.
-       """
-       try:
+           // Get a list of models in the supplied project.
+           ListModelsResponse response = lfvClient.listModels(listModelsRequest);
    
-           client = boto3.client("lookoutvision")
+           for (ModelMetadata model : response.models()) {
+                   logger.log(Level.INFO, "Model ARN: {0}\nVersion: {1}\nStatus: {2}\nMessage: {3}", new Object[] {
+                                   model.modelArn(),
+                                   model.modelVersion(),
+                                   model.statusMessage(),
+                                   model.statusAsString() });
+           }
    
-           # list models
-           response = client.list_models(ProjectName=project_name)
-           print("Project: " + project_name)
-           for model in response["Models"]:
-               print("Model version: " + model["ModelVersion"])
-               print("\tARN: " + model["ModelArn"])
-               if "Description" in model:
-                   print("\tDescription: " + model["Description"])
+           return response.models();
    
-               # Get model description
-               model_description = client.describe_model(
-                   ProjectName=project_name, ModelVersion=model["ModelVersion"]
-               )
-               print("\tStatus: " + model_description["ModelDescription"]["Status"])
-               print(
-                   "\tMessage: " + model_description["ModelDescription"]["StatusMessage"]
-               )
-               print(
-                   "\tCreated: "
-                   + str(model_description["ModelDescription"]["CreationTimestamp"])
-               )
-   
-               if model_description["ModelDescription"]["Status"] == "TRAINED":
-                   print(
-                       "\tTraining duration: "
-                       + str(
-                           model_description["ModelDescription"]["EvaluationEndTimestamp"]
-                           - model_description["ModelDescription"]["CreationTimestamp"]
-                       )
-                   )
-                   print(
-                       "\tRecall: "
-                       + str(
-                           model_description["ModelDescription"]["Performance"]["Recall"]
-                       )
-                   )
-                   print(
-                       "\tPrecision: "
-                       + str(
-                           model_description["ModelDescription"]["Performance"][
-                               "Precision"
-                           ]
-                       )
-                   )
-                   print(
-                       "\tF1: "
-                       + str(
-                           model_description["ModelDescription"]["Performance"]["F1Score"]
-                       )
-                   )
-                   print(
-                       "\tTraining output : s3://"
-                       + str(
-                           model_description["ModelDescription"]["OutputConfig"][
-                               "S3Location"
-                           ]["Bucket"]
-                       )
-                       + "/"
-                       + str(
-                           model_description["ModelDescription"]["OutputConfig"][
-                               "S3Location"
-                           ]["Prefix"]
-                       )
-                   )
-   
-               print()
-   
-           print("Done...")
-   
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
-   
-   
-   def main():
-       project_name = "my-project"  # Change to the name of your project.
-       describe_models(project_name)
-   
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

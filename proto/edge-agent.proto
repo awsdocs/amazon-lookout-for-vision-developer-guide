@@ -15,6 +15,13 @@ service EdgeAgent {
   // Detects anomalies in the supplied image.
   // The response from DetectAnomalies includes a boolean prediction that
   // the image contains one or more anomalies and a confidence value for the prediction.
+  // If the model is a segmentation model, the response includes the following:
+  //
+  // - A mask image that covers each anomaly type in a unique color. 
+  //     You can have DetectAnomalies store the mask image in shared memory, 
+  //     or return the mask as image bytes. 
+  // - The percentage area of the image that an anomaly type covers.
+  // - The hex color for an anomaly type on the mask image.
   //
   // The model that you use with DetectAnomalies must be running.
   // You can get the current status by calling DescribeModel. To start running
@@ -36,7 +43,7 @@ service EdgeAgent {
   //  3. INVALID_ARGUMENT - One or more input parameters is invalid. Check the error message for more details.
   //  5. NOT_FOUND - A model with the specified name wasn't found.
   //  8. RESOURCE_EXHAUSTED - There isn't enough resources to perform this operation.
-  //     For example, The Lookout for Vision Edge Agent can't keep up with the rate of calls to DetectAnomalies. 
+  //     For example, The Lookout for Vision Edge Agent can't keep up with the rate of calls to DetectAnomalies.
   //     Check the error message for more details.
   //  9. FAILED_PRECONDITION - DetectAnomalies was called for model that is
   //     not in the RUNNING state.
@@ -145,7 +152,7 @@ message SharedMemoryHandle {
 //  width - The width of the image in pixels.
 //  height - The height of the image in pixels.
 //  byte_data - Image bytes passed in the protobuf message.
-//  shared_memory_handle -Image bytes passed in shared memory segment.
+//  shared_memory_handle - Image bytes passed in a shared memory segment.
 //
 message Bitmap {
   int32 width = 1;
@@ -157,15 +164,53 @@ message Bitmap {
 }
 
 //
+// Parameters for outputting an anomaly mask. (Segmentation model).
+//
+// shared_memory_handle - Contains the image bytes for the mask, if 
+// shared_memory_handle wasn't provided. 
+message AnomalyMaskParams {
+  SharedMemoryHandle shared_memory_handle = 2;
+}
+
+// 
+// Information about the pixel mask that covers an anomaly type.
+// (Segmentation model).
+//
+// total_percentage_area - The percentage area of the image that the
+// anomaly type covers.
+// hex_color - A hex color value for the mask that covers an anomaly type.
+// Each anomaly type has a different mask color. The color maps to the color
+// of the anomaly type used in the training dataset.  
+message PixelAnomaly {
+  float total_percentage_area = 1;
+  string hex_color = 2;
+}
+
+//
+// Represents an anomaly found on an image. (Segmentation model).
+//
+// name - The name of an anomaly type found in an image. name maps
+// to an anomaly type in the training dataset. The service automatically
+// inserts the background anomaly type into the response from DetectAnomalies. 
+// pixel_anomaly - Information about the pixel mask that covers an anomaly type.
+//
+message Anomaly {
+  string name = 1;
+  PixelAnomaly pixel_anomaly = 2;
+}
+
+//
 // The request for a DetectsAnomalies rpc call.
 //
 //  model_component - The name of the AWS IoT Greengrass V2
 //  component that contains the model you want to use.
 //  bitmap - The image that you want analyze with DetectAnomalies.
+//  anomaly_mask_params - Optional parameters for outputting the mask. (Segmentation model).
 //
 message DetectAnomaliesRequest {
   string model_component = 1;
   Bitmap bitmap = 2;
+  AnomalyMaskParams anomaly_mask_params = 3;
 }
 
 //
@@ -176,10 +221,16 @@ message DetectAnomaliesRequest {
 //  true if the image contains an anomaly. false if the image is normal.
 //  confidence - The confidence that DetectAnomalies has in the accuracy
 //  of the prediction. Confidence is a floating point value between 0 and 1.
+//  anomaly_mask - if shared_memory_handle wasn't provided, contains the
+//  image bytes for the mask. (Segmentation model).
+//  anomalies - A list of 0 or more anomalies found within the 
+//  input image. (Segmentation model). 
 //
 message DetectAnomalyResult {
   bool is_anomalous = 1;
   float confidence = 2;
+  Bitmap anomaly_mask = 3;
+  repeated Anomaly anomalies = 4;
 }
 
 //

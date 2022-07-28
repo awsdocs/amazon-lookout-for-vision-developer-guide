@@ -4,7 +4,7 @@ You package a model as a model component by creating a model packaging job\. To 
 
 For information about package settings, see [Package settings](package-settings.md)\.
 
-The following procedure shows you how to start a packaging job by using the AWS CLI\. You can package the model for a target platform or a target device\.
+The following procedure shows you how to start a packaging job by using the AWS CLI\. You can package the model for a target platform or a target device\. For example Java code, see [StartModelPackagingJob](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/StartModelPackagingJob.java)\.
 
 **To package your model \(SDK\)**
 
@@ -27,7 +27,7 @@ The following procedure shows you how to start a packaging job by using the AWS 
 ------
 #### [ Target platform ]
 
-   Use the following CLI commands to package a model for a target platform\.
+   The following CLI command shows how to package a model for a target platform with an NVIDIA accelerator\.
 
    Change the following values:
    + `project_name` to the name of the project that contains the model that you want to package\.

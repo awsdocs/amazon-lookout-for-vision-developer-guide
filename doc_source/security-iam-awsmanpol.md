@@ -117,7 +117,7 @@ This policy includes the following permissions\.
 
 ## AWS managed policy: AmazonLookoutVisionConsoleFullAccess<a name="security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess"></a>
 
-Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. For more information, see [Getting Started with the Amazon Lookout for Vision console](getting-started.md)\. 
+Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. For more information, see [Getting Started](getting-started.md)\. 
 
 The `LookoutVisionConsoleFullAccess` policy includes permissions to your Amazon Lookout for Vision console bucket\. For information about the console bucket, see [Step 4: Create the console bucket](su-create-console-bucket.md)\. To store datasets, images, and Amazon SageMaker Ground Truth manifest files in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Setting Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
 

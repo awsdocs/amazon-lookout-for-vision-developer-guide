@@ -14,6 +14,7 @@ By default your images are encrypted with a key that AWS owns and manages\. You 
 **Topics**
 + [Running a trial detection task](#run-trial-detection)
 + [Verifying trial detection results](#verify-trial-detection-results)
++ [Correcting segmentation labels with the annotation tool](#verify-trial-detection-results-annotation-tool)
 
 ## Running a trial detection task<a name="run-trial-detection"></a>
 
@@ -89,8 +90,30 @@ After you add verified images to your dataset, retrain and re\-evaluate your mod
 **Note**  
 You can filter image labels by choosing the desired label, or label state, in the **Filters** section\. You can sort by confidence score in the **Sorting options** section\.
 
-1. Repeat steps 7\-9 on each page as necessary until all the images have been verified\.
+1. If your model is a segmentation model and the mask or anomaly type for an image is wrong, choose **Anomalous area** under the image and open the annotation tool\. Update the segmentation information by doing [Correcting segmentation labels with the annotation tool](#verify-trial-detection-results-annotation-tool)\.
+
+1. Repeat steps 7\-10 on each page as necessary until all the images have been verified\.
 
 1. Choose **Add verified images to dataset**\. If you have separate datasets, the images are added to the training dataset\.
 
 1. Retrain your model\. For more information, see [Training your model](model-train.md)\.
+
+## Correcting segmentation labels with the annotation tool<a name="verify-trial-detection-results-annotation-tool"></a>
+
+You use the annotation tool to segment an image by marking anomalous areas with a mask\.
+
+**To correct the segmentation labels for an image with the annotation tool**
+
+1. Open the annotation tool by selecting **anomalous area** under an image in the dataset gallery\.
+
+1. If the anomaly type for a mask isn't correct, choose the mask and then choose the correct anomaly type under **Anomaly types**\. If necessary, choose **Add anomaly type** to add a new anomaly type\.
+
+1. If the mask isn't correct, choose a drawing tool at the bottom of the page and draw masks that tightly covers anomalous areas for the anomaly type\. The following image is an example of a mask that tightly covers an anomaly\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/good-mask.png)
+
+   The following is an example of a poor mask that doesn't tightly cover an anomaly\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/poor-mask.png)
+
+1. If you have more images to correct, choose **Next** and repeat steps 2 and 3\.
+
+1. Choose **Submit and close** to finish updating images\.

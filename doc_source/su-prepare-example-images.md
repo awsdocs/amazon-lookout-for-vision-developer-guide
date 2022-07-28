@@ -1,6 +1,8 @@
-# Step 8: \(Optional\) Prepare example images<a name="su-prepare-example-images"></a>
+# Prepare example images<a name="su-prepare-example-images"></a>
 
-Amazon Lookout for Vision provides example images of circuit boards that AWS customers can use to learn how to create, test, and use a model\.
+Amazon Lookout for Vision provides example images of circuit boards that AWS customers can use to learn how to create, test, and use an [image classification](understanding.md#ud-image-classification) model\.
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/prediction.jpg)
 
 You can copy the images from the [https://github\.com/aws\-samples/amazon\-lookout\-for\-vision](https://github.com/aws-samples/amazon-lookout-for-vision) GitHub repository\. The images are in the `circuitboard` folder\. 
 
@@ -25,5 +27,3 @@ Later, when you create a dataset with the console, Amazon Lookout for Vision can
    ```
    aws s3 cp --recursive your-repository-folder/circuitboard s3://your-bucket/circuitboard
    ```
-
-For more information, see [Getting Started with the Amazon Lookout for Vision console](getting-started.md) and [Getting started with the AWS SDK](getting-started-sdk.md)\.

@@ -15,4 +15,3 @@ Amazon Lookout for Vision isn't compatible with Microsoft Internet Explorer 11\.
 + [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)
 + [Step 6: Set up SDK permissions](su-sdk-permissions.md)
 + [Step 7: \(Optional\) Using your own AWS Key Management Service key](su-kms-encryption.md)
-+ [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)

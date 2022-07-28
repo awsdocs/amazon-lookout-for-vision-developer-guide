@@ -2,12 +2,16 @@
 
 The following code example shows how to detect anomalies in an image with a trained Lookout for Vision model\.
 
+**Note**  
+The source code for these examples is in the [AWS Code Examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples)\. Have feedback on a code example? [Create an Issue](https://github.com/awsdocs/aws-doc-sdk-examples/issues/new/choose) in the code examples repo\. 
+
 For more information, see [Detecting anomalies in an image](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/inference-detect-anomalies.html)\.
 
 ------
 #### [ Python ]
 
 **SDK for Python \(Boto3\)**  
+ To learn how to set up and run this example, see [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/example_code/lookoutvision#code-examples)\. 
   
 
 ```
@@ -74,7 +78,7 @@ class Inference:
             bucket, key = photo.replace("s3://", "").split("/", 1)
             local_file = os.path.basename(photo)
         except ValueError as err:
-            logger.exception("Couldn't get S3 info for %s: %s", photo)
+            logger.exception("Couldn't get S3 info for %s", photo)
             raise
 
         try:
@@ -135,9 +139,8 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/example_code/lookoutvision#code-examples)\. 
 +  For API details, see [DetectAnomalies](https://docs.aws.amazon.com/goto/boto3/lookoutvision-2020-11-20/DetectAnomalies) in *AWS SDK for Python \(Boto3\) API Reference*\. 
 
 ------
 
-For a complete list of AWS SDK developer guides and code examples, including help getting started and information about previous versions, see [Using Lookout for Vision with an AWS SDK](getting-started-sdk.md#sdk-general-information-section)\.
+For a complete list of AWS SDK developer guides and code examples, see [Using this service with an AWS SDK](sdk-general-information-section.md)\. This topic also includes information about getting started and details about previous SDK versions\.

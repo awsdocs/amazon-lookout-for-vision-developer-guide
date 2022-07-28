@@ -14,6 +14,7 @@ You can't delete a trial detection task\. Also, you can't manage trial detection
 + [Deleting a project](delete-project.md)
 + [Creating Amazon Lookout for Vision projects with AWS CloudFormation](creating-projects-with-cloudformation.md)
 + [Viewing your datasets](view-datasets.md)
++ [Updating your dataset](edit-dataset.md)
 + [Deleting a dataset](delete-dataset.md)
 + [Viewing your models](view-models.md)
 + [Deleting a model](delete-model.md)

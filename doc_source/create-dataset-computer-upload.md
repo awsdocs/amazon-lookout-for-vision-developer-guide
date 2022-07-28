@@ -55,6 +55,6 @@ Your training and test datasets can have different image sources\.
 
 ------
 
-1. Follow the steps in [Labeling your images](edit-dataset.md#model-label) to label your images\.
+1. Follow the steps in [Labeling images](model-labelling-overview.md) to label your images\.
 
 1. Follow the steps in [Training your model](model-train.md) to train your model\.

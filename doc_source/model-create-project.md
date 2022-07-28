@@ -61,45 +61,57 @@ To view the projects that you have created in a project, call `ListProjects`\. F
 ------
 #### [ Python ]
 
-   In the function `main`, change the `project_name` to the name that you want to use for the project\.
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def create_project(lookoutvision_client, project_name):
+           """
+           Creates a new Lookout for Vision project.
    
-   import boto3
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param  project_name: The name for the new project.
+           :return project_arn: The ARN of the new project.
+           """
+           try:
+               logger.info("Creating project: %s", project_name)
+               response = lookoutvision_client.create_project(ProjectName=project_name)
+               project_arn = response["ProjectMetadata"]["ProjectArn"]
+               logger.info("project ARN: %s", project_arn)
+           except ClientError:
+               logger.exception("Couldn't create project %s.", project_name)
+               raise
+           else:
+               return project_arn
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/CreateProject.java)\. 
+
+   ```
+   /**
+    * Creates an Amazon Lookout for Vision project.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project that you want to create.
+    * @return ProjectMetadata Metadata information about the created project.
+    */
+   public static ProjectMetadata createProject(LookoutVisionClient lfvClient, String projectName)
+                   throws LookoutVisionException {
    
-   from botocore.exceptions import ClientError
+           logger.log(Level.INFO, "Creating project: {0}", projectName);
+           CreateProjectRequest createProjectRequest = CreateProjectRequest.builder().projectName(projectName)
+                           .build();
    
-   def create_project(project_name):
-       """
-       Creates a new Amazon Lookout for Vision project.
-       param: project_name: The name for the new project.
-       """
+           CreateProjectResponse response = lfvClient.createProject(createProjectRequest);
    
-       try:
+           logger.log(Level.INFO, "Project created. ARN: {0}", response.projectMetadata().projectArn());
    
-           client = boto3.client("lookoutvision")
+           return response.projectMetadata();
    
-           # Create a project
-           print("Creating project:" + project_name)
-           response = client.create_project(ProjectName=project_name)
-           print("project ARN: " + response["ProjectMetadata"]["ProjectArn"])
-           print("Done...")
-   
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
-   
-   
-   def main():
-   
-       project_name = "my-project"  # Change to the desired name.
-       create_project(project_name)
-   
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

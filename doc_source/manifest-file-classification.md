@@ -1,8 +1,8 @@
-# Defining JSON lines for anomaly classification<a name="manifest-file-classification"></a>
+# Defining JSON lines for image classification<a name="manifest-file-classification"></a>
 
-You define a JSON line for each image that you want to use in an Amazon Lookout for Vision manifest file\. The JSON line determines whether the image contains normal or anomalous content\. A JSON line is in SageMaker Ground Truth [Classification Job Output](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data-output.html#sms-output-class) format\. A manifest file is made of one or more JSON lines, one for each image that you want to import\. 
+You define a JSON line for each image that you want to use in an Amazon Lookout for Vision manifest file\. If you want to create a classification model, the JSON line must include an image classification that is either normal or an anomaly\. A JSON line is in SageMaker Ground Truth [Classification Job Output](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data-output.html#sms-output-class) format\. A manifest file is made of one or more JSON lines, one for each image that you want to import\. 
 
-**To create a manifest file for image\-level labels**
+**To create a manifest file for classified images**
 
 1. Create an empty text file\.
 
@@ -20,9 +20,9 @@ You can use the extension `.manifest`, but it is not required\.
 
  
 
-## Image\-level JSON lines<a name="cd-manifest-classification-json"></a>
+## Classification JSON lines<a name="cd-manifest-classification-json"></a>
 
-In this section, you learn how to create a JSON line for an image that is either normal or anomalous\.
+In this section, you learn how to create a JSON line that classifies an image as normal or anomalous\.
 
 ### Anomaly JSON line<a name="classification-anomaly"></a>
 
@@ -66,17 +66,17 @@ The following JSON line shows an image labeled as normal\. Note that the value o
 
 The following information describes the keys and values in an Amazon Lookout for Vision JSON line\.
 
-### source\-ref<a name="w143aac22c13c25b7c17c11b5"></a>
+### source\-ref<a name="json-line-format-source-ref"></a>
 
 \(Required\) The Amazon S3 location of the image\. The format is `"s3://BUCKET/OBJECT_PATH"`\. Images in an imported dataset must be stored in the same Amazon S3 bucket\. 
 
-### anomaly\-label<a name="w143aac22c13c25b7c17c11b7"></a>
+### anomaly\-label<a name="w160aac19c11c15b7c17c11b7"></a>
 
 \(Required\) The label attribute\. Use the key `anomaly-label`, or another key name that you choose\. The key value \(`0` in the preceding example\) is required by Amazon Lookout for Vision, but it isn't used\. The output manifest created by Amazon Lookout for Vision converts the value to `0` for an anomalous image and a value of `1` for a normal image\. The value of `class-name` determines if the image is normal or anomalous\. 
 
 There must be corresponding metadata identified by the field name with *\-metadata* appended\. For example, `"anomaly-label-metadata"`\. 
 
-### anomaly\-label\-metadata<a name="w143aac22c13c25b7c17c11b9"></a>
+### anomaly\-label\-metadata<a name="w160aac19c11c15b7c17c11b9"></a>
 
 \(Required\) Metadata about the label attribute\. The field name must be the same as the label attribute with *\-metadata* appended\. 
 
@@ -87,7 +87,7 @@ There must be corresponding metadata identified by the field name with *\-metada
 \(Optional\) A name that you choose for the job that processes the image\. 
 
 *class\-name*  
-\(Required\) If the image contains normal content, specify `normal`, otherwise specify `anomaly`\. If the value of `class-name` is any other value, the image is added to the dataset as an unlabeled image\. To label an image, see [Editing your dataset](edit-dataset.md)\. 
+\(Required\) If the image contains normal content, specify `normal`, otherwise specify `anomaly`\. If the value of `class-name` is any other value, the image is added to the dataset as an unlabeled image\. To label an image, see [Updating your dataset](edit-dataset.md)\. 
 
 *human\-annotated*  
 \(Required\) Specify `"yes"`, if the annotation was completed by a human\. Otherwise, specify `"no"`\. 
