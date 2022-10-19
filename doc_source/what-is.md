@@ -15,4 +15,4 @@ If you're a first\-time user of Amazon Lookout for Vision, we recommend that you
 
 1. **[Setting up Amazon Lookout for Vision](su-set-up.md)** – In this section, you set your account details\.
 
-1. **[Getting Started with the Amazon Lookout for Vision console](getting-started.md)** – In this section, you learn about creating your first Amazon Lookout for Vision model\.
+1. **[Getting Started](getting-started.md)** – In this section, you learn about creating your first Amazon Lookout for Vision model\.

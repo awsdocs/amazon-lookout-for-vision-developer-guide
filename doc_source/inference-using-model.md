@@ -84,6 +84,10 @@ with grpc.insecure_channel("unix:///tmp/aws.iot.lookoutvision.EdgeAgent.sock") a
 
 You use the [DetectAnomalies](edge-agent-reference-detect-anomalies.md) API to detect anomalies in an image\. 
 
+The `DetectAnomalies` operation expects the image bitmap to be passed in RGB888 packed format\. The first byte represents the red channel, the second byte represents the green channel, and the third byte represents the blue channel\. If you provide the image in a different format, such as BGR, the predictions from DetectAnomalies are incorrect\.
+
+By default, OpenCV uses the BGR format for image bitmaps\. If you are using OpenCV to capture images for analysis with `DetectAnomalies`, you must convert the image to RGB888 format before you pass the image to `DetectAnomalies`\.
+
 ### Detecting Anomalies by using image bytes<a name="client-application-overview-detect-anomalies-image-bytes"></a>
 
 You can detect anomalies in an image by supplying the image as image bytes\. In the following example, the image bytes are retrieved from an image stored in the local file system\. 

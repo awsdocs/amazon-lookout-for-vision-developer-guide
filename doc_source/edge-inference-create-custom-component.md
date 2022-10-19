@@ -65,7 +65,7 @@ You create the recipe as a JSON or YAML format file\. You also upload the client
    ```
    {
      "RecipeFormatVersion": "2020-01-25",
-     "ComponentName": "com.lookoutvison.EdgeAgentPythonExample",
+     "ComponentName": "com.lookoutvision.EdgeAgentPythonExample",
      "ComponentVersion": "1.0.0",
      "ComponentType": "aws.greengrass.generic",
      "ComponentDescription": "Lookout for Vision Edge Agent Sample Application",
@@ -84,7 +84,7 @@ You create the recipe as a JSON or YAML format file\. You also upload the client
          "Lifecycle": {
            "install": "pip3 install grpcio grpcio-tools protobuf Pillow",
            "run": {
-             "script": "python3 {artifacts:path}/lookout_vision_agent_example.py"
+             "script": "python3 {artifacts:path}/lookoutvision_edge_agent_example.py"
            }
          },
          "Artifacts": [

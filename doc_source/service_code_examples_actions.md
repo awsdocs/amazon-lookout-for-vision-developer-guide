@@ -1,6 +1,8 @@
-# API examples for Lookout for Vision<a name="service_code_examples_api"></a>
+# Actions for Lookout for Vision using AWS SDKs<a name="service_code_examples_actions"></a>
 
-The following code examples show how to use Lookout for Vision with AWS SDKs\.
+The following code examples demonstrate how to perform individual Lookout for Vision actions with AWS SDKs\. These excerpts call the Lookout for Vision API and are not intended to be run in isolation\. Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
+
+ The following examples include only the most commonly used actions\. For a complete list, see the [Amazon Lookout for Vision API Reference](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/Welcome.html)\. 
 
 **Topics**
 + [Create a dataset](example_lookoutvision_CreateDataset_section.md)

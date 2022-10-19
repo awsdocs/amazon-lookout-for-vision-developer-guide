@@ -4,7 +4,7 @@ You package a model as a model component by creating a model packaging job\. To 
 
 For information about package settings, see [Package settings](package-settings.md)\.
 
-The following procedure shows you how to start a packaging job by using the AWS CLI\. You can package the model for a target platform or a target device\.
+The following procedure shows you how to start a packaging job by using the AWS CLI\. You can package the model for a target platform or a target device\. For example Java code, see [StartModelPackagingJob](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/StartModelPackagingJob.java)\.
 
 **To package your model \(SDK\)**
 
@@ -27,7 +27,7 @@ The following procedure shows you how to start a packaging job by using the AWS 
 ------
 #### [ Target platform ]
 
-   Use the following CLI commands to package a model for a target platform\.
+   The following CLI command shows how to package a model for a target platform with an NVIDIA accelerator\.
 
    Change the following values:
    + `project_name` to the name of the project that contains the model that you want to package\.
@@ -50,7 +50,7 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name project_name \
      --model-version model_version \
      --description="description" \
-     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='architecture',Accelerator='NVIDIA'},CompilerOptions='{\'gpu-code\': \'gpu_code\', \'trt-ver\': \'trt_ver\', \'cuda-ver\': \'cuda_ver\'}',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='Component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
+     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='architecture',Accelerator='NVIDIA'},CompilerOptions='{\"gpu-code\": \"gpu_code\", \"trt-ver\": \"trt_ver\", \"cuda-ver\": \"cuda_ver\"}',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='Component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
    ```
 
    For example:
@@ -60,7 +60,7 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name test-project-01 \
      --model-version 1 \
      --description="Model Packaging Job for G4 Instance using TargetPlatform Option" \
-     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='X86_64',Accelerator='NVIDIA'},CompilerOptions='{\'gpu-code\': \'sm_75\', \'trt-ver\': \'7.1.3\', \'cuda-ver\': \'10.2\'}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/folder'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='0.1.0',ComponentDescription='This is my component',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}"
+     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='X86_64',Accelerator='NVIDIA'},CompilerOptions='{\"gpu-code\": \"sm_75\", \"trt-ver\": \"7.1.3\", \"cuda-ver\": \"10.2\"}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/folder'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='0.1.0',ComponentDescription='This is my component',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}"
    ```
 
 ------

@@ -18,19 +18,29 @@ The target device for the model, such as [NVIDIA® Jetson AGX Xavier](https://ww
 
 ### Target platform<a name="package-settings-target-platform"></a>
 
-Amazon Lookout for Vision supports the X86\_64 \(64\-bit version of the x86 instruction set\) and ARM\_64 \(ARMv8 64\-bit CPU\) architectures\. Lookout for Vision supports the Linux operating system and various NVIDIA accelerators\. You need to specify the correct compiler options for your target platform\.
+Amazon Lookout for Vision supports the following platform configurations:
++ X86\_64 \(64\-bit version of the x86 instruction set\) and Aarch64 \(ARMv8 64\-bit CPU\) architectures\.
++ Linux operating system\.
++ Inference using NVIDIA or CPU accelerators\.
+
+You need to specify the correct compiler options for your target platform\.
 
 #### Compiler options<a name="package-settings-compiler-options"></a>
 
 Compiler options allow you to specify the target platform  for your AWS IoT Greengrass Version 2 core device\. Currently you can specify the following compiler options\. 
+
+##### NVIDIA accelerator<a name="package-settings-target-platform-nvidia-accelerator"></a>
 + `gpu-code` — Specifies the gpu code of the core device that runs the model component\. 
 + `trt-ver` — Specifies the TensorRT version in x\.y\.z\. format\.
 + `cuda-ver` — Specifies the CUDA version in x\.y format\.
 
+##### CPU accelerator<a name="package-settings-target-platform-cpu-accelerator"></a>
++ \(Optional\) `mcpu` — specifies the instruction set\. For example `core-avx2`\. If you don't provide a value, Lookout for Vision uses the value `core-avx2`\. 
+
 You specify the options in JSON format\. For example:
 
 ```
-{'gpu-code': 'sm_75', 'trt-ver': '7.1.3', 'cuda-ver': '10.2'}
+{"gpu-code": "sm_75", "trt-ver": "7.1.3", "cuda-ver": "10.2"}
 ```
 
 For more examples, see [Tested devices, chip architectures, and operating systems](models-devices-setup-requirements.md#models-devices-setup-core-device-tested)\.

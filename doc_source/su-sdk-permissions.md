@@ -2,7 +2,11 @@
 
 The Identity and Access Management \(IAM\) user or group that uses Amazon Lookout for Vision SDK operations needs access permissions to the Lookout for Vision API and the Amazon S3 bucket that you use for model training\.
 
-## Setting SDK operation access with AWS managed policies<a name="su-sdk-managed-policies"></a>
+**Topics**
++ [Set SDK operation access with AWS managed policies](#su-sdk-managed-policies)
++ [Set Amazon S3 Bucket permissions](#su-sdk-bucket-permissions)
+
+## Set SDK operation access with AWS managed policies<a name="su-sdk-managed-policies"></a>
 
 Use the following AWS managed policies to add appropriate access permissions to Amazon Lookout for Vision SDK operations\. 
 + [AmazonLookoutVisionFullAccess](security-iam-awsmanpol.md#security-iam-awsmanpol-AmazonLookoutVisionFullAccess) — allows full access to Amazon Lookout for Vision SDK operations\.
@@ -14,7 +18,7 @@ To allow access to Lookout for Vision SDK operations, add the desired managed po
 
 For information about AWS managed policies, see [AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)\.
 
-## Setting Amazon S3 Bucket permissions<a name="su-sdk-bucket-permissions"></a>
+## Set Amazon S3 Bucket permissions<a name="su-sdk-bucket-permissions"></a>
 
 
 
@@ -26,7 +30,7 @@ The console managed policies \(`AmazonLookoutVisionConsoleFullAccess` and `Amazo
 
  
 
-### Deciding task permissions<a name="su-sdk-permissions-tasks"></a>
+### Decide task permissions<a name="su-sdk-permissions-tasks"></a>
 
 Use the following information to decide which permissions are needed for the tasks you want to do\. 
 
@@ -47,11 +51,11 @@ To create a model with [CreateModel](https://docs.aws.amazon.com/lookout-for-vis
 
 Amazon S3 bucket permissions aren't required to view Amazon Lookout for Vision operation responses\. You do need `s3:GetObject` permission if you want to access images, manifests files, and training output referenced in operation responses\. If you are accessing a versioned Amazon S3 object, you need `s3:GetObjectVersion` permission\. 
 
-### Setting Amazon S3 bucket policy<a name="su-sdk-bucket-policy"></a>
+### Set Amazon S3 bucket policy<a name="su-sdk-bucket-policy"></a>
 
 You can use the following policy to specify the Amazon S3 bucket permissions needed to create a dataset \(`CreateDataset`\), create a model \(`CreateModel`\), and access images, manifest files, and training output\. Change the value of *my\-bucket* to the name of the bucket that you want use\.
 
-You can adjust the policy to your needs\. For more information, see [Deciding task permissions](#su-sdk-permissions-tasks)\. Add the policy to the desired IAM user or role\. For more information, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html)\.
+You can adjust the policy to your needs\. For more information, see [Decide task permissions](#su-sdk-permissions-tasks)\. Add the policy to the desired IAM user or role\. For more information, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html)\.
 
 ```
 {
@@ -90,3 +94,5 @@ You can adjust the policy to your needs\. For more information, see [Deciding ta
     ]
 }
 ```
+
+**Next:** [Step 7: \(Optional\) Using your own AWS Key Management Service key](su-kms-encryption.md)

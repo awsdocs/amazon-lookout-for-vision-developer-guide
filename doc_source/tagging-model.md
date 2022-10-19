@@ -106,6 +106,8 @@ aws lookoutvision tag-resource --resource-arn "resource-arn"\
   --tags '[{"Key":"Key","Value":"Value"}]'
 ```
 
+For example Java code, see [TagModel](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/TagModel.java)\.
+
 ### Listing model tags \(SDK\)<a name="listing-model-tags-sdk"></a>
 
 To list the tags attached to a model, use the [ListTagsForResource](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource) operation and specify the model's Amazon Resource Name \(ARN\), the \(`ResourceArn`\)\. The response is a map of tag keys and values that are attached to the specified model\.
@@ -116,7 +118,7 @@ aws lookoutvision list-tags-for-resource --resource-arn resource-arn
 
 To see which models in a project have a specific tag, call `ListModels` to get a list of models\. Then call `ListTagsForResource` for each model in the response from `ListModels`\. Inspect the response from `ListTagsForResource` to see if the required tag is present\. 
 
-For example code that searches for a tag value across all projects, see [find\_tag\.py](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lookoutvision/find_tag.py)\.
+For example Java code, see [ListModelTags](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/ListModelTags.java)\. For example Python code that searches for a tag value across all projects, see [find\_tag\.py](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lookoutvision/find_tag.py)\.
 
 ### Removing tags from a model \(SDK\)<a name="removing-a-tag-sdk"></a>
 
@@ -126,3 +128,5 @@ To remove one or more tags from a model, use the [UntagResource](https://docs.aw
 aws lookoutvision untag-resource --resource-arn resource-arn\
   --tag-keys '["Key"]'
 ```
+
+For example Java code, see [UntagModel](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/UntagModel.java)\.

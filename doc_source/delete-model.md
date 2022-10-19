@@ -59,70 +59,99 @@ Use the following procedure to delete model with the `DeleteModel` operation\.
 ------
 #### [ Python ]
 
-   In the function `main`, change the following values:
-   + `project_name` to the name of the project that contains the model that you want to delete\.
-   + `model_version` to the version of the model that you want to delete\. 
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def delete_model(lookoutvision_client, project_name, model_version):
+           """
+           Deletes a Lookout for Vision model. The model must first be stopped and can't
+           be in training.
    
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project that contains the desired model.
+           :param model_version: The version of the model that you want to delete.
+           """
+           try:
+               logger.info("Deleting model: %s", model_version)
+               lookoutvision_client.delete_model(
+                   ProjectName=project_name, ModelVersion=model_version)
    
-   import time
-   import boto3
+               model_exists = True
+               while model_exists:
+                   response = lookoutvision_client.list_models(ProjectName=project_name)
    
-   from botocore.exceptions import ClientError
+                   model_exists = False
+                   for model in response["Models"]:
+                       if model["ModelVersion"] == model_version:
+                           model_exists = True
    
+                   if model_exists is False:
+                       logger.info("Model deleted")
+                   else:
+                       logger.info("Model is being deleted...")
+                       time.sleep(2)
    
-   def delete_model(project_name, model_version):
-       """
-       Deletes an Amazon Lookout for Vision model. The model must first be
-       stopped and can't be in training.
-       param: project_name: The name of the project that contains the desired model.
-       param: model_version: The version of the model that you want to delete.
-       """
+               logger.info("Deleted Model: %s", model_version)
+           except ClientError:
+               logger.exception("Couldn't delete model.")
+               raise
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/DeleteModel.java)\. 
+
+   ```
+   /**
+   * Deletes an Amazon Lookout for Vision model.
+   * 
+   * @param lfvClient    An Amazon Lookout for Vision client. Returns after the model is deleted.
+   * @param projectName  The name of the project that contains the model that you want to delete.
+   * @param modelVersion The version of the model that you want to delete.
+   * @return void
+   */
+   public static void deleteModel(LookoutVisionClient lfvClient,
+                   String projectName,
+                   String modelVersion) throws LookoutVisionException, InterruptedException {
    
-       try:
-           client = boto3.client("lookoutvision")
+           DeleteModelRequest deleteModelRequest = DeleteModelRequest.builder()
+                           .projectName(projectName)
+                           .modelVersion(modelVersion)
+                           .build();
    
-           # Delete the model
-           print("Deleting model:" + model_version)
-           response = client.delete_model(
-               ProjectName=project_name, ModelVersion=model_version
-           )
+           lfvClient.deleteModel(deleteModelRequest);
    
-           model_exists = True
+           boolean deleted = false;
    
-           while model_exists:
-               model_exists = False
-               response = client.list_models(ProjectName=project_name)
-               for model in response["Models"]:
-                   if model["ModelVersion"] == model_version:
-                       model_exists = True
+           do {
    
-               if model_exists is False:
-                   print("Model deleted")
-               else:
-                   print("Model is being deleted...")
-                   time.sleep(2)
+                   ListModelsRequest listModelsRequest = ListModelsRequest.builder()
+                                   .projectName(projectName)
+                                   .build();
    
-           print("Deleted Model: " + model_version)
-           print("Done...")
+                   // Get a list of models in the supplied project.
+                   ListModelsResponse response = lfvClient.listModels(listModelsRequest);
    
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
+                   ModelMetadata modelMetadata = response.models().stream()
+                                   .filter(model -> model.modelVersion().equals(modelVersion)).findFirst()
+                                   .orElse(null);
    
+                   if (modelMetadata == null) {
+                           deleted = true;
+                           logger.log(Level.INFO, "Deleted: Model version {0} of project {1}.",
+                                           new Object[] { modelVersion, projectName });
    
-   def main():
-       project_name = "my-project"  # The desired project
-       model_version = "1"  # The version of the model that you want to delete.
+                   } else {
+                           logger.log(Level.INFO, "Not yet deleted: Model version {0} of project {1}.",
+                                           new Object[] { modelVersion, projectName });
+                           TimeUnit.SECONDS.sleep(60);
+                   }
    
-       delete_model(project_name, model_version)
+           } while (!deleted);
    
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

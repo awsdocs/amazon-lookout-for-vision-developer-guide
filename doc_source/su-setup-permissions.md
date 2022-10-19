@@ -5,7 +5,11 @@ The Identity and Access Management \(IAM\) user or group that uses Amazon Lookou
 **Note**  
 If you only use Lookout for Vision SDK operations, you can use policies that are scoped to Lookout for Vision SDK operations\. For more information, see [Step 6: Set up SDK permissions](su-sdk-permissions.md)\. 
 
-## Setting console access with AWS managed policies<a name="su-console-managed-policies"></a>
+**Topics**
++ [Set console access with AWS managed policies](#su-console-managed-policies)
++ [Set Amazon S3 bucket permissions](#su-non-console-buckets)
+
+## Set console access with AWS managed policies<a name="su-console-managed-policies"></a>
 
 Use the following AWS managed policies to apply appropriate access permissions for the Amazon Lookout for Vision console and SDK operations\. 
 + [AmazonLookoutVisionConsoleFullAccess](security-iam-awsmanpol.md#security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess) — allows full access to the Amazon Lookout for Vision console and SDK operations\. You need `AmazonLookoutVisionConsoleFullAccess` permissions to create the console bucket\. For more information, see [Step 4: Create the console bucket](su-create-console-bucket.md)\.
@@ -19,7 +23,7 @@ To allow access to the Lookout for Vision console and SDK operations, add the de
 
 For information about AWS managed policies, see [AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)\.
 
-## Setting Amazon S3 bucket permissions<a name="su-non-console-buckets"></a>
+## Set Amazon S3 bucket permissions<a name="su-non-console-buckets"></a>
 
 Amazon Lookout for Vision uses an Amazon S3 bucket to store the following files: 
 + Dataset images — Images that are used to train a model\. For more information, see [Creating your dataset](model-create-dataset.md)\.
@@ -62,3 +66,5 @@ To use a different bucket, add the following inline policy to the desired IAM us
     ]
 }
 ```
+
+**Next:** [Step 4: Create the console bucket](su-create-console-bucket.md)

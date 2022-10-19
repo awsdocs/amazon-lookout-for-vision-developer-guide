@@ -35,11 +35,9 @@ Perform the steps in the following procedure to stop your model using the consol
 
 1. In the **Models** section, choose the model that you want to stop\. 
 
-1. On the model's detail page, choose the **Use model** tab\. 
+1. On the model's details page, choose **Use model** and then choose **Integrate API to the cloud**\. 
 
-1. Under **Code snippets** choose **AWS CLI commands**\. 
-
-1. Copy the AWS CLI command that calls `stop-model`\.
+1. Under **AWS CLI commands**, copy the AWS CLI command that calls `stop-model`\.
 
 1. At the command prompt, enter the `stop-model` command that you copied in the previous step\. 
 
@@ -78,75 +76,135 @@ A model might take a while to stop\. To check the current status, use `DescribeM
 ------
 #### [ Python ]
 
-   The following example stops a model that is already running\. In the function `main`, change the following values:
-   + `project` to the name of the project that contains the model that you want to stop\.
-   + `model_version` to the version of the model that you want to stop\.
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def stop_model(lookoutvision_client, project_name, model_version):
+           """
+           Stops a running Lookout for Vision Model.
    
-   import time
-   import boto3
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project that contains the version of
+                                the model that you want to stop hosting.
+           :param model_version:  The version of the model that you want to stop hosting.
+           """
+           try:
+               logger.info("Stopping model version %s for %s", model_version, project_name)
+               response = lookoutvision_client.stop_model(
+                   ProjectName=project_name, ModelVersion=model_version)
+               logger.info("Stopping hosting...")
    
-   from botocore.exceptions import ClientError
+               status = response["Status"]
+               finished = False
    
-   def stop_model(project_name, model_version):
-       """
-       Stops a running Amazon Lookout for Vision Model
-       param: project_Name: The name of the project that contains the
-            version of the model that you want to stop hosting.
-       param: model_version: The version of the nodel that you want to stop hosting.
-       """
+               # Wait until stopped or failed.
+               while finished is False:
+                   model_description = lookoutvision_client.describe_model(
+                       ProjectName=project_name, ModelVersion=model_version)
+                   status = model_description["ModelDescription"]["Status"]
    
-       try:
+                   if status == "STOPPING_HOSTING":
+                       logger.info("Host stopping in progress...")
+                       time.sleep(10)
+                       continue
    
-           client = boto3.client("lookoutvision")
+                   if status == "TRAINED":
+                       logger.info("Model is no longer hosted.")
+                       finished = True
+                       continue
    
-           # Stop the model
-           print(
-               "Stopping model version " + model_version + " for project " + project_name
-           )
-           response = client.stop_model(
-               ProjectName=project_name, ModelVersion=model_version
-           )
-           print("Stopping...")
-           status = response["Status"]
+                   logger.info("Failed to stop model: %s ", status)
+                   finished = True
    
-           # Breaks when hosting has stopped.
-           while True:
-               model_description = client.describe_model(
-                   ProjectName=project_name, ModelVersion=model_version
-               )
-               status = model_description["ModelDescription"]["Status"]
+               if status != "TRAINED":
+                   logger.error("Error stopping model: %s", status)
+                   raise Exception(f"Error stopping model: {status}")
+           except ClientError:
+               logger.exception("Couldn't stop hosting model.")
+               raise
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/StopModel.java)\. 
+
+   ```
+   /**
+    * Stops the hosting an Amazon Lookout for Vision model. Returns when model has
+    * stopped or if hosting fails.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project that contains the model that you
+    *                    want to stop hosting.
+    * @modelVersion The version of the model that you want to stop hosting.
+    * @return ModelDescription The description of the model, which includes the
+    *         model hosting status.
+    */
    
-               if status == "STOPPING_HOSTING":
-                   print("Host stopping in progress...")
-                   time.sleep(10)
-                   continue
+   public static ModelDescription stopModel(LookoutVisionClient lfvClient, String projectName,
+                   String modelVersion) throws LookoutVisionException, InterruptedException {
    
-               if status == "TRAINED":
-                   print("Model is no longer hosted.")
-                   break
+           logger.log(Level.INFO, "Stopping Model version {0} for project {1}.",
+                           new Object[] { modelVersion, projectName });
    
-               print("Failed. Unxexpected state for stopping model: " + status)
-               break
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
+           StopModelRequest stopModelRequest = StopModelRequest.builder()
+                           .projectName(projectName)
+                           .modelVersion(modelVersion)
+                           .build();
    
-       print("Done...")
+           // Stop hosting the model.
    
+           lfvClient.stopModel(stopModelRequest);
    
-   def main():
-       project = "my-project"  # Change to your project name.
-       model_version = "1"  # Change to the version of your model.
+           DescribeModelRequest describeModelRequest = DescribeModelRequest.builder()
+                           .projectName(projectName)
+                           .modelVersion(modelVersion)
+                           .build();
    
-       stop_model(project, model_version)
+           ModelDescription modelDescription = null;
    
+           boolean finished = false;
+           // Wait until model is stopped or failure occurs.
+           do {
    
-   if __name__ == "__main__":
-       main()
+                   modelDescription = lfvClient.describeModel(describeModelRequest).modelDescription();
+   
+                   switch (modelDescription.status()) {
+   
+                           case TRAINED:
+                                   logger.log(Level.INFO, "Model version {0} for project {1} has stopped.",
+                                                   new Object[] { modelVersion, projectName });
+                                   finished = true;
+                                   break;
+   
+                           case STOPPING_HOSTING:
+                                   logger.log(Level.INFO, "Model version {0} for project {1} is stopping.",
+                                                   new Object[] { modelVersion, projectName });
+   
+                                   TimeUnit.SECONDS.sleep(60);
+   
+                                   break;
+   
+                           default:
+                                   logger.log(Level.SEVERE,
+                                                   "Unexpected error when stopping model version {0} for project {1}: {2}.",
+                                                   new Object[] { projectName, modelVersion,
+                                                                   modelDescription.status() });
+                                   finished = true;
+                                   break;
+   
+                   }
+   
+           } while (!finished);
+   
+           logger.log(Level.INFO, "Finished stopping model version {0} for project {1} status: {2}",
+                           new Object[] { modelVersion, projectName, modelDescription.statusMessage() });
+   
+           return modelDescription;
+   
+   }
    ```
 
 ------

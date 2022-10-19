@@ -33,7 +33,7 @@ Use the `AmazonLookoutVisionReadOnlyAccess` policy to allow users read\-only acc
 + [ListProjects](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListProjects)
 + [ListTagsForResource](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource)
 
-To call read\-only actions, users don't need Amazon S3 bucket permissions\. However, operation responses might include references to Amazon S3 buckets\. For example, the `source-ref` entry in the response from `ListDatasetEntries` is a reference to an image in an Amazon S3 bucket\. Add Amazon S3 bucket permissions if your users need to access referenced buckets\. For example, a user might want to download an image referenced by a `source-ref` field\. For more information, see [Setting Amazon S3 Bucket permissions](su-sdk-permissions.md#su-sdk-bucket-permissions)\. 
+To call read\-only actions, users don't need Amazon S3 bucket permissions\. However, operation responses might include references to Amazon S3 buckets\. For example, the `source-ref` entry in the response from `ListDatasetEntries` is a reference to an image in an Amazon S3 bucket\. Add Amazon S3 bucket permissions if your users need to access referenced buckets\. For example, a user might want to download an image referenced by a `source-ref` field\. For more information, see [Set Amazon S3 Bucket permissions](su-sdk-permissions.md#su-sdk-bucket-permissions)\. 
 
 
 
@@ -117,9 +117,9 @@ This policy includes the following permissions\.
 
 ## AWS managed policy: AmazonLookoutVisionConsoleFullAccess<a name="security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess"></a>
 
-Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. For more information, see [Getting Started with the Amazon Lookout for Vision console](getting-started.md)\. 
+Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. For more information, see [Getting Started](getting-started.md)\. 
 
-The `LookoutVisionConsoleFullAccess` policy includes permissions to your Amazon Lookout for Vision console bucket\. For information about the console bucket, see [Step 4: Create the console bucket](su-create-console-bucket.md)\. To store datasets, images, and Amazon SageMaker Ground Truth manifest files in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Setting Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
+The `LookoutVisionConsoleFullAccess` policy includes permissions to your Amazon Lookout for Vision console bucket\. For information about the console bucket, see [Step 4: Create the console bucket](su-create-console-bucket.md)\. To store datasets, images, and Amazon SageMaker Ground Truth manifest files in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Set Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
 
 
 
@@ -245,7 +245,7 @@ This policy is grouped into statements based on the set of permissions provided:
 
 Use the `AmazonLookoutVisionConsoleReadOnlyAccess` policy to allow users read\-only access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. 
 
-The `AmazonLookoutVisionConsoleReadOnlyAccess` policy includes Amazon S3 permissions for the Amazon Lookout for Vision console bucket\. If your dataset images or Amazon SageMaker Ground Truth manifest files are in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Setting Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
+The `AmazonLookoutVisionConsoleReadOnlyAccess` policy includes Amazon S3 permissions for the Amazon Lookout for Vision console bucket\. If your dataset images or Amazon SageMaker Ground Truth manifest files are in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Set Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
 
 
 

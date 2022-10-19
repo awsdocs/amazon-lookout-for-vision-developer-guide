@@ -4,13 +4,13 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
@@ -21,26 +21,32 @@ Amazon's trademarks and trade dress may not be used in
    + [Step 3: Set up permissions](su-setup-permissions.md)
    + [Step 4: Create the console bucket](su-create-console-bucket.md)
    + [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)
+      + [Using this service with an AWS SDK](sdk-general-information-section.md)
    + [Step 6: Set up SDK permissions](su-sdk-permissions.md)
    + [Step 7: (Optional) Using your own AWS Key Management Service key](su-kms-encryption.md)
-   + [Step 8: (Optional) Prepare example images](su-prepare-example-images.md)
-+ [Getting Started with the Amazon Lookout for Vision console](getting-started.md)
-+ [Getting started with the AWS SDK](getting-started-sdk.md)
-+ [Using the Amazon Lookout for Vision dashboard](dashboard.md)
++ [Understanding Amazon Lookout for Vision](understanding.md)
++ [Getting Started](getting-started.md)
+   + [Prepare example images](su-prepare-example-images.md)
+   + [Getting started with the AWS SDK](getting-started-sdk.md)
+   + [Creating a model](getting-started-create-first-model.md)
 + [Creating an Amazon Lookout for Vision model](model.md)
    + [Creating your project](model-create-project.md)
-   + [Preparing images for a dataset](model-prepare-images.md)
    + [Creating your dataset](model-create-dataset.md)
       + [Creating a dataset using images stored on your local computer](create-dataset-computer-upload.md)
       + [Creating a dataset using images stored in an Amazon S3 bucket](create-dataset-s3.md)
       + [Creating a dataset using an Amazon SageMaker Ground Truth manifest file](create-dataset-ground-truth.md)
+         + [Using an Amazon Sagemaker Ground Truth job](create-dataset-groundtruth-labeling-lob.md)
          + [Creating a manifest file](manifest-files.md)
-            + [Defining JSON lines for anomaly classification](manifest-file-classification.md)
-            + [Creating a manifest file from a CSV file](ex-csv-manifest.md)
-         + [Creating a dataset with a manifest file (console)](create-dataset-use-manifest.md)
-         + [Creating a dataset with a manifest file (SDK)](create-dataset-sdk.md)
-   + [Editing your dataset](edit-dataset.md)
+            + [Defining JSON lines for image classification](manifest-file-classification.md)
+            + [Defining JSON lines for image segmentation](manifest-file-segmentation.md)
+            + [Creating a classification manifest file from a CSV file](ex-csv-manifest.md)
+            + [Creating a dataset with a manifest file (console)](create-dataset-use-manifest.md)
+            + [Creating a dataset with a manifest file (SDK)](create-dataset-sdk.md)
+   + [Labeling images](model-labelling-overview.md)
+      + [Classifying images (console)](model-label.md)
+      + [Segmenting images (console)](segment-image.md)
    + [Training your model](model-train.md)
+   + [Troubleshooting model training](troubleshoot-model-training.md)
 + [Improving your model](improve.md)
    + [Viewing performance metrics](performance-metrics.md)
    + [Verifying your model with a trial detection task](trial-detection.md)
@@ -48,6 +54,8 @@ Amazon's trademarks and trade dress may not be used in
    + [Starting your Amazon Lookout for Vision model](run-start-model.md)
    + [Stopping your Amazon Lookout for Vision model](run-stop-model.md)
 + [Detecting anomalies in an image](inference-detect-anomalies.md)
+   + [Determining if an image is anomalous](inference-determine-anomaly-state.md)
+   + [Showing classification and segmentation information](inference-display-information.md)
 + [Using your Amazon Lookout for Vision model on an edge device](models-devices.md)
    + [AWS IoT Greengrass Version 2 core device requirements](models-devices-setup-requirements.md)
    + [Setting up your AWS IoT Greengrass Version 2 core device](models-devices-setup-core-device.md)
@@ -68,23 +76,21 @@ Amazon's trademarks and trade dress may not be used in
       + [StartModel](edge-agent-reference-start-model.md)
       + [StopModel](edge-agent-reference-stop-model.md)
       + [ModelStatus](edge-agent-reference-enums-model-status.md)
++ [Using the Amazon Lookout for Vision dashboard](dashboard.md)
 + [Managing your Amazon Lookout for Vision resources](manage.md)
    + [Viewing your projects](view-projects.md)
    + [Deleting a project](delete-project.md)
    + [Creating Amazon Lookout for Vision projects with AWS CloudFormation](creating-projects-with-cloudformation.md)
    + [Viewing your datasets](view-datasets.md)
+   + [Adding images to your dataset](edit-dataset.md)
+   + [Removing images from your dataset](edit-dataset-remove-images.md)
    + [Deleting a dataset](delete-dataset.md)
    + [Viewing your models](view-models.md)
    + [Deleting a model](delete-model.md)
    + [Tagging models](tagging-model.md)
    + [Viewing your trial detection tasks](view-trial-detections.md)
-+ [Code examples for Lookout for Vision](service_code_examples.md)
-   + [Scenario examples for Lookout for Vision](service_code_examples_scenario.md)
-      + [Create a Lookout for Vision manifest file using an AWS SDK](example_lookoutvision_Scenario_CreateManifestFile_section.md)
-      + [Create, train, and start a Lookout for Vision model using an AWS SDK](example_lookoutvision_Scenario_CreateTrainStartModel_section.md)
-      + [Find a Lookout for Vision project with a specific tag using an AWS SDK](example_lookoutvision_Scenario_FindTagInProjects_section.md)
-      + [List Lookout for Vision models that are currently hosted using an AWS SDK](example_lookoutvision_Scenario_ListHostedModels_section.md)
-   + [API examples for Lookout for Vision](service_code_examples_api.md)
++ [Code examples for Lookout for Vision using AWS SDKs](service_code_examples.md)
+   + [Actions for Lookout for Vision using AWS SDKs](service_code_examples_actions.md)
       + [Create a Lookout for Vision dataset using an AWS SDK](example_lookoutvision_CreateDataset_section.md)
       + [Create a Lookout for Vision model using an AWS SDK](example_lookoutvision_CreateModel_section.md)
       + [Create a Lookout for Vision project using an AWS SDK](example_lookoutvision_CreateProject_section.md)
@@ -98,6 +104,11 @@ Amazon's trademarks and trade dress may not be used in
       + [List Lookout for Vision projects using an AWS SDK](example_lookoutvision_ListProjects_section.md)
       + [Start a Lookout for Vision model using an AWS SDK](example_lookoutvision_StartModel_section.md)
       + [Stop a Lookout for Vision model using an AWS SDK](example_lookoutvision_StopModel_section.md)
+   + [Scenarios for Lookout for Vision using AWS SDKs](service_code_examples_scenarios.md)
+      + [Create a Lookout for Vision manifest file using an AWS SDK](example_lookoutvision_Scenario_CreateManifestFile_section.md)
+      + [Create, train, and start a Lookout for Vision model using an AWS SDK](example_lookoutvision_Scenario_CreateTrainStartModel_section.md)
+      + [Find a Lookout for Vision project with a specific tag using an AWS SDK](example_lookoutvision_Scenario_FindTagInProjects_section.md)
+      + [List Lookout for Vision models that are currently hosted using an AWS SDK](example_lookoutvision_Scenario_ListHostedModels_section.md)
 + [Security in Amazon Lookout for Vision](security.md)
    + [Data protection in Amazon Lookout for Vision](data-protection.md)
       + [Data encryption](security-data-encryption.md)

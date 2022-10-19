@@ -26,18 +26,18 @@ S3-bucket
 
 ## Creating a dataset using images from an Amazon S3 bucket<a name="create-dataset-s3-procedure"></a>
 
-The following procedure creates a dataset using the Getting Started example images stored in an Amazon S3 bucket\. To use your own images, create the folder structure described in [Setting up folders for automatic labeling](#create-dataset-s3-auto-label)\. 
+The following procedure creates a dataset using the [Getting Started](getting-started.md) example images stored in an Amazon S3 bucket\. To use your own images, create the folder structure described in [Setting up folders for automatic labeling](#create-dataset-s3-auto-label)\. 
 
 The procedure also shows how to create a single dataset project, or a project that uses separate training and test datasets\.
 
-If you don't choose to automatically label your images, you need to label the images after the datasets is created\. For more information, see [Labeling your images](edit-dataset.md#model-label)\.
+If you don't choose to automatically label your images, you need to label the images after the datasets is created\. For more information, see [Classifying images \(console\)](model-label.md)\.
 
 **Note**  
 If you've just completed [Creating your project](model-create-project.md), the console should show your project dashboard and you don't need to do steps 1 \- 4\.
 
 **To create a dataset using images stored in an Amazon S3 bucket**
 
-1. If you haven't already done so, upload the getting started images to your Amazon S3 bucket\. For more information, see [Step 8: \(Optional\) Prepare example images](su-prepare-example-images.md)\.
+1. If you haven't already done so, upload the getting started images to your Amazon S3 bucket\. For more information, see [Prepare example images](su-prepare-example-images.md)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 

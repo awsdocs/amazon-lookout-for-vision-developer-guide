@@ -26,3 +26,8 @@ The following quotas apply to the testing, training, and functionality of a mode
 | Maximum number of training datasets in a model | 1 | 
 | Maximum training time | 24 hours | 
 | Maximum testing time | 24 hours | 
+| Maximum number of anomaly labels in a project | 100 | 
+| Maximum number of anomaly labels on a mask image | 20 | 
+| Minimum number of images for an anomaly label\. To count, the image must contain only one type of anomaly label\.  | 20 for a single dataset project\. 10 for each dataset in a project with separate training and test datasets\. | 
+| Maximum number of training images for anomaly localization | 8000 | 
+| Maximum number of test images for anomaly localization | 800 | 

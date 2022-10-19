@@ -2,7 +2,7 @@
 
 The following procedure shows you how to create a training or test dataset by importing an SageMaker format manifest file that is stored in an Amazon S3 bucket\. 
 
-After you create the dataset, you can add more images to the dataset, or add labels to images\. For more information, see [Editing your dataset](edit-dataset.md)\.<a name="create-dataset-procedure-manifest-file"></a>
+After you create the dataset, you can add more images to the dataset, or add labels to images\. For more information, see [Adding images to your dataset](edit-dataset.md)\.<a name="create-dataset-procedure-manifest-file"></a>
 
 **To create a dataset using an SageMaker Ground Truth format manifest file \(console\)**
 
@@ -59,5 +59,7 @@ Your training and test datasets can have different image sources\.
 ------
 
 1. Choose **Submit**\. 
+
+1. Follow the steps in [Training your model](model-train.md) to train your model\.
 
 Amazon Lookout for Vision creates a dataset in the Amazon S3 bucket `datasets` folder\. Your original `.manifest` file remains unchanged\.

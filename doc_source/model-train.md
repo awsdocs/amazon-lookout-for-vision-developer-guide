@@ -15,7 +15,7 @@ You are charged for the amount of time it takes to successfully train your model
 To view the existing models in a project, [Viewing your models](view-models.md)\.
 
 **Note**  
-If you've just completed [Creating your dataset](model-create-dataset.md) or [Editing your dataset](edit-dataset.md)\. The console should currently show your model dashboard and you don't need to do steps 1 \- 4\.
+If you've just completed [Creating your dataset](model-create-dataset.md) or [Adding images to your dataset](edit-dataset.md)\. The console should currently show your model dashboard and you don't need to do steps 1 \- 4\.
 
 **Topics**
 + [Training a model \(console\)](#create-model-console)
@@ -69,7 +69,7 @@ You use the [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/
 
  Each time you call `CreateModel`, a new version of the model is created\. The response from `CreateModel` includes the version of the model\. 
 
-You are charged for each successful model training\. Use the `ClientToken` input parameter to help prevent charges due to unnecessary or accidental repeats of model training by your users\. `ClientToken` is an idempotent input parameter that ensures `CreateModel` only completes once for a specific set of parameters — A repeat call to `CreateModel` with the same `ClientToken` value ensures that training isn't repeated\. If you don't supply a value for `ClientToken`, the AWS SDK you are using inserts a value for you\. This prevents retries after a network error from starting multiple training jobs, but you'll need to provide your own value for your own use cases\. For more information, see [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/CreateModel)\. 
+You are charged for each successful model training\. Use the `ClientToken` input parameter to help prevent charges due to unnecessary or accidental repeats of model training by your users\. `ClientToken` is an idempotent input parameter that ensures `CreateModel` only completes once for a specific set of parameters — A repeat call to `CreateModel` with the same `ClientToken` value ensures that training isn't repeated\. If you don't supply a value for `ClientToken`, the AWS SDK you are using inserts a value for you\. This prevents retries after a network error from starting multiple training jobs, but you'll need to provide your own value for your own use cases\. For more information, see [CreateModel](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateModel)\. 
 
 Training takes a while to complete\. To check the current status, call `DescribeModel` and pass the project name \(specified in the call to `CreateProject`\) and the model version\. The `status` field indicates the current status of the model training\. For example code, see [Viewing your models \(SDK\)](view-models.md#view-models-sdk)\. 
 
@@ -107,112 +107,169 @@ To view the models that you have created in a project, call `ListModels`\. For e
 ------
 #### [ Python ]
 
-   In the function `main`, change the following values:
-   + `project-name` to the name of the project that contains the model that you want to create\.
-   + `output-config` to the location where you want to save training results\. Replace the following values:
-     + `output_bucket` with the name of the Amazon S3 bucket where Amazon Lookout for Vision saves the training results\.
-     + `output_folder` with the name of the folder where you want to save the training results\. 
-     + `tag_key` with the name of a tag key\. 
-     + `tag_key_value` with a value to associate with `tag_key`\.
-     + `client_token` with an idempotent token value that you choose\.
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def create_model(
+               lookoutvision_client, project_name, training_results, tag_key=None,
+               tag_key_value=None):
+           """
+           Creates a version of a Lookout for Vision model.
    
-   import json
-   import time
-   import boto3
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project in which you want to create a
+                                model.
+           :param training_results: The Amazon S3 location where training results are stored.
+           :param tag_key: The key for a tag to add to the model.
+           :param tag_key_value - A value associated with the tag_key.
+           return: The model status and version.
+           """
+           try:
+               logger.info("Training model...")
+               output_bucket, output_folder = training_results.replace(
+                   "s3://", "").split("/", 1)
+               output_config = {
+                   "S3Location": {"Bucket": output_bucket, "Prefix": output_folder}}
+               tags = []
+               if tag_key is not None:
+                   tags = [{"Key": tag_key, "Value": tag_key_value}]
    
-   from botocore.exceptions import ClientError
+               response = lookoutvision_client.create_model(
+                   ProjectName=project_name, OutputConfig=output_config, Tags=tags)
    
+               logger.info("ARN: %s", response["ModelMetadata"]["ModelArn"])
+               logger.info("Version: %s", response["ModelMetadata"]["ModelVersion"])
+               logger.info("Started training...")
    
-   def create_model(project_name, output_bucket, output_folder, tag_key, tag_key_value, client_token):
-       """
-       Creates a version of an Amazon Lookout for Vision model.
-       param: project_name: The name of the project in which you want to create a model.
-       param: output_bucket: The output bucket in which to place training results.
-       param: output_folder: The output folder in which to place training results.
-       param: tag_key: The key for a tag to add to the model.
-       param: tag_key_value: A value associated with the tag_key.
-       param: client_token: Idempotent token value. Valid for 8 hours.
-       """
+               print("Training started. Training might take several hours to complete.")
    
-       client = boto3.client("lookoutvision")
+               # Wait until training completes.
+               finished = False
+               status = "UNKNOWN"
+               while finished is False:
+                   model_description = lookoutvision_client.describe_model(
+                       ProjectName=project_name,
+                       ModelVersion=response["ModelMetadata"]["ModelVersion"])
+                   status = model_description["ModelDescription"]["Status"]
    
-       try:
-           # Create a model
-           print("Creating model...")
+                   if status == "TRAINING":
+                       logger.info("Model training in progress...")
+                       time.sleep(600)
+                       continue
    
-           output_config = json.loads(
-               '{ "S3Location": { "Bucket": "'
-               + output_bucket
-               + '", "Prefix": "'
-               + output_folder
-               + '" } } '
-           )
-           tags = json.loads(
-               '[{"Key": "' + tag_key + '" ,"Value":"' + tag_key_value + '"}]'
-           )
+                   if status == "TRAINED":
+                       logger.info("Model was successfully trained.")
+                   else:
+                       logger.info(
+                           "Model training failed: %s ",
+                           model_description["ModelDescription"]["StatusMessage"])
+                   finished = True
+           except ClientError:
+               logger.exception("Couldn't train model.")
+               raise
+           else:
+               return status, response["ModelMetadata"]["ModelVersion"]
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/CreateModel.java)\. 
+
+   ```
+   /**
+    * Creates an Amazon Lookout for Vision model. The function returns after model
+    * training completes. Model training can take multiple hours to complete.
+    * You are charged for the amount of time it takes to successfully train a model.
+    * Returns after Lookout for Vision creates the dataset.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project in which you want to create a
+    *                    model.
+    * @param description A description for the model.
+    * @param bucket      The S3 bucket in which Lookout for Vision stores the
+    *                    training results.
+    * @param folder      The location of the training results within the S3
+    *                    bucket.
+    * @return ModelDescription The description of the created model.
+    */
+   public static ModelDescription createModel(LookoutVisionClient lfvClient, String projectName,
+                   String description, String bucket, String folder)
+                   throws LookoutVisionException, InterruptedException {
    
-           response = client.create_model(
-               ProjectName=project_name,
-               OutputConfig=output_config,
-               Tags=tags,
-               ClientToken=client_token,
-           )
-           print("ARN: " + response["ModelMetadata"]["ModelArn"])
-           print("Version: " + response["ModelMetadata"]["ModelVersion"])
-           print("Started training...")
+           logger.log(Level.INFO, "Creating model for project: {0}.", new Object[] { projectName });
    
-           while True:
-               model_description = client.describe_model(
-                   ProjectName=project_name,
-                   ModelVersion=response["ModelMetadata"]["ModelVersion"],
-               )
-               status = model_description["ModelDescription"]["Status"]
+           // Setup input parameters.
+           S3Location s3Location = S3Location.builder()
+                           .bucket(bucket)
+                           .prefix(folder)
+                           .build();
    
-               if status == "TRAINING":
-                   print("Model training in progress...")
-                   time.sleep(600)
-                   continue
+           OutputConfig config = OutputConfig.builder()
+                           .s3Location(s3Location)
+                           .build();
    
-               if status == "TRAINED":
-                   print("Model was successfully trained.")
-                   break
+           CreateModelRequest createModelRequest = CreateModelRequest.builder()
+                           .projectName(projectName)
+                           .description(description)
+                           .outputConfig(config)
+                           .build();
    
-               if status == "TRAINING_FAILED":
-                   print(
-                       "Model training failed: "
-                       + model_description["ModelDescription"]["StatusMessage"]
-                   )
-                   break
+           // Create and train the model.
+           CreateModelResponse response = lfvClient.createModel(createModelRequest);
    
-               print("Failed. Unexpected state for training: " + status)
-               break
+           String modelVersion = response.modelMetadata().modelVersion();
+           boolean finished = false;
+           DescribeModelResponse descriptionResponse = null;
    
-           print("Done...")
+           // Wait until training finishes or fails.
    
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
+           do {
+                   DescribeModelRequest describeModelRequest = DescribeModelRequest.builder()
+                                   .projectName(projectName)
+                                   .modelVersion(modelVersion)
+                                   .build();
    
+                   descriptionResponse = lfvClient.describeModel(describeModelRequest);
    
-   def main():
-       project_name = "my-project"  # the project in which to create a model.
-       output_bucket = "output-bucket"  # bucket to store training output.
-       output_folder = "my-project-output-folder/"  # folder for training output.
-       tag_key = "my-tag-key"  # tag key.
-       tag_key_value = "my-tag-key-value"  # tag value.
-       client_token = "1"  # idempotency token.
+                   switch (descriptionResponse.modelDescription().status()) {
+                           case TRAINED:
+                                   logger.log(Level.INFO, "Model training completed for project {0} version {1}.",
+                                                   new Object[] { projectName, modelVersion });
+                                   finished = true;
+                                   break;
    
-       create_model(
-           project_name, output_bucket, output_folder, tag_key, tag_key_value, client_token
-       )
+                           case TRAINING:
+                                   logger.log(Level.INFO,
+                                                   "Model training in progress for project {0} version {1}.",
+                                                   new Object[] { projectName, modelVersion });
+                                   TimeUnit.SECONDS.sleep(60);
    
+                                   break;
    
-   if __name__ == "__main__":
-       main()
+                           case TRAINING_FAILED:
+                                   logger.log(Level.SEVERE,
+                                                   "Model training failed for for project {0} version {1}.",
+                                                   new Object[] { projectName, modelVersion });
+                                   finished = true;
+                                   break;
+   
+                           default:
+                                   logger.log(Level.SEVERE,
+                                                   "Unexpected error when training model project {0} version {1}: {2}.",
+                                                   new Object[] { projectName, modelVersion,
+                                                                   descriptionResponse.modelDescription()
+                                                                                   .status() });
+                                   finished = true;
+                                   break;
+   
+                   }
+           } while (!finished);
+   
+           return descriptionResponse.modelDescription();
+   
+   }
    ```
 
 ------

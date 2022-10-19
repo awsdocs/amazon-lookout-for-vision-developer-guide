@@ -47,65 +47,93 @@ You can get use the `DescribeDataset` operation to get information about the tra
 ------
 #### [ Python ]
 
-   In the function `main`, change the following values:
-   + `project_name` to the name of the project that contains the model that you want to view\.
-   + `dataset_type` to the type of dataset that you want to view \(`train` or `test`\)\.
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lookoutvision/train_host.py)\. 
 
    ```
-   # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-   # SPDX-License-Identifier: Apache-2.0
+       @staticmethod
+       def describe_dataset(lookoutvision_client, project_name, dataset_type):
+           """
+           Gets information about a Lookout for Vision dataset.
    
-   import boto3
+           :param lookoutvision_client: A Boto3 Lookout for Vision client.
+           :param project_name: The name of the project that contains the dataset that
+                                you want to describe.
+           :param dataset_type: The type (train or test) of the dataset that you want
+                                to describe.
+           """
+           try:
+               response = lookoutvision_client.describe_dataset(
+                   ProjectName=project_name, DatasetType=dataset_type)
+               print(f"Name: {response['DatasetDescription']['ProjectName']}")
+               print(f"Type: {response['DatasetDescription']['DatasetType']}")
+               print(f"Status: {response['DatasetDescription']['Status']}")
+               print(
+                   f"Message: {response['DatasetDescription']['StatusMessage']}")
+               print(
+                   f"Images: {response['DatasetDescription']['ImageStats']['Total']}")
+               print(
+                   f"Labeled: {response['DatasetDescription']['ImageStats']['Labeled']}")
+               print(
+                   f"Normal: {response['DatasetDescription']['ImageStats']['Normal']}")
+               print(
+                   f"Anomaly: {response['DatasetDescription']['ImageStats']['Anomaly']}")
+           except ClientError:
+               logger.exception("Service error: problem listing datasets.")
+               raise
+           print("Done.")
+   ```
+
+------
+#### [ Java V2 ]
+
+   This code is taken from the AWS Documentation SDK examples GitHub repository\. See the full example [here](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/DescribeDataset.java)\. 
+
+   ```
+   /**
+    * Gets the description for a Amazon Lookout for Vision dataset.
+    * 
+    * @param lfvClient   An Amazon Lookout for Vision client.
+    * @param projectName The name of the project in which you want to describe a
+    *                    dataset.
+    * @param datasetType The type of the dataset that you want to describe (train
+    *                    or test).
+    * @return DatasetDescription A description of the dataset.
+    */
+   public static DatasetDescription describeDataset(LookoutVisionClient lfvClient,
+                   String projectName,
+                   String datasetType) throws LookoutVisionException {
    
-   from botocore.exceptions import ClientError
+           logger.log(Level.INFO, "Describing {0} dataset for project {1}",
+                           new Object[] { datasetType, projectName });
    
-   def describe_dataset(project_name, dataset_type):
-       """
-       Gets information about an Amazon Lookout for Vision dataset.
-       param: project_name: The name of the project that contains the
-        dataset that you want to describe.
-       param: dataset_type: The type (train or test) of the dataset that you want to describe.
-       """
+           DescribeDatasetRequest describeDatasetRequest = DescribeDatasetRequest.builder()
+                           .projectName(projectName)
+                           .datasetType(datasetType)
+                           .build();
    
-       try:
+           DescribeDatasetResponse describeDatasetResponse = lfvClient.describeDataset(describeDatasetRequest);
+           DatasetDescription datasetDescription = describeDatasetResponse.datasetDescription();
    
-           client = boto3.client("lookoutvision")
+           logger.log(Level.INFO, "Project: {0}\n"
+                           + "Created: {1}\n"
+                           + "Type: {2}\n"
+                           + "Total: {3}\n"
+                           + "Labeled: {4}\n"
+                           + "Normal: {5}\n"
+                           + "Anomalous: {6}\n",
+                           new Object[] {
+                                           datasetDescription.projectName(),
+                                           datasetDescription.creationTimestamp(),
+                                           datasetDescription.datasetType(),
+                                           datasetDescription.imageStats().total().toString(),
+                                           datasetDescription.imageStats().labeled().toString(),
+                                           datasetDescription.imageStats().normal().toString(),
+                                           datasetDescription.imageStats().anomaly().toString(),
+                           });
    
-           # Describe a dataset
+           return datasetDescription;
    
-           response = client.describe_dataset(
-               ProjectName=project_name, DatasetType=dataset_type
-           )
-           print("Name: " + response["DatasetDescription"]["ProjectName"])
-           print("Type: " + response["DatasetDescription"]["DatasetType"])
-           print("Status: " + response["DatasetDescription"]["Status"])
-           print("Message: " + response["DatasetDescription"]["StatusMessage"])
-           print("Images: " + str(response["DatasetDescription"]["ImageStats"]["Total"]))
-           print(
-               "Labeled: " + str(response["DatasetDescription"]["ImageStats"]["Labeled"])
-           )
-           print("Normal: " + str(response["DatasetDescription"]["ImageStats"]["Normal"]))
-           print(
-               "Anomaly: " + str(response["DatasetDescription"]["ImageStats"]["Anomaly"])
-           )
-   
-           print("Done...")
-   
-       except ClientError as err:
-           print("Service error: " + format(err))
-           raise
-   
-   
-   def main():
-       project_name = (
-           "my-project"  # Change to the project name that contains the dataset.
-       )
-       dataset_type = "train"  # Change to the dataset type (train or test)
-       describe_dataset(project_name, dataset_type)
-   
-   
-   if __name__ == "__main__":
-       main()
+   }
    ```
 
 ------

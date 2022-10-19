@@ -1,16 +1,19 @@
-# Code examples for Lookout for Vision<a name="service_code_examples"></a>
+# Code examples for Lookout for Vision using AWS SDKs<a name="service_code_examples"></a>
 
 The following code examples show how to use Lookout for Vision with an AWS software development kit \(SDK\)\. 
 
-For a complete list of AWS SDK developer guides and code examples, including help getting started and information about previous versions, see [Using Lookout for Vision with an AWS SDK](getting-started-sdk.md#sdk-general-information-section)\.
+The examples are divided into the following categories:
+
+**Actions**  
+Code excerpts that show you how to call individual service functions\.
+
+**Scenarios**  
+Code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
+
+For a complete list of AWS SDK developer guides and code examples, see [Using this service with an AWS SDK](sdk-general-information-section.md)\. This topic also includes information about getting started and details about previous SDK versions\.
 
 **Contents**
-+ [Scenario examples](service_code_examples_scenario.md)
-  + [Create a manifest file](example_lookoutvision_Scenario_CreateManifestFile_section.md)
-  + [Create, train, and start a model](example_lookoutvision_Scenario_CreateTrainStartModel_section.md)
-  + [Find a project with a specific tag](example_lookoutvision_Scenario_FindTagInProjects_section.md)
-  + [List models that are currently hosted](example_lookoutvision_Scenario_ListHostedModels_section.md)
-+ [API examples](service_code_examples_api.md)
++ [Actions](service_code_examples_actions.md)
   + [Create a dataset](example_lookoutvision_CreateDataset_section.md)
   + [Create a model](example_lookoutvision_CreateModel_section.md)
   + [Create a project](example_lookoutvision_CreateProject_section.md)
@@ -24,3 +27,8 @@ For a complete list of AWS SDK developer guides and code examples, including hel
   + [List projects](example_lookoutvision_ListProjects_section.md)
   + [Start a model](example_lookoutvision_StartModel_section.md)
   + [Stop a model](example_lookoutvision_StopModel_section.md)
++ [Scenarios](service_code_examples_scenarios.md)
+  + [Create a manifest file](example_lookoutvision_Scenario_CreateManifestFile_section.md)
+  + [Create, train, and start a model](example_lookoutvision_Scenario_CreateTrainStartModel_section.md)
+  + [Find a project with a specific tag](example_lookoutvision_Scenario_FindTagInProjects_section.md)
+  + [List models that are currently hosted](example_lookoutvision_Scenario_ListHostedModels_section.md)

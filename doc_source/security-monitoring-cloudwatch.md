@@ -16,6 +16,10 @@ Amazon Lookout for Vision sends the following metrics to CloudWatch for the `Det
 |  `ErrorCount` |  The number of API errors Valid Statistics: `Sum,Average` Unit: Count  | 
 |  `ThrottledCount` |  The number of API errors that were due to throttling Valid Statistics: `Sum,Average` Unit: Count  | 
 |  `Time` |  The time in milliseconds for Lookout for Vision to compute the anomaly detection Valid Statistics: `Data Samples,Average` Units: Milliseconds for `Average` statistics and Count for `Data Samples` statistics  | 
+| `MinInferenceUnits` | The minimum number of inference units specified during the `StartModel` request\. Valid statistics: `Average` Unit: Count  | 
+| `MaxInferenceUnits` | The maximum number of inference units specified during the `StartModel`request\. Valid statistics: `Average` Unit: Count  | 
+|  `DesiredInferenceUnits`  |  The number of inference units to which Lookout for Vision is scaling up or down\.  Valid statistics: `Average` Unit: Count  | 
+|  `InServiceInferenceUnits`  |  The number of inference units that the model is using\. Valid statistics: `Average` It is recommended that you use the Average statistic to obtain the 1 minute average of how many instances are used\. Unit: Count  | 
 
 ## Dimensions of Lookout for Vision metrics<a name="cloudwatch-metric-dimensions"></a>
 
