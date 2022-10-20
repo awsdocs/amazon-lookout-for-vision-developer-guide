@@ -2,7 +2,7 @@
 
 You can create a dataset by importing an SageMaker Ground Truth format manifest file\. If your images are labeled in a format that isn't a SageMaker Ground Truth manifest file, use the following information to create an SageMaker Ground Truth format manifest file\. 
 
-Manifest files are in [JSON lines](http://jsonlines.org) format where each line is a complete JSON object representing the labeling information for an image\. There are different formats for image [classification](manifest-file-classification.md) and image [segmentation](manifest-file-segmentation.md)\.  Manifest files must be encoded using UTF\-8 encoding\.
+Manifest files are in [JSON lines](http://jsonlines.org) format where each line is a complete JSON object representing the labeling information for an image\. There are different formats for image [classification](manifest-file-classification.md) and image [segmentation](manifest-file-segmentation.md)\. Manifest files must be encoded using UTF\-8 encoding\.
 
 **Note**  
 The JSON line examples in this section are formatted for readability\. 

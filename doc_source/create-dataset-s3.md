@@ -1,6 +1,6 @@
 # Creating a dataset using images stored in an Amazon S3 bucket<a name="create-dataset-s3"></a>
 
-You can create a dataset using images stored in an Amazon S3 bucket\. With this option, you can use the folder structure in your Amazon S3 bucket to automatically label your images\. You can store the images in the console bucket or another Amazon S3 bucket in your account\. 
+You can create a dataset using images stored in an Amazon S3 bucket\. With this option, you can use the folder structure in your Amazon S3 bucket to automatically classify your images\. You can store the images in the console bucket or another Amazon S3 bucket in your account\. 
 
 ## Setting up folders for automatic labeling<a name="create-dataset-s3-auto-label"></a>
 
@@ -26,7 +26,7 @@ S3-bucket
 
 ## Creating a dataset using images from an Amazon S3 bucket<a name="create-dataset-s3-procedure"></a>
 
-The following procedure creates a dataset using the [Getting Started](getting-started.md) example images stored in an Amazon S3 bucket\. To use your own images, create the folder structure described in [Setting up folders for automatic labeling](#create-dataset-s3-auto-label)\. 
+The following procedure creates a dataset using the [classification example](example-datasets.md#example-datasets-classification) images stored in an Amazon S3 bucket\. To use your own images, create the folder structure described in [Setting up folders for automatic labeling](#create-dataset-s3-auto-label)\. 
 
 The procedure also shows how to create a single dataset project, or a project that uses separate training and test datasets\.
 
@@ -37,7 +37,7 @@ If you've just completed [Creating your project](model-create-project.md), the c
 
 **To create a dataset using images stored in an Amazon S3 bucket**
 
-1. If you haven't already done so, upload the getting started images to your Amazon S3 bucket\. For more information, see [Prepare example images](su-prepare-example-images.md)\.
+1. If you haven't already done so, upload the getting started images to your Amazon S3 bucket\. For more information, see [Image classification dataset](example-datasets.md#example-datasets-classification)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 

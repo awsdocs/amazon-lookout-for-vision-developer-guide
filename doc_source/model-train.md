@@ -2,7 +2,7 @@
 
 After you have created your datasets and labeled the images, you can train your model\. As part of the training process, a test dataset is used\. If you have a single dataset project, the images in the dataset are automatically split into a test dataset and a training dataset as part of the training process\. If your project has a training and a test dataset, they are used to separately train and test the dataset\. 
 
-After training is complete, you can evaluate the performance of the model and make any necessary improvements\. For more information, see [Improving your model](improve.md)\.
+After training is complete, you can evaluate the performance of the model and make any necessary improvements\. For more information, see [Improving your Amazon Lookout for Vision model](improve.md)\.
 
 To train your model, Amazon Lookout for Vision makes a copy of your source training and test images\. By default the copied images are encrypted with a key that AWS owns and manages\. You can also choose to use your own AWS Key Management Service \(KMS\) key\. For more information, see [AWS Key Management Service concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)\. Your source images are unaffected\.
 
@@ -61,7 +61,7 @@ The following procedure shows you how to train your model using the console\.
 
 1. In the **Models** view, you can see that training has started and you can check the current status by viewing the `Status` column for the model version\. Training a model takes a while to complete\. 
 
-1. When training is finished, you can evaluate its performance\. For more information, see [Improving your model](improve.md)\.
+1. When training is finished, you can evaluate its performance\. For more information, see [Improving your Amazon Lookout for Vision model](improve.md)\.
 
 ## Training a model \(SDK\)<a name="create-model-sdk"></a>
 
@@ -73,7 +73,7 @@ You are charged for each successful model training\. Use the `ClientToken` input
 
 Training takes a while to complete\. To check the current status, call `DescribeModel` and pass the project name \(specified in the call to `CreateProject`\) and the model version\. The `status` field indicates the current status of the model training\. For example code, see [Viewing your models \(SDK\)](view-models.md#view-models-sdk)\. 
 
-If training is successful, you can evaluate model\. For more information, see [Improving your model](improve.md)\. 
+If training is successful, you can evaluate model\. For more information, see [Improving your Amazon Lookout for Vision model](improve.md)\. 
 
 To view the models that you have created in a project, call `ListModels`\. For example code, see [Viewing your models](view-models.md)\. 
 
@@ -274,4 +274,4 @@ To view the models that you have created in a project, call `ListModels`\. For e
 
 ------
 
-1. When training is finished, you can evaluate its performance\. For more information, see [Improving your model](improve.md)\.
+1. When training is finished, you can evaluate its performance\. For more information, see [Improving your Amazon Lookout for Vision model](improve.md)\.

@@ -6,7 +6,7 @@ A manifest file describes the images used to train a model\. A manifest file is 
 
 A CSV file represents tabular data over multiple rows in a text file\. Fields on a row are separated by commas\. For more information, see [comma separated values](https://en.wikipedia.org/wiki/Comma-separated_values)\. For this script, each row in your CSV file includes the S3 location of an image and the anomaly classification for the image \(`normal` or `anomaly`\)\. Each row maps to a JSON Line in the manifest file\.
 
-For example, The following CSV file describes some of the images in the [example images](su-prepare-example-images.md)\. 
+For example, The following CSV file describes some of the images in the [example images](example-datasets.md#example-datasets-classification)\. 
 
 ```
 s3://s3bucket/circuitboard/train/anomaly/train-anomaly_1.jpg,anomaly

@@ -36,10 +36,12 @@ A semantic segmentation model locates different types of anomaly\. It doesn't pr
 
 An Amazon Lookout for Vision segmentation model predicts the following:
 
-**Classification**  
+#### Classification<a name="ud-image-segmentation-classification"></a>
+
 The model returns a classification for an analyzed image \(normal/anomaly\), which includes the model's confidence in the prediction\. Classification information is calculated separately from segmentation information and you shouldn't assume a relationship between them\.
 
-**Segmentation**  
+#### Segmentation<a name="ud-image-segmentation-masks-labels"></a>
+
 The model returns an image mask that marks the pixels where anomalies occur on the image\. Different types of anomaly are color coded according to the color assigned to the *anomaly label* in the dataset\. An anomaly label represents the type of an anomaly\. For example, the blue mask in the following image marks the location of a *scratch* anomaly type found on a car\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/mask.png)
@@ -115,7 +117,7 @@ If your project has separate training and test datasets, Lookout for Vision uses
 
 Training creates a model and trains it to predict the presence of anomalies in images\. A new version of your model is created each time you train\.
 
-At the start of training, Amazon Lookout for Vision chooses the most suitable algorithm to train your model with\. The model is trained and then tested\. When you train a single dataset project, the dataset is internally split to create a training dataset and a test dataset\. In Getting Started, your project has separate training and test datasets\. In this configuration, Amazon Lookout for Vision trains your model with the training dataset and tests the model with the test dataset\. 
+At the start of training, Amazon Lookout for Vision chooses the most suitable algorithm to train your model with\. The model is trained and then tested\. In [Getting started](getting-started.md), you train a single dataset project, the dataset is internally split to create a training dataset and a test dataset\. You can also create a project that has separate training and test datasets\. In this configuration, Amazon Lookout for Vision trains your model with the training dataset and tests the model with the test dataset\. 
 
 **Important**  
 You are charged for the amount of time that it takes to successfully train your model\.

@@ -7,7 +7,8 @@ If you want to use a single dataset for training and testing, create a single da
 You can optionally use the `DatasetSource` parameter to specify the location of a SageMaker Ground Truth format manifest file that's used to populate the dataset\. In this case, the call to `CreateDataset` is asynchronous\. To check the current status, call `DescribeDataset`\. For more information, see [Viewing your datasets](view-datasets.md)\. If a validation error occurs during import, the value of `Status` is set to CREATE\_FAILED and the status message \(`StatusMessage`\) is set\.  
 
 **Tip**  
-If you are creating your dataset using the circuitboard example images, you have two options:  
+If you are creating a dataset with the [getting started](getting-started.md) example dataset, use the manifest file \(`getting-started/dataset-files/manifests/train.manifest`\) that the script creates in [Step 1: Create the manifest file and upload images](getting-started.md#getting-started-prepare-files)\.   
+If you are creating a dataset with the [circuitboard](example-datasets.md#example-datasets-classification) example images, you have two options:  
 Create the manifest file using code\. The [Amazon Lookout for Vision Lab](https://github.com/aws-samples/amazon-lookout-for-vision/blob/main/Amazon%20Lookout%20for%20Vision%20Lab.ipynb) Python Notebook shows how to create the manifest file for the circuitboard example images\. Alternatively, use the [Datasets example code](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lookoutvision/datasets.py) in the AWS Code Examples Repository\.
 If you've already used the Amazon Lookout for Vision console to create a dataset with the circuitboard example images, reuse the manifest files created for you by Amazon Lookout for Vision\. The training and test manifest file locations are `s3://bucket/datasets/project name/train or test/manifests/output/output.manifest`\. 
 

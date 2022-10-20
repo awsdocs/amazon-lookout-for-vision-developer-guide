@@ -1,4 +1,4 @@
-# Step 7: \(Optional\) Using your own AWS Key Management Service key<a name="su-kms-encryption"></a>
+# Step 6: \(Optional\) Using your own AWS Key Management Service key<a name="su-kms-encryption"></a>
 
 You can use AWS Key Management Service \(KMS\) to manage encryption for the input images that you store in Amazon S3 buckets\.
 

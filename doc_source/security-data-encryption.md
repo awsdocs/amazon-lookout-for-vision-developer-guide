@@ -22,6 +22,6 @@ Amazon Lookout for Vision API endpoints only support secure connections over HTT
 
 ## Key management<a name="security-data-encryption-key-management"></a>
 
-You can use AWS Key Management Service \(KMS\) to manage encryption for the input images that you store in Amazon S3 buckets\. For more information, see [Step 7: \(Optional\) Using your own AWS Key Management Service key](su-kms-encryption.md)\.
+You can use AWS Key Management Service \(KMS\) to manage encryption for the input images that you store in Amazon S3 buckets\. For more information, see [Step 6: \(Optional\) Using your own AWS Key Management Service key](su-kms-encryption.md)\.
 
 By default your images are encrypted with a key that AWS owns and manages\. You can also choose to use your own AWS Key Management Service \(KMS\) key\. For more information, see [AWS Key Management Service concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)\.

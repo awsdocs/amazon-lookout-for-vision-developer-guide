@@ -16,18 +16,13 @@ If you only use the AWS SDK and not the Lookout for Vision console, you don't ne
 The format of the console bucket name is `lookoutvision`\-*<region>*\-*<random value>*\. The random value ensures that there isn't a collision between bucket names\.
 
 **Topics**
-+ [Create the console bucket with the Amazon Lookout for Vision console](#su-create-console-bucket-lfv-procedure)
-+ [Create the console bucket with Amazon S3](#su-create-console-bucket-s3-procedure)
++ [Creating the console bucket with the Amazon Lookout for Vision console](#su-create-console-bucket-lfv-procedure)
++ [Creating the console bucket with Amazon S3](#su-create-console-bucket-s3-procedure)
++ [Console bucket settings](#su-console-bucket-settings)
 
-## Create the console bucket with the Amazon Lookout for Vision console<a name="su-create-console-bucket-lfv-procedure"></a>
+## Creating the console bucket with the Amazon Lookout for Vision console<a name="su-create-console-bucket-lfv-procedure"></a>
 
-Use the following procedure to create the console bucket for an AWS Region with the Amazon Lookout for Vision console\.
-
-When you create the console bucket with the Amazon Lookout for Vision console, we enable the following settings on the console bucket\.
-+ [Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html) of objects in the console bucket\.
-+ [Server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html) of objects in the console bucket\.
-+ [A lifecycle configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) for the deletion of noncurrent objects \(30 days\) and incomplete multipart uploads \(3 days\)\. 
-+ [Block public access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html) to the console bucket\.
+Use the following procedure to create the console bucket for an AWS Region with the Amazon Lookout for Vision console\. For information about the S3 bucket settings that we enable, see [Console bucket settings](#su-console-bucket-settings)\.
 
 **To create the console bucket by using the Amazon Lookout for Vision console**
 
@@ -49,9 +44,9 @@ When you create the console bucket with the Amazon Lookout for Vision console, w
 
 1. Close the browser window\.
 
-## Create the console bucket with Amazon S3<a name="su-create-console-bucket-s3-procedure"></a>
+## Creating the console bucket with Amazon S3<a name="su-create-console-bucket-s3-procedure"></a>
 
-You can use Amazon S3 to create the console bucket\. You must create the bucket with [Amazon S3 versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html) enabled\. We recommend that you use an [Amazon S3 lifecycle configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) to remove noncurrent \(previous\) versions of an object and delete incomplete multipart uploads\. We don't recommend a lifecycle configuration that deletes current versions of an object\. For information about the S3 bucket settings we enable for console buckets that you create with the Amazon Lookout for Vision console, see [Create the console bucket with the Amazon Lookout for Vision console](#su-create-console-bucket-lfv-procedure)\. 
+You can use Amazon S3 to create the console bucket\. You must create the bucket with [Amazon S3 versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html) enabled\. We recommend that you use an [Amazon S3 lifecycle configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) to remove noncurrent \(previous\) versions of an object and delete incomplete multipart uploads\. We don't recommend a lifecycle configuration that deletes current versions of an object\. For information about the S3 bucket settings we enable for console buckets that you create with the Amazon Lookout for Vision console, see [Console bucket settings](#su-console-bucket-settings)\. 
 
 1. Decide the AWS Region in which you want to create a console bucket\. For information about supported regions, see [Amazon Lookout for Vision endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/lookoutvision.html)\.
 
@@ -73,4 +68,10 @@ You can use Amazon S3 to create the console bucket\. You must create the bucket 
 
    1. For step 12 enter the number of days to wait before deleting incomplete multipart uploads\. 
 
-**Next:** [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)
+## Console bucket settings<a name="su-console-bucket-settings"></a>
+
+If you create the console bucket with the Amazon Lookout for Vision console, we enable the following settings on the console bucket\.
++ [Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html) of objects in the console bucket\.
++ [Server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html) of objects in the console bucket\.
++ [A lifecycle configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) for the deletion of noncurrent objects \(30 days\) and incomplete multipart uploads \(3 days\)\. 
++ [Block public access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html) to the console bucket\.

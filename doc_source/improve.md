@@ -1,4 +1,4 @@
-# Improving your model<a name="improve"></a>
+# Improving your Amazon Lookout for Vision model<a name="improve"></a>
 
 During training Lookout for Vision tests your model with the test dataset and uses the results to create performance metrics\. You can use performance metrics to evaluate the performance of your model\. If necessary, you can take steps to improve your datasets and then retrain your model\.
 
@@ -97,13 +97,15 @@ The following image has a higher IoU\. The blue mask \(test image\) is tightly c
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/mask-high-iou.png)
 
-### Testing results<a name="w221aac22b9c23"></a>
+### Testing results<a name="test-results"></a>
 
-During testing, the model predicts a result for each test image in the test dataset\. The result for each prediction is compared to the label \(normal or anomaly\) of the corresponding test image as follows: 
+During testing, the model predicts classification for each test image in the test dataset\. The result for each prediction is compared to the label \(normal or anomaly\) of the corresponding test image as follows: 
 + Correctly predicting that an image is anomalous is considered a *true positive*\.
 + Incorrectly predicting that an image is anomalous is considered a *false positive*\.
 + Correctly predicting that an image is normal is considered a *true negative*\.
 + Incorrectly predicting that an image is normal is considered a *false negative*\.
+
+If the model is a segmentation model, the model also predicts masks and anomaly labels for the location of anomalies on the test image\.
 
 Amazon Lookout for Vision uses the results of the comparisons to generate the performance metrics\.
 
