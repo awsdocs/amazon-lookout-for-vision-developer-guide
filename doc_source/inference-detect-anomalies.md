@@ -36,7 +36,8 @@ This AWS CLI command displays the JSON output for the `DetectAnomalies` CLI oper
 aws lookoutvision detect-anomalies  --project-name project name\
     --model-version model version\
     --content-type content type\
-    --body file name
+    --body file name \
+    --profile lookoutvision-access
 ```
 
 ------
@@ -191,7 +192,7 @@ If you're finding the confidence values returned by `DetectAnomalies` are too lo
 
 ### Segmentation model<a name="inference-response-segmentation"></a>
 
-If your model is an [Image segmentation model](understanding.md#ud-image-segmentation), the response includes classification information and segmentation information, such as an image mask and anomaly types\. Classification information is calculated separately from segmentation information and you shouldn't assume a relationship between them\. For example code, see [Segmentation](inference-determine-anomaly-state.md#inference-segmentation)\.
+If your model is an [Image segmentation model](understanding.md#ud-image-segmentation), the response includes classification information and segmentation information, such as an image mask and anomaly types\. Classification information is calculated separately from segmentation information and you shouldn't assume a relationship between them\. For example code, see [Segmentation](inference-determine-anomaly-state.md#inference-segmentation) and [Showing classification and segmentation information](inference-display-information.md)\.
 + **IsAnomalous** \(classification\) – A Boolean indicator that classifies the image as either normal or anomalous\. 
 + **Confidence** \(classification\) – The confidence that Amazon Lookout for Vision has in the accuracy of the classification of the image \(`IsAnomalous`\)\. `Confidence` is a floating point value between 0 and 1\. A higher value indicates a higher confidence\.
 + **Source** – Information about the image passed to `DetectAnomalies`\.

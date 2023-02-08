@@ -1,41 +1,44 @@
-# Amazon Lookout for Vision and interface VPC endpoints \(AWS PrivateLink\)<a name="vpc-interface-endpoints"></a>
+# Access Amazon Lookout for Vision using an interface endpoint \(AWS PrivateLink\)<a name="vpc-interface-endpoints"></a>
 
-You can establish a private connection between your VPC and Amazon Lookout for Vision by creating an *interface VPC endpoint*\. Interface endpoints are powered by [AWS PrivateLink](http://aws.amazon.com/privatelink), a technology that enables you to privately access Lookout for Vision APIs without an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. Instances in your VPC don't need public IP addresses to communicate with Lookout for Vision APIs\. Traffic between your VPC and Lookout for Vision does not leave the Amazon network\. 
+You can use AWS PrivateLink to create a private connection between your VPC and Amazon Lookout for Vision\. You can access Lookout for Vision as if it were in your VPC, without the use of an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. Instances in your VPC don't need public IP addresses to access Lookout for Vision\.
 
-Each interface endpoint is represented by one or more [Elastic Network Interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in your subnets\. 
+You establish this private connection by creating an *interface endpoint*, powered by AWS PrivateLink\. We create an endpoint network interface in each subnet that you enable for the interface endpoint\. These are requester\-managed network interfaces that serve as the entry point for traffic destined for Lookout for Vision\.
 
-For more information, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. 
+For more information, see [Access AWS services through AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-access-aws-services.html) in the *AWS PrivateLink Guide*\.
 
 ## Considerations for Lookout for Vision VPC endpoints<a name="vpc-endpoint-considerations"></a>
 
-Before you set up an interface VPC endpoint for Lookout for Vision, ensure that you review [Interface endpoint properties and limitations](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#vpce-interface-limitations) in the *Amazon VPC User Guide*\. 
+Before you set up an interface endpoint for Lookout for Vision, review [Considerations](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html#considerations-interface-endpoints) in the *AWS PrivateLink Guide*\.
 
-Lookout for Vision supports making calls to all of its API actions from your VPC\. 
+Lookout for Vision supports making calls to all of its API actions through the interface endpoint\.
 
-VPC endpoint policies are supported for Lookout for Vision\. By default, full access to Lookout for Vision is allowed through the endpoint\. For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
+VPC endpoint policies are not supported for Lookout for Vision\. By default, full access to Lookout for Vision is allowed through the interface endpoint\. Alternatively, you can associate a security group with the endpoint network interfaces to control traffic to Lookout for Vision through the interface endpoint\.
 
 ## Creating an interface VPC endpoint for Lookout for Vision<a name="vpc-endpoint-create"></a>
 
-You can create a VPC endpoint for the Lookout for Vision service using either the Amazon VPC console or the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
+You can create an interface endpoint for Lookout for Vision using either the Amazon VPC console or the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Create an interface endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html#create-interface-endpoint-aws) in the *AWS PrivateLink Guide*\.
 
-Create a VPC endpoint for Lookout for Vision using the following service name: 
-+ com\.amazonaws\.*region*\.lookoutvision 
+Create an interface endpoint for Lookout for Vision using the following service name:
 
-If you enable private DNS for the endpoint, you can make API requests to Lookout for Vision using its default DNS name for the Region, for example, `lookoutvision.us-east-1.amazonaws.com`\. 
+```
+com.amazonaws.region.lookoutvision
+```
 
-For more information, see [Accessing a service through an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#access-service-though-endpoint) in the *Amazon VPC User Guide*\.
+If you enable private DNS for the interface endpoint, you can make API requests to Lookout for Vision using its default Regional DNS name\. For example, `lookoutvision.us-east-1.amazonaws.com`\.
 
 ## Creating a VPC endpoint policy for Lookout for Vision<a name="vpc-endpoint-policy"></a>
 
-You can attach an endpoint policy to your VPC endpoint that controls access to Lookout for Vision\. The policy specifies the following information:
-+ The principal that can perform actions\.
-+ The actions that can be performed\.
-+ The resources on which actions can be performed\.
+An endpoint policy is an IAM resource that you can attach to an interface endpoint\. The default endpoint policy allows full access to Lookout for Vision through the interface endpoint\. To control the access allowed to Lookout for Vision from your VPC, attach a custom endpoint policy to the interface endpoint\.
 
-For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\. 
+An endpoint policy specifies the following information:
++ The principals that can perform actions \(AWS accounts, IAM users, and IAM roles\)\.
++ The actions that can be performed\.
++ The resources on which the actions can be performed\.
+
+For more information, see [Control access to services using endpoint policies](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html) in the *AWS PrivateLink Guide*\.
 
 **Example: VPC endpoint policy for Lookout for Vision actions**  
-The following is an example of an endpoint policy for Lookout for Vision\. When attached to an endpoint, this policy specifies that all users who have access to the VPC interface endpoint are allowed to call the `DetectAnomalies` API operation for the Lookout for Vision model `myModel` associated with project `myProject`\.
+The following is an example of a custom endpoint policy for Lookout for Vision\. When you attach this policy to your interface endpoint, it specifies that all users who have access to the VPC interface endpoint are allowed to call the `DetectAnomalies` API operation for the Lookout for Vision model `myModel` associated with project `myProject`\.
 
 ```
 {

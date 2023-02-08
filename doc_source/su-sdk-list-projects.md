@@ -2,17 +2,13 @@
 
 Run the following code to confirm that you can make calls to the Amazon Lookout for Vision API\. The code lists the projects in your AWS account, in the current AWS Region\. If you haven't previously created a project, the response is empty, but does confirm that you can call the `ListProjects` operation\. 
 
-If the call fails, check that the IAM user that you use has the correct permissions\. Also check the AWS Region that you using as Amazon Lookout for Vision is not available in all AWS Regions\.
-
 In general, calling an example function requires an AWS SDK Lookout for Vision client and any other required parameters\. The AWS SDK Lookout for Vision client is declared in the main function\. 
+
+If the code fails, check that the user that you use has the correct permissions\. Also check the AWS Region that you using as Amazon Lookout for Vision is not available in all AWS Regions\.
 
 **To call an Amazon Lookout for Vision operation**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to view your projects\.
 
@@ -22,7 +18,8 @@ In general, calling an example function requires an AWS SDK Lookout for Vision c
    Use the `list-projects` command to list the projects in your account\.
 
    ```
-   aws lookoutvision list-projects
+   aws lookoutvision list-projects \
+   --profile lookoutvision-access
    ```
 
 ------
@@ -58,8 +55,9 @@ In general, calling an example function requires an AWS SDK Lookout for Vision c
            except ClientError:
                raise
    def main():
+       session = boto3.Session(profile_name='lookoutvision-access')
+       lookoutvision_client = session.client("lookoutvision")
        
-       lookoutvision_client = boto3.client("lookoutvision")
        GettingStarted.list_projects(lookoutvision_client)
    
    if __name__ == "__main__":
@@ -77,10 +75,9 @@ In general, calling an example function requires an AWS SDK Lookout for Vision c
       SPDX-License-Identifier: Apache-2.0
    */
    
-   // snippet-start:[lookoutvision.java2.gettingstarted.complete]
-   
    package com.example.lookoutvision;
    
+   import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
    import software.amazon.awssdk.services.lookoutvision.LookoutVisionClient;
    import software.amazon.awssdk.services.lookoutvision.model.ProjectMetadata;
    import software.amazon.awssdk.services.lookoutvision.paginators.ListProjectsIterable;
@@ -98,11 +95,9 @@ In general, calling an example function requires an AWS SDK Lookout for Vision c
    
        /**
         * Lists the Amazon Lookoutfor Vision projects in the current AWS account and
-        * AWS
-        * Region.
+        * AWS Region.
         * 
         * @param lfvClient   An Amazon Lookout for Vision client.
-        * @param projectName The name of the project that you want to create.
         * @return List<ProjectMetadata> Metadata for each project.
         */
        public static List<ProjectMetadata> listProjects(LookoutVisionClient lfvClient)
@@ -134,7 +129,9 @@ In general, calling an example function requires an AWS SDK Lookout for Vision c
            try {
    
                // Get the Lookout for Vision client.
-               LookoutVisionClient lfvClient = LookoutVisionClient.builder().build();
+               LookoutVisionClient lfvClient = LookoutVisionClient.builder()
+                       .credentialsProvider(ProfileCredentialsProvider.create("lookoutvision-access"))
+                       .build();
    
                List<ProjectMetadata> projects = Projects.listProjects(lfvClient);
    
@@ -157,7 +154,6 @@ In general, calling an example function requires an AWS SDK Lookout for Vision c
        }
    
    }
-   // snippet-end:[lookoutvision.java2.gettingstarted.complete]
    ```
 
 ------

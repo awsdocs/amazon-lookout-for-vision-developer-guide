@@ -36,11 +36,7 @@ The project might take a few moments to delete\. During that time, the status of
 
 **To delete a project \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following code to delete a project\. 
 
@@ -50,7 +46,8 @@ The project might take a few moments to delete\. During that time, the status of
    Change the value of `project-name` to the name of the project that you want to delete\.
 
    ```
-   aws lookoutvision delete-project --project-name project_name 
+   aws lookoutvision delete-project --project-name project_name \
+     --profile lookoutvision-access
    ```
 
 ------

@@ -25,11 +25,7 @@ A project manages the datasets and models for a single use case\. For example, d
 
 **To view your projects \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to view your projects\.
 
@@ -39,7 +35,8 @@ A project manages the datasets and models for a single use case\. For example, d
    Use the `list-projects` command to list the projects in your account\.
 
    ```
-   aws lookoutvision list-projects
+   aws lookoutvision list-projects \
+     --profile lookoutvision-access
    ```
 
    Use the `describe-project` command to get information about a project\.
@@ -47,7 +44,8 @@ A project manages the datasets and models for a single use case\. For example, d
    Change the value of `project-name` to the name of the project that you want to describe\.
 
    ```
-   aws lookoutvision describe-project --project-name project_name
+   aws lookoutvision describe-project --project-name project_name \
+     --profile lookoutvision-access
    ```
 
 ------

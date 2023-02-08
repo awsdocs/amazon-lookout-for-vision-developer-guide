@@ -1,4 +1,4 @@
-# Getting started<a name="getting-started"></a>
+# Getting started with Amazon Lookout for Vision<a name="getting-started"></a>
 
 Before starting these *Getting started* instructions, we recommend that you read [Understanding Amazon Lookout for Vision](understanding.md)\.
 
@@ -30,7 +30,27 @@ In this procedure, you clone the Amazon Lookout for Vision documentation reposit
 
 1. In the Amazon S3 bucket, [create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html#create-folder) named `getting-started`\.
 
-1. Note the Amazon S3 URI for the folder\. You use the URL in step 6 to run the script and create a dataset\.
+1. Note the Amazon S3 URI and Amazon Resource name \(ARN\) for the folder\. You use them to set up permissions and to run the script\.
+
+1. Make sure that the user calling the script has permissions to call the `s3:PutObject` operation\. You can use the following policy\. To assign permissions, see [Assigning permissions](su-sdk-permissions.md#su-sdk-assign-permissions)\.
+
+   ```
+   {
+   	"Version": "2012-10-17",
+   	"Statement": [{
+   		"Sid": "Statement1",
+   		"Effect": "Allow",
+   		"Action": [
+   			"s3:PutObject"
+   		],
+   		"Resource": [
+   			"arn:aws:s3::: ARN for S3 folder in step 4/*"
+   		]
+   	}]
+   }
+   ```
+
+1. Make sure that you have a local profile named `lookoutvision-access` and that the profile user has the permission from the previous step\. For more information, see [Using a profile on your local computer](su-sdk-programmatic-access.md#su-sdk-programmatic-access-lookoutvision-examples)\.
 
 1. Clone the Amazon Lookout for Vision documentation repository to your computer by entering the following command at the command prompt\.
 
@@ -115,7 +135,7 @@ You are charged for a successful training of a model\.
    + Predictions for [test images](improve.md#test-results) \(classification, segmentation masks, and anomaly labels\)  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/getting-started/get-started-model-test-image-results.png)
 
-   For more information, see [Improving your Amazon Lookout for Vision model](improve.md)\.
+   As model training is non\-deterministic, your evaluation results might differ from the results on shown on this page\. For more information, see [Improving your Amazon Lookout for Vision model](improve.md)\.
 
 ## Step 3: Start the model<a name="getting-started-analyze-image-start-model"></a>
 
@@ -132,15 +152,16 @@ You are charged for the amount of time that your model runs\. You stop your mode
 1. In the **AWS CLI commands** section, copy the `start-model` AWS CLI command\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/getting-started/get-started-model-start.png)
 
-1. Make sure that the AWS CLI is configured to run in the same AWS Region in which you are using the Amazon Lookout for Vision console\. To change the AWS Region that the AWS CLI uses, see [Installing the AWS SDKS](sdk-install-sdk.md)\.
+1. Make sure that the AWS CLI is configured to run in the same AWS Region in which you are using the Amazon Lookout for Vision console\. To change the AWS Region that the AWS CLI uses, see [Install the AWS SDKS](su-awscli-sdk.md#sdk-install-sdk)\.
 
-1. At the command prompt, start the model by entering the `start-model` command\. For example:
+1. At the command prompt, start the model by entering the `start-model` command\. If you are using the `lookoutvision` profile to get credentials, add the `--profile lookoutvision-access` parameter\. For example:
 
    ```
    aws lookoutvision start-model \
      --project-name getting-started \
      --model-version 1 \
-     --min-inference-units 1
+     --min-inference-units 1 \
+     --profile lookoutvision-access
    ```
 
    If the call is successful, the following output is displayed:
@@ -172,14 +193,15 @@ In this step, you analyze an image with your model\. We provide example images t
 1. In the **AWS CLI commands** section, copy the `detect-anomalies` AWS CLI command\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/getting-started/get-started-model-detect-anomalies.png)
 
-1. At the command prompt, analyze an anomalous image by entering the `detect-anomalies` command from the previous step\. For the `--body` parameter, specify an anomalous image from the getting started `test-images` folder on your [computer](#getting-started-prepare-files)\. For example:
+1. At the command prompt, analyze an anomalous image by entering the `detect-anomalies` command from the previous step\. For the `--body` parameter, specify an anomalous image from the getting started `test-images` folder on your [computer](#getting-started-prepare-files)\. If you are using the `lookoutvision` profile to get credentials, add the `--profile lookoutvision-access` parameter\. For example:
 
    ```
    aws lookoutvision detect-anomalies \
      --project-name getting-started \
      --model-version 1 \
      --content-type image/jpeg \
-     --body /path/to/test-images/test-anomaly-1.jpg
+     --body /path/to/test-images/test-anomaly-1.jpg \
+     --profile lookoutvision-access
    ```
 
    The output should look similar to the following:
@@ -222,14 +244,15 @@ In this step, you analyze an image with your model\. We provide example images t
    You can use information in the response to display a blend of the analyzed image and anomaly mask, as shown in the following example\. For example code, see [Showing classification and segmentation information](inference-display-information.md)\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/getting-started/get-started-detection-results.png)
 
-1. At the command prompt, analyze a normal image from the getting started `test-images` folder\. For example:
+1. At the command prompt, analyze a normal image from the getting started `test-images` folder\. If you are using the `lookoutvision` profile to get credentials, add the `--profile lookoutvision-access` parameter\. For example:
 
    ```
    aws lookoutvision detect-anomalies \
      --project-name getting-started \
      --model-version 1 \
      --content-type image/jpeg \
-     --body /path/to/test-images/test-normal-1.jpg
+     --body /path/to/test-images/test-normal-1.jpg \
+     --profile lookoutvision-access
    ```
 
    The output should look similar to the following:
@@ -276,12 +299,13 @@ In this step, you stop hosting the model\. You are charged for the amount of tim
 1. In the **AWS CLI commands** section, copy the `stop-model` AWS CLI command\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/images/getting-started/get-started-model-stop.png)
 
-1. At the command prompt, stop the model by entering the `stop-model` AWS CLI command from the previous step\. For example:
+1. At the command prompt, stop the model by entering the `stop-model` AWS CLI command from the previous step\. If you are using the `lookoutvision` profile to get credentials, add the `--profile lookoutvision-access` parameter\. For example:
 
    ```
    aws lookoutvision stop-model \
      --project-name getting-started \
-     --model-version 1
+     --model-version 1 \
+     --profile lookoutvision-access
    ```
 
    If the call is successful, the following output is displayed:

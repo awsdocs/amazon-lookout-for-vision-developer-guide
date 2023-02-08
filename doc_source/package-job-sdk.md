@@ -8,19 +8,9 @@ The following procedure shows you how to start a packaging job by using the AWS 
 
 **To package your model \(SDK\)**
 
-1. If you haven't already done so, do the following:
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
-
-1. Make sure the IAM user has the following permissions:
-   + `lookoutvision:StartModelPackagingJob`
-   + `s3:PutObject`
-   + `s3:GetBucketLocation`
-   + `greengrass:CreateComponentVersion`
-   + `greengrass:DescribeComponent`
-   + \(Optional\) `greengrass:TagResource`\. Only required if you want to tag the component\.
+1. Make sure that you have the correct permissions to start a model packaging job\. For more information, see [StartModelPackagingJob](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModelPackagingJob.html)\.
 
 1. Use the following CLI commands to package your model for either a target device or a target platform\. 
 
@@ -50,7 +40,8 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name project_name \
      --model-version model_version \
      --description="description" \
-     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='architecture',Accelerator='NVIDIA'},CompilerOptions='{\"gpu-code\": \"gpu_code\", \"trt-ver\": \"trt_ver\", \"cuda-ver\": \"cuda_ver\"}',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='Component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
+     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='architecture',Accelerator='NVIDIA'},CompilerOptions='{\"gpu-code\": \"gpu_code\", \"trt-ver\": \"trt_ver\", \"cuda-ver\": \"cuda_ver\"}',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='Component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}" \
+     --profile lookoutvision-access
    ```
 
    For example:
@@ -60,7 +51,8 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name test-project-01 \
      --model-version 1 \
      --description="Model Packaging Job for G4 Instance using TargetPlatform Option" \
-     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='X86_64',Accelerator='NVIDIA'},CompilerOptions='{\"gpu-code\": \"sm_75\", \"trt-ver\": \"7.1.3\", \"cuda-ver\": \"10.2\"}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/folder'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='0.1.0',ComponentDescription='This is my component',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}"
+     --configuration "Greengrass={TargetPlatform={Os='LINUX',Arch='X86_64',Accelerator='NVIDIA'},CompilerOptions='{\"gpu-code\": \"sm_75\", \"trt-ver\": \"7.1.3\", \"cuda-ver\": \"10.2\"}',S3OutputLocation={Bucket='bucket',Prefix='test-project-01/folder'},ComponentName='SampleComponentNameX86TargetPlatform',ComponentVersion='0.1.0',ComponentDescription='This is my component',Tags=[{Key='modelKey0',Value='modelValue'}, {Key='modelKey1',Value='modelValue'}]}" \
+     --profile lookoutvision-access
    ```
 
 ------
@@ -85,7 +77,8 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name project_name \
      --model-version model_version \
      --description="description" \
-     --configuration "Greengrass={TargetDevice='jetson_xavier',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
+     --configuration "Greengrass={TargetDevice='jetson_xavier',S3OutputLocation={Bucket='bucket',Prefix='prefix'},ComponentName='component_name',ComponentVersion='component_version',ComponentDescription='component_description',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}" \
+     --profile lookoutvision-access
    ```
 
    For example:
@@ -95,7 +88,8 @@ The following procedure shows you how to start a packaging job by using the AWS 
      --project-name project_01 \
      --model-version 1 \
      --description="description" \
-     --configuration "Greengrass={TargetDevice='jetson_xavier',S3OutputLocation={Bucket='bucket',Prefix='component_folder'},ComponentName='jetson_component',ComponentVersion='2.0.0',ComponentDescription='jetson model component',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}"
+     --configuration "Greengrass={TargetDevice='jetson_xavier',S3OutputLocation={Bucket='bucket',Prefix='component_folder'},ComponentName='jetson_component',ComponentVersion='2.0.0',ComponentDescription='jetson model component',Tags=[{Key='tag_key1',Value='tag_value1'}, {Key='tag_key2',Value='tag_value2'}]}" \
+     --profile lookoutvision-access
    ```
 
 ------
@@ -115,7 +109,8 @@ The following procedure shows you how to start a packaging job by using the AWS 
    ```
    aws lookoutvision describe-model-packaging-job \
        --project-name project_name \
-       --job-name job_name
+       --job-name job_name \
+       --profile lookoutvision-access
    ```
 
    The model packaging job is complete if the value of `Status` is `SUCCEEDED`\. If the value is different, wait a minute and try again\. 

@@ -30,11 +30,7 @@ To add more labeled images with the SDK, use the [UpdateDatasetEntries](https://
 
 **To add more images to a dataset \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to add more images to a dataset\.
 
@@ -50,7 +46,8 @@ To add more labeled images with the SDK, use the [UpdateDatasetEntries](https://
    aws lookoutvision update-dataset-entries\
        --project-name project\
        --dataset-type train or test\
-       --changes fileb://manifest file
+       --changes fileb://manifest file \
+       --profile lookoutvision-access
    ```
 
 ------

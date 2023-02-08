@@ -1,10 +1,8 @@
-# Monitoring Lookout for Vision with Amazon CloudWatch<a name="security-monitoring-cloudwatch"></a>
+# Monitoring Lookout for Vision with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
 
-You can use CloudWatch to monitor image processing and anomaly detecting metrics in Lookout for Vision\.
+You can monitor Lookout for Vision using CloudWatch, which collects raw data and processes it into readable, near real\-time metrics\. These statistics are kept for 15 months, so that you can access historical information and gain a better perspective on how your web application or service is performing\. You can also set alarms that watch for certain thresholds, and send notifications or take actions when those thresholds are met\. For more information, see the [Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)\.
 
-## Lookout for Vision metrics<a name="cloudwatch-metrics"></a>
-
-Amazon Lookout for Vision sends the following metrics to CloudWatch for the `DetectAnomalies` action:
+The Lookout for Vision service reports the following metrics in the `AWS/LookoutVision` namespace\.
 
 
 | Metric | Description | 
@@ -21,9 +19,7 @@ Amazon Lookout for Vision sends the following metrics to CloudWatch for the `Det
 |  `DesiredInferenceUnits`  |  The number of inference units to which Lookout for Vision is scaling up or down\.  Valid statistics: `Average` Unit: Count  | 
 |  `InServiceInferenceUnits`  |  The number of inference units that the model is using\. Valid statistics: `Average` It is recommended that you use the Average statistic to obtain the 1 minute average of how many instances are used\. Unit: Count  | 
 
-## Dimensions of Lookout for Vision metrics<a name="cloudwatch-metric-dimensions"></a>
-
-Lookout for Vision metrics use the Lookout for Vision namespace and provide metrics for the following dimensions:
+The following dimensions are supported for the Lookout for Vision metrics\.
 
 
 | Dimension | Description | 

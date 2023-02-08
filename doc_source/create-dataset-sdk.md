@@ -24,11 +24,7 @@ To view information about the test and training datasets, see [Viewing your data
 
 **To create a dataset \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to create a dataset\.
 
@@ -45,7 +41,8 @@ To view information about the test and training datasets, see [Viewing your data
    ```
    aws lookoutvision create-dataset --project-name project\
      --dataset-type train or test\
-     --dataset-source '{ "GroundTruthManifest": { "S3Object": { "Bucket": "bucket", "Key": "manifest file" } } }'
+     --dataset-source '{ "GroundTruthManifest": { "S3Object": { "Bucket": "bucket", "Key": "manifest file" } } }' \
+     --profile lookoutvision-access
    ```
 
 ------

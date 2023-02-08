@@ -39,7 +39,7 @@ For image limits, see [Quotas in Amazon Lookout for Vision](limits.md)\.
 
 When you create the dataset for your project, you choose the initial dataset configuration of your project\. You also choose where Lookout for Vision imports the images from\. 
 
-### Choosing a dataset configuration for your project<a name="w144aac17c11b9b5"></a>
+### Choosing a dataset configuration for your project<a name="model-creating-dataset-configuration"></a>
 
 When you create the first dataset in your project, you choose one of the following dataset configurations:
 + **Single dataset** – A single dataset project uses a single dataset to train and test your model\. Using a single dataset simplifies training by letting Amazon Lookout for Vision choose the training and test images\. During training, Amazon Lookout for Vision, internally splits the dataset into a training dataset and a test dataset\. You don't have access to the split datasets\. We recommend using a single dataset project for most scenarios\.

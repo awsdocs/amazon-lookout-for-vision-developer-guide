@@ -82,7 +82,7 @@ For the complete code example, see [GitHub](https://github.com/awsdocs/aws-doc-s
 
 ## Segmentation<a name="inference-segmentation"></a>
 
-If your model is an image segmentation model, you can use the segmentation information to determine if an image contains anomalies\. You can also use an image segmentation model to classify images\. 
+If your model is an image segmentation model, you can use the segmentation information to determine if an image contains anomalies\. You can also use an image segmentation model to classify images\. For example code that gets and display image masks, see [Showing classification and segmentation information](inference-display-information.md)
 
 ### Area of anomaly<a name="inference-segmentation-area"></a>
 

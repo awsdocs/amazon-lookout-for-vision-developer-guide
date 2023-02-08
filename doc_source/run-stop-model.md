@@ -19,11 +19,7 @@ Perform the steps in the following procedure to stop your model using the consol
 
 **To stop your model \(console\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 
@@ -39,7 +35,7 @@ Perform the steps in the following procedure to stop your model using the consol
 
 1. Under **AWS CLI commands**, copy the AWS CLI command that calls `stop-model`\.
 
-1. At the command prompt, enter the `stop-model` command that you copied in the previous step\. 
+1. At the command prompt, enter the `stop-model` command that you copied in the previous step\. If you are using the `lookoutvision` profile to get credentials, add the `--profile lookoutvision-access` parameter\. 
 
 1. At the console, choose **Models** in the left navigation page\.
 
@@ -53,11 +49,7 @@ A model might take a while to stop\. To check the current status, use `DescribeM
 
 **To stop your model \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to stop a running model\.
 
@@ -70,7 +62,8 @@ A model might take a while to stop\. To check the current status, use `DescribeM
 
    ```
    aws lookoutvision stop-model --project-name "project name"\
-       --model-version model version
+       --model-version model version \
+     --profile lookoutvision-access
    ```
 
 ------

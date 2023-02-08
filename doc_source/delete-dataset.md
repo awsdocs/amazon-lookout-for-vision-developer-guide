@@ -30,11 +30,7 @@ Use the `DeleteDataset` operation to delete a dataset\.
 
 **To delete a dataset \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to delete a model\.
 
@@ -47,7 +43,8 @@ Use the `DeleteDataset` operation to delete a dataset\.
 
    ```
    aws lookoutvision delete-dataset --project-name project name\
-     --dataset-type dataset type
+     --dataset-type dataset type \
+     --profile lookoutvision-access
    ```
 
 ------

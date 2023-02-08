@@ -7,7 +7,7 @@ The list of models is eventually consistent\. If you create a model, you might h
 
 ## Viewing your models \(console\)<a name="view-models-console"></a>
 
-Perform the steps in the following procedure to view the your project's models in the console\. 
+Perform the steps in the following procedure to view your project's models in the console\. 
 
 **To view your models \(console\)**
 
@@ -27,11 +27,7 @@ To get view the versions of a model you use the `ListModels` operation\. To get 
 
 **To view your models \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to list your models and get information about a model\.
 
@@ -44,7 +40,8 @@ To get view the versions of a model you use the `ListModels` operation\. To get 
    + `project-name` to the name of the project that contains the model that you want to view\.
 
    ```
-   aws lookoutvision list-models --project-name project name
+   aws lookoutvision list-models --project-name project name \
+     --profile lookoutvision-access
    ```
 
    Use the `describe-model` command to get information about a model\. Change the following values:
@@ -53,7 +50,8 @@ To get view the versions of a model you use the `ListModels` operation\. To get 
 
    ```
    aws lookoutvision describe-model --project-name project name\
-       --model-version model version
+       --model-version model version \
+      --profile lookoutvision-access
    ```
 
 ------

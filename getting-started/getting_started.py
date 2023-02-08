@@ -73,7 +73,7 @@ def copy_local_folder_to_s3(local_path, s3_path):
     """
 
     logger.info("Copying local folder %s to %s", local_path, s3_path)
-    session = boto3.Session()
+    session = boto3.Session(profile_name='lookoutvision-access')
     s3_resource = session.resource('s3')
 
     # Remove forward slash at end of s3 path, if present.

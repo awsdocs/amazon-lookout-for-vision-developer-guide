@@ -1,10 +1,13 @@
-# Document History for Amazon Lookout for Vision<a name="document-history"></a>
+# Document history for Amazon Lookout for Vision<a name="document-history"></a>
 
 The following table describes important changes in each release of the *Amazon Lookout for Vision Developer Guide*\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
-+ **Latest documentation update: **October 17th, 2022
++ **Latest documentation update: **February 8th, 2023
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Updated the IAM guidance for AWS WAF](#document-history) | Updated guide to align with the IAM best practices\. For more information, see [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)\. | February 8, 2023 | 
+| [Added dataset export example](#document-history) | Added Python example showing how to use the `ListDatasetEntries` operation to export the datasets from an Amazon Lookout for Vision project\. For more information, see [Exporting datasets from a project \(SDK\)](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/export-dataset-sdk.html)\. | December 2, 2022 | 
+| [Updated getting started topic](#document-history) | Updated getting started to show creating an image segmentation model with an example dataset\. For more information, see [Getting started with Amazon Lookout for Vision](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/getting-started.html)\. | October 20, 2022 | 
 | [Added troubleshooting topic](#document-history) | Added model training troubleshooting topic\. For more information, see [Troubleshooting model training](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/troubleshoot-model-training.html)\. | October 17, 2022 | 
 | [Added topic on using Amazon SageMaker Ground Truth jobs](#document-history) | Instead of labeling images yourself, you can use Amazon SageMaker Ground Truth jobs to label images for classification and image segmentation models\. For more information, see [Using an Amazon SageMaker Ground Truth job](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/create-dataset-groundtruth-labeling-lob.html)\. | August 19, 2022 | 
 | [Amazon Lookout for Vision now provides anomaly localization\.](#document-history) | You can create a segmentation model that finds the locations on an image where different types of anomalies \(such as a scratch, dent, or tear\) are present, the label of the anomaly and the size of the anomaly, For more information, see [Running your trained Amazon Lookout for Vision model](https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/running-model.html)\.  | August 16, 2022 | 

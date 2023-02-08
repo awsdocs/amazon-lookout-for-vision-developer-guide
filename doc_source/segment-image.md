@@ -42,7 +42,7 @@ After you specify the anomaly labels, label the images by doing [Labeling an ima
 
 ## Labeling an image<a name="segment-image-label"></a>
 
-To label an image for image segmentation, classify the image as normal or an anomaly\. Then, use the annotation tool to segment the image by drawing masks that tightly cover the  areas for each type of anomaly present in the image\.
+To label an image for image segmentation, classify the image as normal or an anomaly\. Then, use the annotation tool to segment the image by drawing masks that tightly cover the areas for each type of anomaly present in the image\.
 
 **To label an image**
 

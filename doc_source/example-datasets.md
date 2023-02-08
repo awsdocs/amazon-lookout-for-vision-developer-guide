@@ -8,7 +8,7 @@ The following are example datasets that you can use with Amazon Lookout for Visi
 
 ## Image segmentation datasets<a name="example-datasets-segmentation"></a>
 
-[Getting started](getting-started.md) provides a dataset of broken cookies that you can use to create an [image segmentation]() model\.
+[Getting started with Amazon Lookout for Vision](getting-started.md) provides a dataset of broken cookies that you can use to create an [image segmentation](understanding.md#ud-image-segmentation) model\.
 
 For another dataset that creates an image segmentation model, see [Identify the location of anomalies using Amazon Lookout for Vision at the edge without using a GPU](https://aws.amazon.com/blogs/machine-learning/identify-the-location-of-anomalies-using-amazon-lookout-for-vision-at-the-edge-without-using-a-gpu/)\. 
 

@@ -117,7 +117,7 @@ If your project has separate training and test datasets, Lookout for Vision uses
 
 Training creates a model and trains it to predict the presence of anomalies in images\. A new version of your model is created each time you train\.
 
-At the start of training, Amazon Lookout for Vision chooses the most suitable algorithm to train your model with\. The model is trained and then tested\. In [Getting started](getting-started.md), you train a single dataset project, the dataset is internally split to create a training dataset and a test dataset\. You can also create a project that has separate training and test datasets\. In this configuration, Amazon Lookout for Vision trains your model with the training dataset and tests the model with the test dataset\. 
+At the start of training, Amazon Lookout for Vision chooses the most suitable algorithm to train your model with\. The model is trained and then tested\. In [Getting started with Amazon Lookout for Vision](getting-started.md), you train a single dataset project, the dataset is internally split to create a training dataset and a test dataset\. You can also create a project that has separate training and test datasets\. In this configuration, Amazon Lookout for Vision trains your model with the training dataset and tests the model with the test dataset\. 
 
 **Important**  
 You are charged for the amount of time that it takes to successfully train your model\.

@@ -32,21 +32,18 @@ You can use the AWS SDK to list the model packaging jobs in a project and get in
 
 ### List model packaging jobs<a name="package-job-list-jobs"></a>
 
-You can list the model packaging jobs in a project by calling the [ListModelPackages](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListModelPackages) API\. The response includes a list of [ModelPackagingJobMetadata](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ModelPackagingJobMetadata) objects that provides information about each model packaging job\. Also included is a pagination token that you can use to get the next set of results, if the list is incomplete\.
+You can list the model packaging jobs in a project by calling the [ListModelPackagingJobs](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListModelPackagingJobs) API\. The response includes a list of [ModelPackagingJobMetadata](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ModelPackagingJobMetadata) objects that provides information about each model packaging job\. Also included is a pagination token that you can use to get the next set of results, if the list is incomplete\.
 
 **To list your model packaging jobs**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following CLI command\. Change `project_name` to the name of the project that you want to use\.
 
    ```
    aws lookoutvision list-model-packaging-jobs \
-    --project-name project_name
+     --project-name project_name \
+     --profile lookoutvision-access
    ```
 
 ### Describe a model packaging job<a name="package-job-describe-job"></a>
@@ -55,11 +52,7 @@ Use the [DescribeModelPackagingJob](https://docs.aws.amazon.com/lookout-for-visi
 
 **To describe a package**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following CLI command\. Change the following:
    + `project_name` to the name of the project that you are using\.
@@ -68,5 +61,6 @@ Use the [DescribeModelPackagingJob](https://docs.aws.amazon.com/lookout-for-visi
    ```
    aws lookoutvision describe-model-packaging-job \
        --project-name project_name \
-       --job-name job_name
+       --job-name job_name \
+       --profile lookoutvision-access
    ```

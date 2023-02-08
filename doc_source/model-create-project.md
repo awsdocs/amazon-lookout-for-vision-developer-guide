@@ -7,7 +7,7 @@ An Amazon Lookout for Vision project is a grouping of the resources needed to cr
 We recommend that you use a project for a single use case, such as detecting anomalies in a single type of machine part\. 
 
 **Note**  
-You can use AWS CloudFormation to provision and configure Amazon Lookout for Vision projects\. For more information, see [Creating Amazon Lookout for Vision projects with AWS CloudFormation](creating-projects-with-cloudformation.md)\.
+You can use AWS CloudFormation to provision and configure Amazon Lookout for Vision projects\. For more information, see [Creating Amazon Lookout for Vision resources with AWS CloudFormation](creating-projects-with-cloudformation.md)\.
 
 To view your projects, see [Viewing your projects](view-projects.md) or open the [Using the Amazon Lookout for Vision dashboard](dashboard.md)\. To delete a model, see [Deleting a model](delete-model.md)\. 
 
@@ -41,11 +41,7 @@ To view the projects that you have created in a project, call `ListProjects`\. F
 
 **To create a project \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to create a model\.
 
@@ -55,7 +51,8 @@ To view the projects that you have created in a project, call `ListProjects`\. F
    Change the value of `project-name` to the name that you want to use for the project\.
 
    ```
-   aws lookoutvision create-project --project-name project name
+   aws lookoutvision create-project --project-name project name \
+     --profile lookoutvision-access
    ```
 
 ------

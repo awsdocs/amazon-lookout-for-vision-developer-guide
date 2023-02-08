@@ -6,15 +6,13 @@ This example shows the analyzed image and overlays the analysis results\. If the
 
 1. If you haven't already done so, do the following:
 
-   1. Create or update an IAM user\.  For more information, see [Step 2: Create an IAM administrator user and group](su-account-user.md)\.
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+   1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
    1. [Train your model](model.md)\.
 
    1. [Start your model](run-start-model.md)\.
 
-1. Ensure the IAM user calling `DetectAnomalies` has access to the model version that you want to use\. 
+1. Make sure the user calling `DetectAnomalies` has access to the model version that you want to use\. For more information, see [Set up SDK permissions](su-sdk-permissions.md)\.
 
 1. Use the following code\.
 
@@ -223,7 +221,10 @@ This example shows the analyzed image and overlays the analysis results\. If the
            logging.basicConfig(level=logging.INFO,
                                format="%(levelname)s: %(message)s")
    
-           lookoutvision_client = boto3.client("lookoutvision")
+           session = boto3.Session(
+               profile_name='lookoutvision-access')
+   
+           lookoutvision_client = session.client("lookoutvision")
    
            parser = argparse.ArgumentParser(usage=argparse.SUPPRESS)
    
@@ -268,6 +269,7 @@ This example shows the analyzed image and overlays the analysis results\. If the
    
    package com.example.lookoutvision;
    
+   import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
    import software.amazon.awssdk.core.SdkBytes;
    import software.amazon.awssdk.core.sync.RequestBody;
    import software.amazon.awssdk.services.lookoutvision.LookoutVisionClient;
@@ -552,7 +554,9 @@ This example shows the analyzed image and overlays the analysis results\. If the
                ShowAnomalies panel = null;
    
                // Get the Lookout for Vision client.
-               LookoutVisionClient lfvClient = LookoutVisionClient.builder().build();
+               LookoutVisionClient lfvClient = LookoutVisionClient.builder()
+                   .credentialsProvider(ProfileCredentialsProvider.create("lookoutvision-access"))
+                   .build();
    
                // Create frame and panel.
                JFrame frame = new JFrame(photo);

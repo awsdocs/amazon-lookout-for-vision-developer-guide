@@ -10,7 +10,7 @@ To add permissions to users, groups, and roles, it is easier to use AWS managed 
 
 AWS services maintain and update AWS managed policies\. You can't change the permissions in AWS managed policies\. Services occasionally add additional permissions to an AWS managed policy to support new features\. This type of update affects all identities \(users, groups, and roles\) where the policy is attached\. Services are most likely to update an AWS managed policy when a new feature is launched or when new operations become available\. Services do not remove permissions from an AWS managed policy, so policy updates won't break your existing permissions\.
 
-Additionally, AWS supports managed policies for job functions that span multiple services\. For example, the **ReadOnlyAccess** AWS managed policy provides read\-only access to all AWS services and resources\. When a service launches a new feature, AWS adds read\-only permissions for new operations and resources\. For a list and descriptions of job function policies, see [AWS managed policies for job functions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html) in the *IAM User Guide*\.
+Additionally, AWS supports managed policies for job functions that span multiple services\. For example, the `ViewOnlyAccess` AWS managed policy provides read\-only access to many AWS services and resources\. When a service launches a new feature, AWS adds read\-only permissions for new operations and resources\. For a list and descriptions of job function policies, see [AWS managed policies for job functions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html) in the *IAM User Guide*\.
 
 
 
@@ -33,7 +33,7 @@ Use the `AmazonLookoutVisionReadOnlyAccess` policy to allow users read\-only acc
 + [ListProjects](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListProjects)
 + [ListTagsForResource](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource)
 
-To call read\-only actions, users don't need Amazon S3 bucket permissions\. However, operation responses might include references to Amazon S3 buckets\. For example, the `source-ref` entry in the response from `ListDatasetEntries` is a reference to an image in an Amazon S3 bucket\. Add Amazon S3 bucket permissions if your users need to access referenced buckets\. For example, a user might want to download an image referenced by a `source-ref` field\. For more information, see [Setting Amazon S3 Bucket permissions](su-sdk-permissions.md#su-sdk-bucket-permissions)\. 
+To call read\-only actions, users don't need Amazon S3 bucket permissions\. However, operation responses might include references to Amazon S3 buckets\. For example, the `source-ref` entry in the response from `ListDatasetEntries` is a reference to an image in an Amazon S3 bucket\. Add Amazon S3 bucket permissions if your users need to access referenced buckets\. For example, a user might want to download an image referenced by a `source-ref` field\. For more information, see [Granting Amazon S3 Bucket permissions](su-sdk-permissions.md#su-sdk-bucket-permissions)\. 
 
 
 
@@ -79,7 +79,7 @@ This policy includes the following permissions\.
 
 Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to Amazon Lookout for Vision \(and its dependencies\) with Amazon Lookout for Vision actions \(SDK operations\)\. For example, you can train a model without having to use the Amazon Lookout for Vision console\. For more information, see [Actions](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_Operations.html)\. 
 
-To create a dataset \(`CreateDataset`\) or create a model \(`CreateModel`\), your users must have full access permissions to the Amazon S3 bucket that stores dataset images, Amazon SageMaker Ground Truth manifest files, and training output\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\.
+To create a dataset \(`CreateDataset`\) or create a model \(`CreateModel`\), your users must have full access permissions to the Amazon S3 bucket that stores dataset images, Amazon SageMaker Ground Truth manifest files, and training output\. For more information, see [Step 2: Set up permissions](su-setup-permissions.md)\.
 
 You can also give permission to Amazon Lookout for Vision SDK actions by using the `AmazonLookoutVisionConsoleFullAccess` policy\. 
 
@@ -117,9 +117,9 @@ This policy includes the following permissions\.
 
 ## AWS managed policy: AmazonLookoutVisionConsoleFullAccess<a name="security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess"></a>
 
-Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. For more information, see [Getting started](getting-started.md)\. 
+Use the `AmazonLookoutVisionFullAccess` policy to allow users full access to the Amazon Lookout for Vision console, actions \(SDK operations\), and any dependencies that the service has\. For more information, see [Getting started with Amazon Lookout for Vision](getting-started.md)\. 
 
-The `LookoutVisionConsoleFullAccess` policy includes permissions to your Amazon Lookout for Vision console bucket\. For information about the console bucket, see [Step 4: Create the console bucket](su-create-console-bucket.md)\. To store datasets, images, and Amazon SageMaker Ground Truth manifest files in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Setting Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
+The `LookoutVisionConsoleFullAccess` policy includes permissions to your Amazon Lookout for Vision console bucket\. For information about the console bucket, see [Step 3: Create the console bucket](su-create-console-bucket.md)\. To store datasets, images, and Amazon SageMaker Ground Truth manifest files in a different Amazon S3 bucket, your users need additional permissions\. For more information, see [Setting Amazon S3 bucket permissions](su-setup-permissions.md#su-non-console-buckets)\.
 
 
 
@@ -327,6 +327,6 @@ View details about updates to AWS managed policies for Lookout for Vision since 
 
 
 
-| Change | Description | Date | Model packaging operations added | Amazon Lookout for Vision added the following model packaging operations to the [AmazonLookoutVisionFullAccess](#security-iam-awsmanpol-AmazonLookoutVisionFullAccess) and [AmazonLookoutVisionConsoleFullAccess](#security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess) policies: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html) Amazon Lookout for Vision added the following model packaging operations to the [AmazonLookoutVisionReadOnlyAccess](#security-iam-awsmanpol-AmazonLookoutVisionReadOnlyAccess) and [AmazonLookoutVisionConsoleReadOnlyAccess](#security-iam-awsmanpol-AmazonLookoutVisionConsoleReadOnlyAccess) policies: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | TBD | New policies added  | Amazon Lookout for Vision added the following policies\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | May 11th, 2021 | 
+| Change | Description | Date | Model packaging operations added | Amazon Lookout for Vision added the following model packaging operations to the [AmazonLookoutVisionFullAccess](#security-iam-awsmanpol-AmazonLookoutVisionFullAccess) and [AmazonLookoutVisionConsoleFullAccess](#security-iam-awsmanpol-AmazonLookoutVisionConsoleFullAccess) policies: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html) Amazon Lookout for Vision added the following model packaging operations to the [AmazonLookoutVisionReadOnlyAccess](#security-iam-awsmanpol-AmazonLookoutVisionReadOnlyAccess) and [AmazonLookoutVisionConsoleReadOnlyAccess](#security-iam-awsmanpol-AmazonLookoutVisionConsoleReadOnlyAccess) policies: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | December 7th, 2021 | New policies added  | Amazon Lookout for Vision added the following policies\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/security-iam-awsmanpol.html)  | May 11th, 2021 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 |  Lookout for Vision started tracking changes  |  Amazon Lookout for Vision started tracking changes for its AWS managed policies\.  | March 1st, 2021 | 

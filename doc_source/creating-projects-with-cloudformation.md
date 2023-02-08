@@ -1,4 +1,4 @@
-# Creating Amazon Lookout for Vision projects with AWS CloudFormation<a name="creating-projects-with-cloudformation"></a>
+# Creating Amazon Lookout for Vision resources with AWS CloudFormation<a name="creating-projects-with-cloudformation"></a>
 
 Amazon Lookout for Vision is integrated with AWS CloudFormation, a service that helps you model and set up your AWS resources so that you can spend less time creating and managing your resources and infrastructure\. You create a template that describes all the AWS resources that you want, and AWS CloudFormation takes care of provisioning and configuring those resources for you\.
 

@@ -11,8 +11,6 @@ This documentation helps you understand how to apply the shared responsibility m
 **Topics**
 + [Data protection in Amazon Lookout for Vision](data-protection.md)
 + [Identity and access management for Amazon Lookout for Vision](security-iam.md)
-+ [Logging and monitoring in Amazon Lookout for Vision](security-logging-monitoring.md)
 + [Compliance validation for Amazon Lookout for Vision](lookoutvision-compliance.md)
-+ [Amazon Lookout for Vision and interface VPC endpoints \(AWS PrivateLink\)](vpc-interface-endpoints.md)
 + [Resilience in Amazon Lookout for Vision](disaster-recovery-resiliency.md)
 + [Infrastructure security in Amazon Lookout for Vision](infrastructure-security.md)

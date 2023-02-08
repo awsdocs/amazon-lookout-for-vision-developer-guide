@@ -19,7 +19,7 @@ To deploy a component with AWS IoT Greengrass V2 you need the following permissi
 
 `CreateDeployment` and `GetDeployment` have dependent actions\. For more information, see [Actions defined by AWS IoT Greengrass V2](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotgreengrassv2.html#awsiotgreengrassv2-actions-as-permissions)\. 
 
-For information about changing IAM permissions, see [Changing permissions for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html)\. 
+For information about changing IAM permissions, see [Changing permissions for a user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html)\. 
 
 ## Deploying your components \(console\)<a name="device-deploy-components-model"></a>
 

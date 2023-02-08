@@ -1,8 +1,10 @@
 # Amazon Lookout for Vision identity\-based policy examples<a name="security_iam_id-based-policy-examples"></a>
 
-By default, IAM users and roles don't have permission to create or modify Lookout for Vision resources\. They also can't perform tasks using the AWS Management Console, AWS CLI, or AWS API\. An IAM administrator must create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the IAM users or groups that require those permissions\.
+By default, users and roles don't have permission to create or modify Lookout for Vision resources\. They also can't perform tasks by using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), or AWS API\. An IAM administrator must create IAM policies that grant users and roles permission to perform actions on the resources that they need\. The administrator must then attach those policies for users that require them\.
 
-To learn how to create an IAM identity\-based policy using these example JSON policy documents, see [Creating Policies on the JSON Tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html#access_policies_create-json-editor) in the *IAM User Guide*\.
+To learn how to create an IAM identity\-based policy by using these example JSON policy documents, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) in the *IAM User Guide*\.
+
+For details about actions and resource types defined by Lookout for Vision, including the format of the ARNs for each of the resource types, see [Actions, resources, and condition keys for Amazon Lookout for Vision](https://docs.aws.amazon.com/service-authorization/latest/reference/list_your_service.html) in the *Service Authorization Reference*\.
 
 **Topics**
 + [Policy best practices](#security_iam_service-with-iam-policy-best-practices)
@@ -22,7 +24,7 @@ For more information about best practices in IAM, see [Security best practices i
 
 ## Accessing a single Amazon Lookout for Vision project<a name="security_iam_id-based-policy-examples-project"></a>
 
-In this example, you want to grant an IAM user in your AWS account access to one of your Amazon Lookout for Vision projects\.
+In this example, you want to grant a user in your AWS account access to one of your Amazon Lookout for Vision projects\.
 
 ```
 {
@@ -41,7 +43,7 @@ Tag\-based policies are JSON policy documents that specify the actions that a pr
 
 ### Use a tag to access a resource<a name="tag-resource"></a>
 
-This example policy grants an IAM user or role in your AWS account permission to use the `DetectAnomalies` operation with any model tagged with the key `stage` and the value `production`\. 
+This example policy grants a user or role in your AWS account permission to use the `DetectAnomalies` operation with any model tagged with the key `stage` and the value `production`\. 
 
 ```
 { 
@@ -65,7 +67,7 @@ This example policy grants an IAM user or role in your AWS account permission to
 
 #### Use a tag to deny access to specific Amazon Lookout for Vision operations<a name="example-tag-operations"></a>
 
-This example policy denies permission for an IAM user or role in your AWS account to call the `DeleteModel` or `StopModel` operations with any model tagged with the key `stage` and the value `production`\. 
+This example policy denies permission for a user or role in your AWS account to call the `DeleteModel` or `StopModel` operations with any model tagged with the key `stage` and the value `production`\. 
 
 ```
 { 

@@ -1,4 +1,4 @@
-# Step 4: Create the console bucket<a name="su-create-console-bucket"></a>
+# Step 3: Create the console bucket<a name="su-create-console-bucket"></a>
 
 To use the Amazon Lookout for Vision console, you need an Amazon S3 bucket that is known as the console bucket\. The console bucket stores the following:
 + Images that you [upload](create-dataset-computer-upload.md) to a dataset with the console\.
@@ -26,7 +26,7 @@ Use the following procedure to create the console bucket for an AWS Region with 
 
 **To create the console bucket by using the Amazon Lookout for Vision console**
 
-1. Ensure that the IAM user or group you are using has `AmazonLookoutVisionConsoleFullAccess` permission\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\.
+1. Ensure that the user or group you are using has `AmazonLookoutVisionConsoleFullAccess` permission\. For more information, see [Step 2: Set up permissions](su-setup-permissions.md)\.
 
 1. Open the Amazon Lookout for Vision console at [ https://console\.aws\.amazon\.com/lookoutvision/]( https://console.aws.amazon.com/lookoutvision/)\.
 

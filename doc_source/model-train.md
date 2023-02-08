@@ -79,11 +79,7 @@ To view the models that you have created in a project, call `ListModels`\. For e
 
 **To train a model \(SDK\)**
 
-1. If you haven't already done so, do the following:
-
-   1. Create or update an IAM user with permissions to access Amazon Lookout for Vision\. For more information, see [Step 3: Set up permissions](su-setup-permissions.md)\. 
-
-   1. Install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+1. If you haven't already done so, install and configure the AWS CLI and the AWS SDKs\. For more information, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 1. Use the following example code to train a model\.
 
@@ -101,7 +97,8 @@ To view the models that you have created in a project, call `ListModels`\. For e
    ```
    aws lookoutvision create-model --project-name "project name"\
      --output-config '{ "S3Location": { "Bucket": "output bucket", "Prefix":  "output folder" } }'\
-     --tags '[{"Key":"Key","Value":"Value"}]'
+     --tags '[{"Key":"Key","Value":"Value"}]' \
+     --profile lookoutvision-access
    ```
 
 ------

@@ -2,7 +2,7 @@
 
 You can't delete images directly from a dataset\. Instead you must delete the existing dataset and create a new dataset without the images that you want to remove\. How you remove images depends how you imported images into the existing dataset \([manifest file](create-dataset-use-manifest.md), [Amazon S3 bucket](create-dataset-s3.md), or [local computer](create-dataset-computer-upload.md)\)\. 
 
-You can also use the AWS SDK to remove images\. This is useful if you are creating an image segmentation model without an [image segmentation manifest file](manifest-file-segmentation.md) as you don't have to redraw the image masks with the Amazon Lookout for Vision console\. 
+You can also use the AWS SDK to remove images\. This is useful when creating an image segmentation model without an [image segmentation manifest file](manifest-file-segmentation.md), making it unnecessary to redraw the image masks with the Amazon Lookout for Vision console\. 
 
 
 
@@ -12,7 +12,7 @@ You can also use the AWS SDK to remove images\. This is useful if you are creati
 
 ## Removing images from a dataset \(Console\)<a name="edit-dataset-remove-images-console"></a>
 
-Use the folllowing procedure to remove images from a dataset with the Amazon Lookout for Vision console\.
+Use the following procedure to remove images from a dataset with the Amazon Lookout for Vision console\.
 
 **To remove images from a dataset \(console\)**
 

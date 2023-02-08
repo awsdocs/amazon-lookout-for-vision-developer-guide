@@ -83,7 +83,7 @@ You can use the AWS SDK to:
 + List the tags attached to a model 
 + Remove tags from a model 
 
-This section includes AWS CLI examples\. If you haven't installed the AWS CLI, see [Step 5: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
+This section includes AWS CLI examples\. If you haven't installed the AWS CLI, see [Step 4: Set up the AWS CLI and AWS SDKs](su-awscli-sdk.md)\.
 
 ### Adding tags to a new model \(SDK\)<a name="tagging-new-model-sdk"></a>
 
@@ -92,7 +92,8 @@ You can add tags to a model when you create it using the [CreateModel](https://d
 ```
 aws lookoutvision create-model --project-name "project name"\
   --output-config '{ "S3Location": { "Bucket": "output bucket", "Prefix":  "output folder" } }'\
-  --tags '[{"Key":"Key","Value":"Value"}]'
+  --tags '[{"Key":"Key","Value":"Value"}]' \
+  --profile lookoutvision-access
 ```
 
 For information about creating and training a model, see [Training a model \(SDK\)](model-train.md#create-model-sdk)\.
@@ -103,7 +104,8 @@ To add one or more tags to an existing model, use the [TagResource](https://docs
 
 ```
 aws lookoutvision tag-resource --resource-arn "resource-arn"\
-  --tags '[{"Key":"Key","Value":"Value"}]'
+  --tags '[{"Key":"Key","Value":"Value"}]' \
+  --profile lookoutvision-access
 ```
 
 For example Java code, see [TagModel](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/TagModel.java)\.
@@ -113,7 +115,8 @@ For example Java code, see [TagModel](https://github.com/awsdocs/aws-doc-sdk-exa
 To list the tags attached to a model, use the [ListTagsForResource](https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource) operation and specify the model's Amazon Resource Name \(ARN\), the \(`ResourceArn`\)\. The response is a map of tag keys and values that are attached to the specified model\.
 
 ```
-aws lookoutvision list-tags-for-resource --resource-arn resource-arn
+aws lookoutvision list-tags-for-resource --resource-arn resource-arn \
+  --profile lookoutvision-access
 ```
 
 To see which models in a project have a specific tag, call `ListModels` to get a list of models\. Then call `ListTagsForResource` for each model in the response from `ListModels`\. Inspect the response from `ListTagsForResource` to see if the required tag is present\. 
@@ -126,7 +129,8 @@ To remove one or more tags from a model, use the [UntagResource](https://docs.aw
 
 ```
 aws lookoutvision untag-resource --resource-arn resource-arn\
-  --tag-keys '["Key"]'
+  --tag-keys '["Key"]' \
+  --profile lookoutvision-access
 ```
 
 For example Java code, see [UntagModel](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/lookoutvision/src/main/java/com/example/lookoutvision/UntagModel.java)\.
