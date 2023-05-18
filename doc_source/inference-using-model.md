@@ -61,6 +61,7 @@ def start_model_if_needed(stub, model_name):
     # Starting model if needed.
     while True:
         model_description_response = stub.DescribeModel(pb2.DescribeModelRequest(model_component=model_name))
+        print(f"DescribeModel() returned {model_description_response}")
         if model_description_response.model_description.status == pb2.RUNNING:
             print("Model is already running.")
             break
@@ -68,6 +69,8 @@ def start_model_if_needed(stub, model_name):
             print("Starting the model.")
             stub.StartModel(pb2.StartModelRequest(model_component=model_name))
             continue
+        elif model_description_response.model_description.status == pb2.FAILED:
+            raise Exception(f"model {model_name} failed to start")
         print(f"Waiting for model to start.")
         if model_description_response.model_description.status != pb2.STARTING:
             break
