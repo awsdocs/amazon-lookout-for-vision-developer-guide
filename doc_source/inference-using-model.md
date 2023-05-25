@@ -114,8 +114,8 @@ def detect_anomalies(stub, model_name, image_path):
         pb2.DetectAnomaliesRequest(
             model_component=model_name,
             bitmap=pb2.Bitmap(
-                width=image.size[0]
-                height=image.size[1]
+                width=image.size[0],
+                height=image.size[1],
                 byte_data=bytes(image.tobytes())
             ) 
         )
